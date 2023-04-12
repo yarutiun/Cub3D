@@ -1,2 +1,16 @@
-cub3D
+# output files
+obj/
 *.o
+*.a
+
+#Debug files
+*.dSYM
+
+# README file
+README.md
+
+# Executables
+a.out
+
+# Specific folders and files
+cub3D

@@ -3,13 +3,13 @@
 
 /* Macros */
 
-
 /* Libraries */
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
-#include <fcntl.h>
+# include <fcntl.h>
+# include <stdbool.h>
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
@@ -40,4 +40,5 @@ char	**convert_map(char *file);
 char	*read_file(int fd, char *stash);
 char	*get_return(char *stash);
 char	*get_next_line(int fd);
+
 #endif

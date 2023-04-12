@@ -14,8 +14,10 @@ int check_extension(const char *file_name)
         if(file_name[len-1] == 'b' && file_name[len - 2] == 'u' && \
         file_name[len - 3] == 'c' && file_name[len - 4] == '.')
             return(0);
+        printf("Error\n");
         return(1);
     }
+    printf("Error\n");
     return(1);
 }
 

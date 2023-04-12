@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 
 //function checks that the map extension is ".cub"
@@ -45,13 +45,13 @@ char **convert_map(char *file)
     return(map);
 }
 
-int main(void)
+int parser(void)
 {
     int count = 0;
     char **map;
     map = convert_map("/Users/yarutiun/Desktop/42_projects/Cub3D/maps/test.cub");
     // printf("%s", map[0]);
-    while(map[count])
+    while (map[count])
     {
         printf("%s", map[count]);
         count++;

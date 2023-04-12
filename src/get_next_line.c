@@ -6,11 +6,11 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 21:11:34 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/04/12 21:11:43 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:13:51 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 char *get_next_line(int fd)
 {

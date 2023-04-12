@@ -9,9 +9,14 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
+#include <fcntl.h>
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
 /* Structs */
 typedef struct s_square
@@ -27,8 +32,12 @@ typedef struct s_cube
 }						t_cube;
 
 /* Functions */
-// Parse Arguments //
+// Parser //
+int		check_extension(const char *file_name);
+char	**convert_map(char *file);
 
 // Utils //
-
+char	*read_file(int fd, char *stash);
+char	*get_return(char *stash);
+char	*get_next_line(int fd);
 #endif

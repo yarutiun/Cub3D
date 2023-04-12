@@ -1,37 +1,38 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 21:11:34 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/04/12 21:13:51 by yarutiun         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "cub3d.h"
 
-#include "../inc/cub3d.h"
-
-char *get_next_line(int fd)
+bool	free_get_next_line(char *buff, int i, int readed)
 {
-	int i;
-	int readed;
-	char c;
-	char *buff;
+	if ((!buff[i - 1] && !readed) || readed == -1)
+	{
+		free(buff);
+		return (true);
+	}
+	return (false);
+}
+
+char	*get_next_line(int fd)
+{
+	int		i;
+	int		readed;
+	char	c;
+	char	*buff;
 
 	i = 0;
 	buff = malloc(sizeof(char) * 100);
-	while((readed = read(fd, &c, 1)) > 0)
+	while (1)
 	{
-		buff[i++] = c;
-		if(c == '\n')
-			break;
+		readed = read(fd, &c, 1);
+		if (readed > 0)
+		{
+			buff[i++] = c;
+			if (c == '\n')
+				break ;
+		}
+		else
+			break ;
 	}
-	if((!buff[i - 1] && !readed) || readed == -1)
-	{
-		free(buff);
-		return(NULL);
-	}
+	if (free_get_next_line(buff, i, readed))
+		return (NULL);
 	buff[i] = '\0';
-	return(buff);
+	return (buff);
 }

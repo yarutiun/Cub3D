@@ -34,10 +34,14 @@ SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)
 OBJS	= $(addprefix $(OBJ_PATH), $(OBJ))
 
+# Colors
+GREEN	:= \x1b[32m
+RESET	:= \033[0m
+
 # Rules
 all: $(NAME)
 
-## Update folder names here !!! ##
+## Update folder names here ##
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	@mkdir -p obj/parser
@@ -48,7 +52,7 @@ $(NAME): $(OBJS)
 	@make bonus -C $(LIB_F)
 	@make -C $(MLX_F)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIB_F)$(LIB_A) $(MLX_F)$(MLX_A) $(MLX) $(DEBUG) -o $(NAME)
-	@echo "\n\x1b[32mEverything compiled successfully\x1b[0m"
+	@echo "\n$(GREEN)Everything compiled successfully$(RESET)"
 
 clean:
 	$(RM) $(OBJ_PATH)

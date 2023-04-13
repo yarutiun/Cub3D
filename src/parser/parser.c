@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 
 //function checks that the map extension is ".cub"
@@ -45,7 +45,32 @@ char **convert_map(char *file)
     return(map);
 }
 
-int parser(void)
+//checks if there are only subject-required symbols on a map
+//if yes return 0 
+//if no return 1
+int check_forbidden_chars(char **map)
+{
+    int i;
+    int j;
+    char *symbols;
+    symbols = "01NSEW\n";
+
+    i = 0;
+    while(map[i])
+    {
+        j = 0;
+        while(map[i][j])
+        {
+            if(!ft_strchr(symbols, map[i][j]))
+                return(1);
+            j++;
+        }
+        i++;
+    }
+    return(0);
+}
+
+int main(void)
 {
     int count = 0;
     char **map;
@@ -56,5 +81,6 @@ int parser(void)
         printf("%s", map[count]);
         count++;
     }
+    check_forbidden_chars(map);
     return(0);
 }

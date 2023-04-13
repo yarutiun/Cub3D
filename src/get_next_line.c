@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 bool	free_get_next_line(char *buff, int i, int readed)
 {

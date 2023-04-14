@@ -75,16 +75,37 @@ int check_forbidden_chars(char **map)
     return(0);
 }
 
-int parser(void)
+char *read_from_file(char *path)
 {
-    int count = 0;
-    char **map;
-    map = convert_map("/Users/yarutiun/Desktop/42_projects/Cub3D/maps/test.cub");
-    while(map[count])
+    int     fd;
+    char    *output;
+    int     counter;
+    int     rd;
+
+    // (void) path;
+    fd = 0;
+    rd = 0;
+    counter = 0;
+    fd = open(path, O_RDONLY);
+    if(fd < 0)
+        return(NULL);
+    output = malloc(10000);
+    while(1)
     {
-        printf("%s\n", map[count]);
-        count++;
+        rd = read(fd, &output[counter], 1);
+        if (rd <= 0)
+            break;
+        counter++;
     }
-    check_forbidden_chars(map);
+    output[counter + 1] = '\0';
+    return(output);
+}
+
+int parser(char *path)
+{
+    char *map;
+
+    map = read_from_file(path);
+    printf("%s", map);
     return(0);
 }

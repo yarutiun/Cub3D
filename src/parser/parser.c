@@ -82,7 +82,6 @@ char *read_from_file(char *path)
     int     counter;
     int     rd;
 
-    // (void) path;
     fd = 0;
     rd = 0;
     counter = 0;
@@ -101,11 +100,75 @@ char *read_from_file(char *path)
     return(output);
 }
 
-int parser(char *path)
+char **split_input(char *input_str)
 {
-    char *map;
+    char **output;
+    output = ft_split(input_str, '\n');
+    if(output == 0)
+        return(NULL);
+    return(output);
+}
 
-    map = read_from_file(path);
-    printf("%s", map);
+// void    error_exit()
+// {
+
+// }
+
+void obtain_path(char *string, char *param)
+{
+    int i;
+
+    i = 0;
+    while (string[i])
+    {
+        param[i] = string[i];
+        i++;
+    }
+}
+
+void    init_elements(char **splitted, t_param *param)
+{
+    int i;
+
+    i = 0;
+    while (i < 6)
+    {
+        if (ft_strncmp(splitted[i], "NO ", 3) == 0)
+            obtain_path(&splitted[i][3], param->no);
+        else if (ft_strncmp(splitted[i], "SO ", 3) == 0)
+            obtain_path(&splitted[i][3], param->so);
+        else if (ft_strncmp(splitted[i], "WE", 3) == 0)
+            obtain_path(&splitted[i][3], param->we);
+        else if (ft_strncmp(splitted[i], "EA", 3) == 0)
+            obtain_path(&splitted[i][3], param->ea);
+        else if (ft_strncmp(splitted[i], "F ", 2) == 0)
+            obtain_path(&splitted[i][2], param->f);
+        else if (ft_strncmp(splitted[i], "C ", 2) == 0)
+            obtain_path(&splitted[i][2], param->c);
+        else
+            return ;
+            // error_exit();
+        
+    }
+}
+
+int parser(char *path, t_param *param)
+{
+    char *input_str;
+    char **splitted;
+    int i;
+
+    (void)param;
+    i = 0;
+    input_str = read_from_file(path);
+    splitted = split_input(input_str);
+    while(splitted[i])
+    {
+        printf("%s", splitted[i]);
+        i++;
+    }
+    // init_elements(splitted, param);
+    // printf("%s", param->no);
+
     return(0);
 }

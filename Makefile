@@ -27,7 +27,6 @@ MLX_A = libmlx.a
 
 # Source and object files
 SRC		=	main.c \
-			get_next_line.c \
 			$(addprefix parser/,\
 			parser.c)
 

@@ -3,20 +3,18 @@
 
 /* Macros */
 
+
 /* Libraries */
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
-# include <fcntl.h>
-# include <stdbool.h>
+#include <fcntl.h>
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
-# endif
+# define BUFFER_SIZE 42
 
 /* Structs */
 typedef struct s_square
@@ -41,4 +39,6 @@ char	*read_file(int fd, char *stash);
 char	*get_return(char *stash);
 char	*get_next_line(int fd);
 
+// Errors //
+int parsing_err(void);
 #endif

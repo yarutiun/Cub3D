@@ -19,6 +19,7 @@ typedef struct s_param
 {
 	struct s_cube		*cube;
 	char				**file_input;
+	char				*path;
 	char				*no;
 	char				*so;
 	char				*we;
@@ -35,7 +36,7 @@ typedef struct s_cube
 
 /* Functions */
 // Parser //
-int		parser(void);
+int parser(char *path);
 int		check_extension(const char *file_name);
 char	**convert_map(char *file);
 

@@ -9,28 +9,35 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
-#include <fcntl.h>
+# include <fcntl.h>
+# include <stdbool.h>
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define BUFFER_SIZE 42
-
 /* Structs */
-typedef struct s_square
+typedef struct s_param
 {
 	struct s_cube		*cube;
-	int					area;
-}						t_square;
+	char				**file_input;
+	char				*path;
+	char				*no;
+	char				*so;
+	char				*we;
+	char				*ea;
+	char				*f;
+	char				*c;
+	char 				**map;
+}						t_param;
 
 typedef struct s_cube
 {
-	t_square			*squares;
-	int					volume;	
+	t_param				*param;
 }						t_cube;
 
 /* Functions */
 // Parser //
+int		parser(char *path, t_param *param);
 int		check_extension(const char *file_name);
 char	**convert_map(char *file);
 
@@ -40,5 +47,6 @@ char	*get_return(char *stash);
 char	*get_next_line(int fd);
 
 // Errors //
-int parsing_err(void);
+int		parsing_err(void);
+
 #endif

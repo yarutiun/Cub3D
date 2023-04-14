@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 
 //function checks that the map extension is ".cub"
@@ -75,16 +75,100 @@ int check_forbidden_chars(char **map)
     return(0);
 }
 
-// int main(void)
+char *read_from_file(char *path)
+{
+    int     fd;
+    char    *output;
+    int     counter;
+    int     rd;
+
+    fd = 0;
+    rd = 0;
+    counter = 0;
+    fd = open(path, O_RDONLY);
+    if(fd < 0)
+        return(NULL);
+    output = malloc(10000);
+    while(1)
+    {
+        rd = read(fd, &output[counter], 1);
+        if (rd <= 0)
+            break;
+        counter++;
+    }
+    output[counter + 1] = '\0';
+    return(output);
+}
+
+char **split_input(char *input_str)
+{
+    char **output;
+    output = ft_split(input_str, '\n');
+    if(output == 0)
+        return(NULL);
+    return(output);
+}
+
+// void    error_exit()
 // {
-//     int count = 0;
-//     char **map;
-//     map = convert_map("/Users/yarutiun/Desktop/42_projects/Cub3D/maps/test.cub");
-//     while(map[count])
-//     {
-//         printf("%s\n", map[count]);
-//         count++;
-//     }
-//     int r = check_forbidden_chars(map);
-//     return(0);
+
 // }
+
+void obtain_path(char *string, char *param)
+{
+    int i;
+
+    i = 0;
+    while (string[i])
+    {
+        param[i] = string[i];
+        i++;
+    }
+}
+
+void    init_elements(char **splitted, t_param *param)
+{
+    int i;
+
+    i = 0;
+    while (i < 6)
+    {
+        if (ft_strncmp(splitted[i], "NO ", 3) == 0)
+            obtain_path(&splitted[i][3], param->no);
+        else if (ft_strncmp(splitted[i], "SO ", 3) == 0)
+            obtain_path(&splitted[i][3], param->so);
+        else if (ft_strncmp(splitted[i], "WE", 3) == 0)
+            obtain_path(&splitted[i][3], param->we);
+        else if (ft_strncmp(splitted[i], "EA", 3) == 0)
+            obtain_path(&splitted[i][3], param->ea);
+        else if (ft_strncmp(splitted[i], "F ", 2) == 0)
+            obtain_path(&splitted[i][2], param->f);
+        else if (ft_strncmp(splitted[i], "C ", 2) == 0)
+            obtain_path(&splitted[i][2], param->c);
+        else
+            return ;
+            // error_exit();
+        
+    }
+}
+
+int parser(char *path, t_param *param)
+{
+    char *input_str;
+    char **splitted;
+    int i;
+
+    (void)param;
+    i = 0;
+    input_str = read_from_file(path);
+    splitted = split_input(input_str);
+    while(splitted[i])
+    {
+        printf("%s", splitted[i]);
+        i++;
+    }
+    // init_elements(splitted, param);
+    // printf("%s", param->no);
+
+    return(0);
+}

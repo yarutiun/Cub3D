@@ -1,7 +1,10 @@
 #include "cub3d.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	parser();
+	(void) argc;
+	// (void) argv;
+
+	parser(argv[1]);
 	return (0);
 }

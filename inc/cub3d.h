@@ -36,7 +36,7 @@ typedef struct s_cube
 
 /* Functions */
 // Parser //
-int parser(char *path);
+int		parser(char *path, t_param *param);
 int		check_extension(const char *file_name);
 char	**convert_map(char *file);
 

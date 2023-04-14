@@ -5,6 +5,8 @@ int	main(int argc, char **argv)
 	(void) argc;
 	// (void) argv;
 
-	parser(argv[1]);
+	t_param	param;
+
+	parser(argv[1], &param);
 	return (0);
 }

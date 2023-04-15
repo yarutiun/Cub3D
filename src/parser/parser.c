@@ -159,7 +159,7 @@ int parser(int argc, char *path, t_param *param)
     // (void)param;
     // i = 0;
 
-    if (argc > 2)
+    if (argc != 2)
         argc_error(param);
     param->input_str = read_from_file(path);
     param->splitted_input = split_input(param->input_str);

@@ -109,16 +109,20 @@ char **split_input(char *input_str)
     return(output);
 }
 
-// void    error_exit()
-// {
-
-// }
-
-void obtain_element_args(char *string, char *param)
+void    init_elements_error(t_param *param)
 {
-    param = ft_strdup(string);
-    ft_strlen(param);
-    printf("%s\n", param);
+    ft_putstr_fd("Error\n", 2);
+    ft_putstr_fd("Invalid elements on input file\n", 2);
+    free_param(param);
+    exit(1);
+}
+
+void    argc_error(t_param *param)
+{
+    ft_putstr_fd("Error\n", 2);
+    ft_putstr_fd("Invalid number of arguments\n", 2);
+    free_param(param);
+    exit(1);
 }
 
 void    init_elements(char **splitted, t_param *param)
@@ -129,41 +133,48 @@ void    init_elements(char **splitted, t_param *param)
     while (i < 6)
     {
         if (ft_strncmp(splitted[i], "NO ", 3) == 0)
-            obtain_element_args(&splitted[i][3], param->no);
+            param->no = ft_strdup(&splitted[i][3]);
         else if (ft_strncmp(splitted[i], "SO ", 3) == 0)
-            obtain_element_args(&splitted[i][3], param->so);
+            param->so = ft_strdup(&splitted[i][3]);
         else if (ft_strncmp(splitted[i], "WE ", 3) == 0)
-            obtain_element_args(&splitted[i][3], param->we);
+            param->we = ft_strdup(&splitted[i][3]);
         else if (ft_strncmp(splitted[i], "EA ", 3) == 0)
-            obtain_element_args(&splitted[i][3], param->ea);
+            param->ea = ft_strdup(&splitted[i][3]);
         else if (ft_strncmp(splitted[i], "F ", 2) == 0)
-            obtain_element_args(&splitted[i][2], param->f);
+            param->f = ft_strdup(&splitted[i][2]);
         else if (ft_strncmp(splitted[i], "C ", 2) == 0)
-            obtain_element_args(&splitted[i][2], param->c);
+            param->c = ft_strdup(&splitted[i][2]);
         else
-            return ;
-            // error_exit();
+            init_elements_error(param);
         i++;
     }
 }
 
-int parser(char *path, t_param *param)
+int parser(int argc, char *path, t_param *param)
 {
-    char *input_str;
-    char **splitted;
+    // char *input_str;
+    // char **splitted;
     // int i;
 
     // (void)param;
     // i = 0;
-    input_str = read_from_file(path);
-    splitted = split_input(input_str);
+
+    if (argc > 2)
+        argc_error(param);
+    param->input_str = read_from_file(path);
+    param->splitted_input = split_input(param->input_str);
     // while(splitted[i])
     // {
     //     printf("%s\n", splitted[i]);
     //     i++;
     // }
-    init_elements(splitted, param);
-    // printf("%s", param->no);
+    init_elements(param->splitted_input, param);
+    printf("%s\n", param->no);
+    printf("%s\n", param->so);
+    printf("%s\n", param->we);
+    printf("%s\n", param->ea);
+    printf("%s\n", param->f);
+    printf("%s\n", param->c);
 
     return(0);
 }

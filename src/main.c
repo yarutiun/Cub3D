@@ -2,11 +2,13 @@
 
 int	main(int argc, char **argv)
 {
-	(void) argc;
-	// (void) argv;
+	t_cube	*cube;
+	t_param	*param;
 
-	t_param	param;
-
-	parser(argv[1], &param);
+	cube = malloc(sizeof(t_cube));
+	param = malloc(sizeof(t_param));
+	cube->param = param;
+	parser(argc, argv[1], param);
+	free_all(cube);
 	return (0);
 }

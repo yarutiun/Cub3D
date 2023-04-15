@@ -8,6 +8,7 @@ int	main(int argc, char **argv)
 	cube = malloc(sizeof(t_cube));
 	param = malloc(sizeof(t_param));
 	cube->param = param;
+	param->cube = cube;
 	parser(argc, argv[1], param);
 	free_all(cube);
 	return (0);

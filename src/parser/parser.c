@@ -113,7 +113,7 @@ void    init_elements_error(t_param *param)
 {
     ft_putstr_fd("Error\n", 2);
     ft_putstr_fd("Invalid elements on input file\n", 2);
-    free_param(param);
+    free_all(param->cube);
     exit(1);
 }
 
@@ -121,7 +121,7 @@ void    argc_error(t_param *param)
 {
     ft_putstr_fd("Error\n", 2);
     ft_putstr_fd("Invalid number of arguments\n", 2);
-    free_param(param);
+    free_all(param->cube);
     exit(1);
 }
 

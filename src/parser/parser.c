@@ -114,16 +114,11 @@ char **split_input(char *input_str)
 
 // }
 
-void obtain_path(char *string, char *param)
+void obtain_element_args(char *string, char *param)
 {
-    int i;
-
-    i = 0;
-    while (string[i])
-    {
-        param[i] = string[i];
-        i++;
-    }
+    param = ft_strdup(string);
+    ft_strlen(param);
+    printf("%s\n", param);
 }
 
 void    init_elements(char **splitted, t_param *param)
@@ -134,21 +129,21 @@ void    init_elements(char **splitted, t_param *param)
     while (i < 6)
     {
         if (ft_strncmp(splitted[i], "NO ", 3) == 0)
-            obtain_path(&splitted[i][3], param->no);
+            obtain_element_args(&splitted[i][3], param->no);
         else if (ft_strncmp(splitted[i], "SO ", 3) == 0)
-            obtain_path(&splitted[i][3], param->so);
-        else if (ft_strncmp(splitted[i], "WE", 3) == 0)
-            obtain_path(&splitted[i][3], param->we);
-        else if (ft_strncmp(splitted[i], "EA", 3) == 0)
-            obtain_path(&splitted[i][3], param->ea);
+            obtain_element_args(&splitted[i][3], param->so);
+        else if (ft_strncmp(splitted[i], "WE ", 3) == 0)
+            obtain_element_args(&splitted[i][3], param->we);
+        else if (ft_strncmp(splitted[i], "EA ", 3) == 0)
+            obtain_element_args(&splitted[i][3], param->ea);
         else if (ft_strncmp(splitted[i], "F ", 2) == 0)
-            obtain_path(&splitted[i][2], param->f);
+            obtain_element_args(&splitted[i][2], param->f);
         else if (ft_strncmp(splitted[i], "C ", 2) == 0)
-            obtain_path(&splitted[i][2], param->c);
+            obtain_element_args(&splitted[i][2], param->c);
         else
             return ;
             // error_exit();
-        
+        i++;
     }
 }
 
@@ -156,18 +151,18 @@ int parser(char *path, t_param *param)
 {
     char *input_str;
     char **splitted;
-    int i;
+    // int i;
 
-    (void)param;
-    i = 0;
+    // (void)param;
+    // i = 0;
     input_str = read_from_file(path);
     splitted = split_input(input_str);
-    while(splitted[i])
-    {
-        printf("%s", splitted[i]);
-        i++;
-    }
-    // init_elements(splitted, param);
+    // while(splitted[i])
+    // {
+    //     printf("%s\n", splitted[i]);
+    //     i++;
+    // }
+    init_elements(splitted, param);
     // printf("%s", param->no);
 
     return(0);

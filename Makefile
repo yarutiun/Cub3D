@@ -61,7 +61,7 @@ $(NAME): $(OBJS)
 clean:
 	$(RM) $(OBJ_PATH)
 	@make clean -C $(LIB_F)
-	@make clean -C $(MLX_F)
+	# @make clean -C $(MLX_F) ## UNCOMMENT BEFORE SUBMISSION!
 
 fclean: clean
 	$(RM) $(NAME)

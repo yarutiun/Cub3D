@@ -34,10 +34,13 @@ typedef struct s_param
 
 typedef struct s_cube
 {
-	t_param				*param;
+	t_param				param;
 }						t_cube;
 
 /* Functions */
+// Init Structs //
+void	init_structs(t_cube *cube);
+
 // Parser //
 int		parser(int argc, char *path, t_param *param);
 int		check_extension(const char *file_name);
@@ -53,6 +56,5 @@ int		parsing_err(void);
 
 // Free //
 void	free_all(t_cube *cube);
-void	free_param(t_param *param);
 
 #endif

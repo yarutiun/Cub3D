@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	init_structs(t_cube *cube)
+void	init_param(t_cube *cube)
 {
 	t_param	*param;
 

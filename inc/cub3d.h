@@ -39,7 +39,7 @@ typedef struct s_cube
 
 /* Functions */
 // Init Structs //
-void	init_structs(t_cube *cube);
+void	init_param(t_cube *cube);
 
 // Parser //
 int		parser(int argc, char *path, t_param *param);

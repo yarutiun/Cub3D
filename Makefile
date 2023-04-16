@@ -26,12 +26,13 @@ LIB_A = libft.a
 MLX_A = libmlx.a
 
 # Source and object files
-SRC		=	main.c \
-			get_next_line.c \
-			free.c \
+SRC		=	$(addprefix parser/,\
+			parser.c) \
 			errors.c \
-			$(addprefix parser/,\
-			parser.c)
+			free.c \
+			get_next_line.c \
+			init_structs.c \
+			main.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

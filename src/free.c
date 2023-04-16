@@ -46,14 +46,5 @@ void	free_param(t_param *param)
 
 void	free_all(t_cube *cube)
 {
-	if (cube->param)
-	{
-		free_param(cube->param);
-		free(cube->param);
-	}
-	cube->param = NULL;
-
-	if (cube)
-		free(cube);
-	cube = NULL;
+	free_param(&cube->param);
 }

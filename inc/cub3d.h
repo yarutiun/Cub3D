@@ -19,7 +19,6 @@
 typedef struct s_param
 {
 	struct s_cube		*cube;
-	char				**file_input; //delete
 	char 				*input_str;
     char 				**splitted_input;
 	char				*path;
@@ -39,6 +38,7 @@ typedef struct s_cube
 
 /* Functions */
 // Init Structs //
+void	init_cube(t_cube *cube);
 void	init_param(t_cube *cube);
 
 // Parser //

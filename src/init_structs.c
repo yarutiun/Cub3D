@@ -5,8 +5,6 @@ void	init_param(t_cube *cube)
 	t_param	*param;
 
 	param = &cube->param;
-	param->cube = cube;
-	param->file_input = NULL;
 	param->input_str = NULL;
 	param->splitted_input = NULL;
 	param->path = NULL;
@@ -17,4 +15,9 @@ void	init_param(t_cube *cube)
 	param->f = NULL;
 	param->c = NULL;
 	param->map = NULL;
+}
+
+void	init_cube(t_cube *cube)
+{
+	cube->param.cube = cube;
 }

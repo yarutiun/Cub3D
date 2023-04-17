@@ -14,10 +14,10 @@ int check_extension(const char *file_name, t_cube *cube)
         if(file_name[len-1] == 'b' && file_name[len - 2] == 'u' && \
         file_name[len - 3] == 'c' && file_name[len - 4] == '.')
             return(0);
-        parsing_err(cube);
+        extension_error(cube);
         return(1);
     }
-    parsing_err(cube);
+    extension_error(cube);
     return(1);
 }
 
@@ -35,7 +35,7 @@ int check_extension(const char *file_name, t_cube *cube)
 //     fd = open(file, O_RDONLY);
 //     if(fd < 0)
 //     {
-//         parsing_err();
+//         map_err();
 //         return(NULL);
 //     }
 //     map = malloc(1000);
@@ -65,7 +65,7 @@ int check_extension(const char *file_name, t_cube *cube)
 //         {
 //             if(!ft_strchr(symbols, map[i][j]))
 //             {
-//                 parsing_err();
+//                 forbidden_chars_err();
 //                 return(1);
 //             }
 //             j++;
@@ -136,15 +136,48 @@ void    init_elements(char **splitted, t_param *param)
     }
 }
 
-int parser(int argc, char *path, t_param *param)
+// Needs testing
+void    check_files(t_param *param)
 {
-    // char *input_str;
-    // char **splitted;
-    // int i;
+    int fd;
 
-    // (void)param;
-    // i = 0;
+    fd = open(param->no, O_RDONLY);
+    if(fd == -1)
+        file_error(param->cube);
+    fd = open(param->so, O_RDONLY);
+    if(fd == -1)
+        file_error(param->cube);
+        fd = open(param->we, O_RDONLY);
+    if(fd == -1)
+        file_error(param->cube);
+        fd = open(param->ea, O_RDONLY);
+    if(fd == -1)
+        file_error(param->cube);
 
+}
+
+void    check_rgb(t_param *param)
+{
+    char    **rgb_f;
+    char    **rgb_c;
+
+    rgb_c = ft_split(param->c, ',');
+    rgb_f = ft_split(param->f, ',');
+    while(*rgb_c && *rgb_f)
+    {
+        if(ft_atoi(*rgb_c) <= 255 && ft_atoi(*rgb_c) >= 0 \
+        && ft_atoi(*rgb_f) <= 255 && ft_atoi(*rgb_f) >= 0)
+        {
+            rgb_c++;
+            rgb_f++;
+        }
+        else
+            rgb_error(param->cube);    
+    }
+}
+
+void     parse_input(int argc, char *path, t_param *param)
+{
     t_cube *cube;
 
     cube = param->cube;
@@ -159,12 +192,13 @@ int parser(int argc, char *path, t_param *param)
     //     i++;
     // }
     init_elements(param->splitted_input, param);
-    printf("%s\n", param->no);
-    printf("%s\n", param->so);
-    printf("%s\n", param->we);
-    printf("%s\n", param->ea);
-    printf("%s\n", param->f);
-    printf("%s\n", param->c);
-
-    return(0);
+    // printf("%s\n", param->no);
+    // printf("%s\n", param->so);
+    // printf("%s\n", param->we);
+    // printf("%s\n", param->ea);
+    // printf("%s\n", param->f);
+    // printf("%s\n", param->c);
+    
+    // check_files(param);
+    check_rgb(param);
 }

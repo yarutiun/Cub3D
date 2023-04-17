@@ -8,7 +8,17 @@ void    error_exit(char *message, t_cube *cube)
     exit(1);
 }
 
-void    parsing_err(t_cube *cube)
+void    file_error(t_cube *cube)
+{
+    error_exit("File not found\n", cube);
+}
+
+void    rgb_error(t_cube *cube)
+{
+    error_exit("Invalid RGB arguments\n", cube);
+}
+
+void    extension_error(t_cube *cube)
 {
     error_exit("Invalid file extension\n", cube);    
 }

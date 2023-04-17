@@ -7,6 +7,13 @@ void	free_str(char *str)
 	str = NULL;
 }
 
+void	free_int_arr(int *arr)
+{
+	if (arr)
+		free(arr);
+	arr = NULL;
+}
+
 void	free_double_str_ptr(char **arr)
 {
 	int	i;
@@ -36,6 +43,8 @@ void	free_param(t_param *param)
 	free_str(param->ea);
 	free_str(param->f);
 	free_str(param->c);
+	free_int_arr(param->f_rgb);
+	free_int_arr(param->c_rgb);
 }
 
 void	free_all(t_cube *cube)

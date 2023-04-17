@@ -4,7 +4,7 @@
 //function checks that the map extension is ".cub"
 //returns 1 if extension is not ".cub"
 //returns 0 if test passed
-int check_extension(const char *file_name)
+int check_extension(const char *file_name, t_cube *cube)
 {
     int len;
 
@@ -14,10 +14,10 @@ int check_extension(const char *file_name)
         if(file_name[len-1] == 'b' && file_name[len - 2] == 'u' && \
         file_name[len - 3] == 'c' && file_name[len - 4] == '.')
             return(0);
-        parsing_err();
+        parsing_err(cube);
         return(1);
     }
-    parsing_err();
+    parsing_err(cube);
     return(1);
 }
 
@@ -25,55 +25,55 @@ int check_extension(const char *file_name)
 //Opens a file and copies the map with all symbols to char **map
 //Returns Null (almost impossible) or a filled map
 //Needs tests, also not sure is sets last map[i] to NULL
-char **convert_map(char *file)
-{
-    char **map;
-    int i;
-    int fd;
+// char **convert_map(char *file)
+// {
+//     char **map;
+//     int i;
+//     int fd;
 
-    i = 0;
-    fd = open(file, O_RDONLY);
-    if(fd < 0)
-    {
-        parsing_err();
-        return(NULL);
-    }
-    map = malloc(1000);
-    map[i] = get_next_line(fd);
-    while(map[i] != NULL)
-    {
-        i++;
-        map[i] = get_next_line(fd);
-    }
-    return(map);
-}
+//     i = 0;
+//     fd = open(file, O_RDONLY);
+//     if(fd < 0)
+//     {
+//         parsing_err();
+//         return(NULL);
+//     }
+//     map = malloc(1000);
+//     map[i] = get_next_line(fd);
+//     while(map[i] != NULL)
+//     {
+//         i++;
+//         map[i] = get_next_line(fd);
+//     }
+//     return(map);
+// }
 
 //Returns 1 if any other characters detected in map but 01NSEW
 //Retunrs 0 if check went successful
-int check_forbidden_chars(char **map)
-{
-    int i;
-    int j;
-    char *symbols;
-    symbols = "01NSEW";
+// int check_forbidden_chars(char **map)
+// {
+//     int i;
+//     int j;
+//     char *symbols;
+//     symbols = "01NSEW";
 
-    i = 0;
-    while(map[i])
-    {
-        j = 0;
-        while(map[i][j])
-        {
-            if(!ft_strchr(symbols, map[i][j]))
-            {
-                parsing_err();
-                return(1);
-            }
-            j++;
-        }
-        i++;
-    }
-    return(0);
-}
+//     i = 0;
+//     while(map[i])
+//     {
+//         j = 0;
+//         while(map[i][j])
+//         {
+//             if(!ft_strchr(symbols, map[i][j]))
+//             {
+//                 parsing_err();
+//                 return(1);
+//             }
+//             j++;
+//         }
+//         i++;
+//     }
+//     return(0);
+// }
 
 char *read_from_file(char *path)
 {
@@ -109,27 +109,13 @@ char **split_input(char *input_str)
     return(output);
 }
 
-void    init_elements_error(t_param *param)
-{
-    ft_putstr_fd("Error\n", 2);
-    ft_putstr_fd("Invalid elements on input file\n", 2);
-    free_all(param->cube);
-    exit(1);
-}
-
-void    argc_error(t_param *param)
-{
-    ft_putstr_fd("Error\n", 2);
-    ft_putstr_fd("Invalid number of arguments\n", 2);
-    free_all(param->cube);
-    exit(1);
-}
-
 void    init_elements(char **splitted, t_param *param)
 {
     int i;
+    t_cube *cube;
 
     i = 0;
+    cube = param->cube;
     while (i < 6)
     {
         if (ft_strncmp(splitted[i], "NO ", 3) == 0)
@@ -145,7 +131,7 @@ void    init_elements(char **splitted, t_param *param)
         else if (ft_strncmp(splitted[i], "C ", 2) == 0)
             param->c = ft_strdup(&splitted[i][2]);
         else
-            init_elements_error(param);
+            init_elements_error(cube);
         i++;
     }
 }
@@ -159,8 +145,12 @@ int parser(int argc, char *path, t_param *param)
     // (void)param;
     // i = 0;
 
+    t_cube *cube;
+
+    cube = param->cube;
     if (argc != 2)
-        argc_error(param);
+        argc_error(cube);
+    check_extension(path, cube);
     param->input_str = read_from_file(path);
     param->splitted_input = split_input(param->input_str);
     // while(splitted[i])

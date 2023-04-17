@@ -1,7 +1,24 @@
 #include "cub3d.h"
 
-int parsing_err(void)
+void    error_exit(char *message, t_cube *cube)
 {
-    write(1, "Error\n", 6);
-    return(0);
+    ft_putstr_fd("Error\n", 2);
+    ft_putstr_fd(message, 2);
+    free_all(cube);
+    exit(1);
+}
+
+void    parsing_err(t_cube *cube)
+{
+    error_exit("Invalid file extension\n", cube);    
+}
+
+void    init_elements_error(t_cube *cube)
+{
+    error_exit("Invalid elements on input file\n", cube);
+}
+
+void    argc_error(t_cube *cube)
+{
+    error_exit("Invalid number of arguments\n", cube);
 }

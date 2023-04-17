@@ -43,7 +43,7 @@ void	init_param(t_cube *cube);
 
 // Parser //
 int		parser(int argc, char *path, t_param *param);
-int		check_extension(const char *file_name);
+int 	check_extension(const char *file_name, t_cube *cube);
 char	**convert_map(char *file);
 
 // Utils //
@@ -52,7 +52,9 @@ char	*get_return(char *stash);
 char	*get_next_line(int fd);
 
 // Errors //
-int		parsing_err(void);
+void	parsing_err(t_cube *cube);
+void    init_elements_error(t_cube *cube);
+void    argc_error(t_cube *cube);
 
 // Free //
 void	free_all(t_cube *cube);

@@ -42,19 +42,17 @@ void	init_cube(t_cube *cube);
 void	init_param(t_cube *cube);
 
 // Parser //
-int		parser(int argc, char *path, t_param *param);
-int 	check_extension(const char *file_name, t_cube *cube);
-char	**convert_map(char *file);
+void	parse_input(int argc, char *path, t_param *param);
 
 // Utils //
-char	*read_file(int fd, char *stash);
-char	*get_return(char *stash);
 char	*get_next_line(int fd);
 
 // Errors //
-void	parsing_err(t_cube *cube);
-void    init_elements_error(t_cube *cube);
 void    argc_error(t_cube *cube);
+void	extension_error(t_cube *cube);
+void    init_elements_error(t_cube *cube);
+void    file_error(t_cube *cube);
+void    rgb_error(t_cube *cube);
 
 // Free //
 void	free_all(t_cube *cube);

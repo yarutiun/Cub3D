@@ -28,6 +28,8 @@ typedef struct s_param
 	char				*ea;
 	char				*f;
 	char				*c;
+	int					*f_rgb;
+	int					*c_rgb;
 	char 				**map;
 }						t_param;
 
@@ -56,5 +58,6 @@ void    rgb_error(t_cube *cube);
 
 // Free //
 void	free_all(t_cube *cube);
+void	free_double_str_ptr(char **arr);
 
 #endif

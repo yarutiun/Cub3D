@@ -14,6 +14,8 @@ void	init_param(t_cube *cube)
 	param->ea = NULL;
 	param->f = NULL;
 	param->c = NULL;
+	param->f_rgb = malloc(sizeof(int) * 3);
+	param->c_rgb = malloc(sizeof(int) * 3);
 	param->map = NULL;
 }
 

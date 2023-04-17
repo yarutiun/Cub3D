@@ -158,22 +158,31 @@ void    check_files(t_param *param)
 
 void    check_rgb(t_param *param)
 {
+    int     i;
     char    **rgb_f;
     char    **rgb_c;
 
+    i = 0;
     rgb_c = ft_split(param->c, ',');
     rgb_f = ft_split(param->f, ',');
-    while(*rgb_c && *rgb_f)
+    while (rgb_c[i] && rgb_f[i])
     {
-        if(ft_atoi(*rgb_c) <= 255 && ft_atoi(*rgb_c) >= 0 \
-        && ft_atoi(*rgb_f) <= 255 && ft_atoi(*rgb_f) >= 0)
+        if(ft_atoi(rgb_c[i]) <= 255 && ft_atoi(rgb_c[i]) >= 0 \
+        && ft_atoi(rgb_f[i]) <= 255 && ft_atoi(rgb_f[i]) >= 0)
         {
-            rgb_c++;
-            rgb_f++;
+            param->f_rgb[i] = ft_atoi(rgb_f[i]);
+            param->c_rgb[i] = ft_atoi(rgb_c[i]);
+            i++;
         }
         else
+        {
+            free_double_str_ptr(rgb_c);
+            free_double_str_ptr(rgb_f);
             rgb_error(param->cube);    
+        }
     }
+    free_double_str_ptr(rgb_c);
+    free_double_str_ptr(rgb_f);
 }
 
 void     parse_input(int argc, char *path, t_param *param)
@@ -198,7 +207,7 @@ void     parse_input(int argc, char *path, t_param *param)
     // printf("%s\n", param->ea);
     // printf("%s\n", param->f);
     // printf("%s\n", param->c);
-    
+
     // check_files(param);
     check_rgb(param);
 }

@@ -6,7 +6,7 @@ int	main(int argc, char **argv)
 
 	init_cube(&cube);
 	init_param(&cube);
-	parse_input(argc, argv[1], &cube.param);
+	parse_input(argc, argv[1], &cube);
 	free_all(&cube);
 	return (0);
 }

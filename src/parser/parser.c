@@ -115,16 +115,13 @@ void    init_elements(char **splitted, t_param *param)
     }
 }
 
-void     parse_input(int argc, char *path, t_param *param)
+void     parse_input(int argc, char *path, t_cube *cube)
 {
-    t_cube *cube;
-
-    cube = param->cube;
     if (argc != 2)
         argc_error(cube);
     check_extension(path, cube);
-    param->input_str = read_from_file(path);
-    param->splitted_input = split_input(param->input_str);
-    init_elements(param->splitted_input, param);
-    check_rgb(param);
+    cube->param.input_str = read_from_file(path);
+    cube->param.splitted_input = split_input(cube->param.input_str);
+    init_elements(cube->param.splitted_input, &cube->param);
+    check_rgb(&cube->param);
 }

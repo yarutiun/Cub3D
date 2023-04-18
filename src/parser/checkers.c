@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 //function checks that the map extension is ".cub"
 //returns 1 if extension is not ".cub"
@@ -67,4 +67,42 @@ void    check_rgb(t_param *param)
     }
     free_double_str_ptr(rgb_c);
     free_double_str_ptr(rgb_f);
+}
+
+void    check_map_double_n(char *input, t_cube *cube)
+{
+    int count;
+    int flag;
+
+    count = 0;
+    flag = 0;
+
+    while(flag < 6)
+    {
+        if(ft_isalpha(input[count]))
+        {
+            while(input[count])
+            {
+                if(input[count] == '\n')
+                {
+                    flag++;
+                    break;
+                }
+                count++;
+            }
+        }
+        count++;
+    }
+    while(input[count])
+    {
+        if(input[count] == ' ' || input[count] == '1' || input[count] == '0')
+            break;
+        count++;
+    }
+    while(input[count])
+    {
+        if(input[count] == '\n' && input[count + 1] && input[count + 1] == '\n')
+            error_double_n(cube);
+        count++;
+    }
 }

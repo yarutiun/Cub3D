@@ -106,3 +106,21 @@ void    check_map_double_n(char *input, t_cube *cube)
         count++;
     }
 }
+
+void    check_map_row(char **splitted_input, t_cube *cube)
+{
+    int i;
+    int last_i;
+
+    i = 6;
+    while (splitted_input[i])
+    {
+        last_i = ft_strlen(splitted_input[i]) - 1;
+
+        if (splitted_input[i][last_i] == '0')
+            map_row_error(cube);
+        else if (splitted_input[i][0] == '0')
+            map_row_error(cube);
+        i++;
+    }
+}

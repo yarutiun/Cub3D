@@ -49,6 +49,7 @@ int		check_extension(const char *file_name, t_cube *cube);
 void	check_files(t_param *param);
 void	check_rgb(t_param *param);
 void	check_map_double_n(char *input, t_cube *cube);
+void    check_map_row(char **splitted_input, t_cube *cube);
 
 // Utils //
 char	*get_next_line(int fd);
@@ -60,6 +61,7 @@ void    init_elements_error(t_cube *cube);
 void    file_error(t_cube *cube);
 void    rgb_error(t_cube *cube);
 void	error_double_n(t_cube *cube);
+void    map_row_error(t_cube *cube);
 
 // Free //
 void	free_all(t_cube *cube);

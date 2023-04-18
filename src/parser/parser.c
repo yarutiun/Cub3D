@@ -127,6 +127,7 @@ void     parse_input(int argc, char *path, t_cube *cube)
     init_elements(cube->param.splitted_input, &cube->param);
     check_rgb(&cube->param);
     check_map_double_n(cube->param.input_str, cube);
+    check_map_row(cube->param.splitted_input, cube);
     // while(cube->param.splitted_input[i])
     // {
     //     printf("%s\n", cube->param.splitted_input[i]);

@@ -119,9 +119,17 @@ void     parse_input(int argc, char *path, t_cube *cube)
 {
     if (argc != 2)
         argc_error(cube);
+    // int i = 0;
+    // printf("%s", cube->param.input_str);
     check_extension(path, cube);
     cube->param.input_str = read_from_file(path);
     cube->param.splitted_input = split_input(cube->param.input_str);
     init_elements(cube->param.splitted_input, &cube->param);
     check_rgb(&cube->param);
+    check_map_double_n(cube->param.input_str, cube);
+    // while(cube->param.splitted_input[i])
+    // {
+    //     printf("%s\n", cube->param.splitted_input[i]);
+    //     i++;
+    // }
 }

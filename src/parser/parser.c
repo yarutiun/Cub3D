@@ -119,7 +119,7 @@ void    check_forbidden_chars(char **map, t_cube *cube)
     int i;
     int j;
     char *symbols;
-    symbols = "01NSEW";
+    symbols = "01NSEW ";
 
     i = 0;
     while(map[i])
@@ -133,6 +133,33 @@ void    check_forbidden_chars(char **map, t_cube *cube)
         }
         i++;
     }
+}
+
+void    check_player(char **map, t_cube *cube)
+{
+    int i;
+    int j;
+    int flag;
+    char *symbols;
+    symbols = "NSEW";
+
+    flag = 0;
+    i = 0;
+    while(map[i])
+    {
+        j = 0;
+        while(map[i][j])
+        {
+            if(ft_strchr(symbols, map[i][j]))
+                flag++;
+            j++;
+        }
+        i++;
+    }
+    if(flag == 0)
+        player_error(cube, "No players on the map\n");
+    else if(flag > 1)
+        player_error(cube, "Too many players on the map\n");
 }
 
 void     parse_input(int argc, char *path, t_cube *cube)
@@ -152,6 +179,7 @@ void     parse_input(int argc, char *path, t_cube *cube)
     assign_map(cube->param.splitted_input, cube);
     check_invalid_spaces(cube->param.map, cube);
     check_forbidden_chars(cube->param.map, cube);
+    check_player(cube->param.map, cube);
     // while(cube->param.map[i])
     // {
     //     printf("%s\n", cube->param.map[i]);

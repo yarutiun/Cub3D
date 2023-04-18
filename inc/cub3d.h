@@ -50,6 +50,7 @@ void	check_files(t_param *param);
 void	check_rgb(t_param *param);
 void	check_map_double_n(char *input, t_cube *cube);
 void    check_map_row(char **splitted_input, t_cube *cube);
+void	check_invalid_spaces(char **map, t_cube *cube);
 
 // Utils //
 char	*get_next_line(int fd);
@@ -62,6 +63,8 @@ void    file_error(t_cube *cube);
 void    rgb_error(t_cube *cube);
 void	error_double_n(t_cube *cube);
 void    map_row_error(t_cube *cube);
+void    invalid_spaces_error(t_cube *cube);
+
 
 // Free //
 void	free_all(t_cube *cube);

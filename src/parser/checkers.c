@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 //function checks that the map extension is ".cub"
 //returns 1 if extension is not ".cub"

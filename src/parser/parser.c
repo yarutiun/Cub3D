@@ -27,33 +27,6 @@
 //     return(map);
 // }
 
-//Returns 1 if any other characters detected in map but 01NSEW
-//Retunrs 0 if check went successful
-// int check_forbidden_chars(char **map)
-// {
-//     int i;
-//     int j;
-//     char *symbols;
-//     symbols = "01NSEW";
-
-//     i = 0;
-//     while(map[i])
-//     {
-//         j = 0;
-//         while(map[i][j])
-//         {
-//             if(!ft_strchr(symbols, map[i][j]))
-//             {
-//                 forbidden_chars_err();
-//                 return(1);
-//             }
-//             j++;
-//         }
-//         i++;
-//     }
-//     return(0);
-// }
-
 char *read_from_file(char *path)
 {
     int     fd;
@@ -139,6 +112,29 @@ void    assign_map(char **splitted_input, t_cube *cube)
     }
 }
 
+//Returns 1 if any other characters detected in map but 01NSEW
+//Retunrs 0 if check went successful
+void    check_forbidden_chars(char **map, t_cube *cube)
+{
+    int i;
+    int j;
+    char *symbols;
+    symbols = "01NSEW";
+
+    i = 0;
+    while(map[i])
+    {
+        j = 0;
+        while(map[i][j])
+        {
+            if(!ft_strchr(symbols, map[i][j]))
+                forbidden_chars_error(cube);
+            j++;
+        }
+        i++;
+    }
+}
+
 void     parse_input(int argc, char *path, t_cube *cube)
 {
     // int i = 0;
@@ -155,6 +151,7 @@ void     parse_input(int argc, char *path, t_cube *cube)
     check_map_row(cube->param.splitted_input, cube);
     assign_map(cube->param.splitted_input, cube);
     check_invalid_spaces(cube->param.map, cube);
+    check_forbidden_chars(cube->param.map, cube);
     // while(cube->param.map[i])
     // {
     //     printf("%s\n", cube->param.map[i]);

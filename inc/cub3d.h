@@ -64,6 +64,7 @@ void    rgb_error(t_cube *cube);
 void	error_double_n(t_cube *cube);
 void    map_row_error(t_cube *cube);
 void    invalid_spaces_error(t_cube *cube);
+void	forbidden_chars_error(t_cube *cube);
 
 
 // Free //

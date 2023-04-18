@@ -45,6 +45,9 @@ void	init_param(t_cube *cube);
 
 // Parser //
 void	parse_input(int argc, char *path, t_param *param);
+int		check_extension(const char *file_name, t_cube *cube);
+void	check_files(t_param *param);
+void	check_rgb(t_param *param);
 
 // Utils //
 char	*get_next_line(int fd);

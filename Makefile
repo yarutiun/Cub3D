@@ -28,6 +28,8 @@ MLX_A = libmlx.a
 # Source and object files
 SRC		=	$(addprefix parser/,\
 			parser.c) \
+			$(addprefix parser/,\
+			checkers.c) \
 			errors.c \
 			free.c \
 			get_next_line.c \

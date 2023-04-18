@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/Users/yarutiun/Desktop/42_projects/to_push",
+            "binaryPath": "/Users/yarutiun/Desktop/42_projects/to_push/cub3D",
+            "binaryArgs": []
+        }
+    ]
+}

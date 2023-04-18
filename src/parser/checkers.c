@@ -124,3 +124,32 @@ void    check_map_row(char **splitted_input, t_cube *cube)
         i++;
     }
 }
+
+void	check_invalid_spaces(char **map, t_cube *cube)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if(map[i][j] == '0')
+            {
+                if (map[i][j + 1] && map[i][j + 1] == ' ')
+                    invalid_spaces_error(cube);
+                if (map[i][j - 1] && map[i][j - 1] == ' ')
+                    invalid_spaces_error(cube);
+                if (map[i + 1][j] && map[i + 1][j] == ' ')
+                    invalid_spaces_error(cube);
+                if (map[i - 1][j] && map[i - 1][j] == ' ')
+                    invalid_spaces_error(cube);
+            }
+            j++;
+        }
+        i++;
+    }
+}

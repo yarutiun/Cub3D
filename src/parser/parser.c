@@ -141,7 +141,7 @@ void    assign_map(char **splitted_input, t_cube *cube)
 
 void     parse_input(int argc, char *path, t_cube *cube)
 {
-    int i = 0;
+    // int i = 0;
     if (argc != 2)
         argc_error(cube);
     // printf("%s", cube->param.input_str);
@@ -149,16 +149,16 @@ void     parse_input(int argc, char *path, t_cube *cube)
     cube->param.input_str = read_from_file(path);
     cube->param.splitted_input = split_input(cube->param.input_str);
     init_elements(cube->param.splitted_input, &cube->param);
+    // check_files(&cube->param);
     check_rgb(&cube->param);
     check_map_double_n(cube->param.input_str, cube);
     check_map_row(cube->param.splitted_input, cube);
     assign_map(cube->param.splitted_input, cube);
-    // check_invalid_spaces(cube->param.map, cube);
-    
-    while(cube->param.map[i])
-    {
-        printf("%s\n", cube->param.map[i]);
-        i++;
-    }
+    check_invalid_spaces(cube->param.map, cube);
+    // while(cube->param.map[i])
+    // {
+    //     printf("%s\n", cube->param.map[i]);
+    //     i++;
+    // }
     // printf("%s", cube->param.map[6]);
 }

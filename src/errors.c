@@ -32,3 +32,8 @@ void    argc_error(t_cube *cube)
 {
     error_exit("Invalid number of arguments\n", cube);
 }
+
+void    error_double_n(t_cube *cube)
+{
+    error_exit("Empty line in map\n", cube);
+}

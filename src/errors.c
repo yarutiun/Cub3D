@@ -42,3 +42,8 @@ void    map_row_error(t_cube *cube)
 {
     error_exit("Open map\n", cube);
 }
+
+void    invalid_spaces_error(t_cube *cube)
+{
+    error_exit("Invalid space positon\n", cube);
+}

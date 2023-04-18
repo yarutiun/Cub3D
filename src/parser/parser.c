@@ -115,11 +115,35 @@ void    init_elements(char **splitted, t_param *param)
     }
 }
 
+void    assign_map(char **splitted_input, t_cube *cube)
+{
+    int i;
+    int j;
+
+    i = 6;
+    j = 0;
+    while (splitted_input[i])
+    {
+        i++;
+        j++;
+    }
+    i = 6;
+    cube->param.map = malloc(sizeof(char *) * j);
+    cube->param.map[j] = NULL;
+    j = 0;
+    while (splitted_input[i])
+    {
+        cube->param.map[j] = ft_strdup(splitted_input[i]);
+        i++;
+        j++;
+    }
+}
+
 void     parse_input(int argc, char *path, t_cube *cube)
 {
+    int i = 0;
     if (argc != 2)
         argc_error(cube);
-    // int i = 0;
     // printf("%s", cube->param.input_str);
     check_extension(path, cube);
     cube->param.input_str = read_from_file(path);
@@ -128,9 +152,13 @@ void     parse_input(int argc, char *path, t_cube *cube)
     check_rgb(&cube->param);
     check_map_double_n(cube->param.input_str, cube);
     check_map_row(cube->param.splitted_input, cube);
-    // while(cube->param.splitted_input[i])
-    // {
-    //     printf("%s\n", cube->param.splitted_input[i]);
-    //     i++;
-    // }
+    assign_map(cube->param.splitted_input, cube);
+    // check_invalid_spaces(cube->param.map, cube);
+    
+    while(cube->param.map[i])
+    {
+        printf("%s\n", cube->param.map[i]);
+        i++;
+    }
+    // printf("%s", cube->param.map[6]);
 }

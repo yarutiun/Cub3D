@@ -21,7 +21,7 @@ int check_extension(const char *file_name, t_cube *cube)
 }
 
 // Needs testing
-void    check_files(t_param *param)
+void    check_texture_files(t_param *param)
 {
     int fd;
 

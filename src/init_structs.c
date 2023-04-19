@@ -7,7 +7,6 @@ void	init_param(t_cube *cube)
 	param = &cube->param;
 	param->input_str = NULL;
 	param->splitted_input = NULL;
-	param->path = NULL;
 	param->no = NULL;
 	param->so = NULL;
 	param->we = NULL;

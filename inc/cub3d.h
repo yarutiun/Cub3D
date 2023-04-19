@@ -21,7 +21,6 @@ typedef struct s_param
 	struct s_cube		*cube;
 	char 				*input_str;
     char 				**splitted_input;
-	char				*path;
 	char				*no;
 	char				*so;
 	char				*we;
@@ -46,7 +45,7 @@ void	init_param(t_cube *cube);
 // Parser //
 void	parse_input(int argc, char *path, t_cube *cube);
 int		check_extension(const char *file_name, t_cube *cube);
-void	check_files(t_param *param);
+void	check_texture_files(t_param *param);
 void	check_rgb(t_param *param);
 void	check_map_double_n(char *input, t_cube *cube);
 void    check_map_row(char **splitted_input, t_cube *cube);

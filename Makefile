@@ -26,7 +26,9 @@ LIB_A = libft.a
 MLX_A = libmlx.a
 
 # Source and object files
-SRC		=	$(addprefix parser/,\
+SRC		=	$(addprefix graphics/,\
+			window.c) \
+			$(addprefix parser/,\
 			parser.c) \
 			$(addprefix parser/,\
 			checkers.c) \
@@ -50,7 +52,7 @@ all: $(NAME)
 ## Update folder names here ##
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	@mkdir -p obj/parser
+	@mkdir -p obj/graphics obj/parser
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 	
 $(NAME): $(OBJS)

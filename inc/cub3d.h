@@ -32,15 +32,24 @@ typedef struct s_param
 	char 				**map;
 }						t_param;
 
+typedef struct s_mlx
+{
+	struct s_cube		*cube;
+	void				*mlx_ptr;
+	void				*window;
+}						t_mlx;
+
 typedef struct s_cube
 {
-	t_param				param;
+	t_param				*param;
+	t_mlx				*mlx;
 }						t_cube;
 
 /* Functions */
 // Init Structs //
 void	init_cube(t_cube *cube);
 void	init_param(t_cube *cube);
+void	init_mlx(t_cube *cube);
 
 // Parser //
 void	parse_input(int argc, char *path, t_cube *cube);

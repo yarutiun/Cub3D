@@ -78,12 +78,12 @@ void    assign_map(char **splitted_input, t_cube *cube)
         j++;
     }
     i = 6;
-    cube->param.map = malloc(sizeof(char *) * j);
-    cube->param.map[j] = NULL;
+    cube->param->map = malloc(sizeof(char *) * j);
+    cube->param->map[j] = NULL;
     j = 0;
     while (splitted_input[i])
     {
-        cube->param.map[j] = ft_strdup(splitted_input[i]);
+        cube->param->map[j] = ft_strdup(splitted_input[i]);
         i++;
         j++;
     }
@@ -144,15 +144,15 @@ void     parse_input(int argc, char *path, t_cube *cube)
     if (argc != 2)
         argc_error(cube);
     check_extension(path, cube);
-    cube->param.input_str = read_from_file(path);
-    cube->param.splitted_input = split_input(cube->param.input_str);
-    init_elements(cube->param.splitted_input, &cube->param);
+    cube->param->input_str = read_from_file(path);
+    cube->param->splitted_input = split_input(cube->param->input_str);
+    init_elements(cube->param->splitted_input, cube->param);
     // check_texture_files(&cube->param);
-    check_rgb(&cube->param);
-    check_map_double_n(cube->param.input_str, cube);
-    check_map_row(cube->param.splitted_input, cube);
-    assign_map(cube->param.splitted_input, cube);
-    check_invalid_spaces(cube->param.map, cube);
-    check_forbidden_chars(cube->param.map, cube);
-    check_player(cube->param.map, cube);
+    check_rgb(cube->param);
+    check_map_double_n(cube->param->input_str, cube);
+    check_map_row(cube->param->splitted_input, cube);
+    assign_map(cube->param->splitted_input, cube);
+    check_invalid_spaces(cube->param->map, cube);
+    check_forbidden_chars(cube->param->map, cube);
+    check_player(cube->param->map, cube);
 }

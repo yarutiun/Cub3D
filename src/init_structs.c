@@ -4,7 +4,7 @@ void	init_param(t_cube *cube)
 {
 	t_param	*param;
 
-	param = &cube->param;
+	param = cube->param;
 	param->input_str = NULL;
 	param->splitted_input = NULL;
 	param->no = NULL;
@@ -18,7 +18,16 @@ void	init_param(t_cube *cube)
 	param->map = NULL;
 }
 
+void	init_mlx(t_cube *cube)
+{
+	t_mlx	*mlx;
+
+	mlx = cube->mlx;
+	mlx->mlx_ptr = mlx_init();
+	mlx->window = mlx_new_window(mlx->mlx_ptr, 1920,1080, "Cub3D");
+}
+
 void	init_cube(t_cube *cube)
 {
-	cube->param.cube = cube;
+	cube->param->cube = cube;
 }

@@ -4,7 +4,7 @@ void	init_param(t_cube *cube)
 {
 	t_param	*param;
 
-	param = cube->param;
+	param = &cube->param;
 	param->input_str = NULL;
 	param->splitted_input = NULL;
 	param->no = NULL;
@@ -20,6 +20,6 @@ void	init_param(t_cube *cube)
 
 void	init_cube(t_cube *cube)
 {
-	cube->param->cube = cube;
-	cube->mlx->cube = cube;
+	cube->param.cube = cube;
+	cube->mlx.cube = cube;
 }

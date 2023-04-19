@@ -3,7 +3,7 @@
 int	close_win(t_mlx *mlx)
 {
 	free_all(mlx->cube);
-	exit(0);
+	return (0);
 }
 
 int	key_hooks(int keycode, t_mlx *mlx)
@@ -16,8 +16,8 @@ int	key_hooks(int keycode, t_mlx *mlx)
 void	init_mlx(t_cube *cube)
 {
 	t_mlx	*mlx;
-
-	mlx = cube->mlx;
+	
+	mlx = &cube->mlx;
 	mlx->mlx_ptr = mlx_init();
 	mlx->window = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	// Add own image functions here.

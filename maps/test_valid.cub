@@ -1,7 +1,7 @@
-NO ./PATH
-SO ./PATH
-WE ./PATH
-EA ./PATH
+NO ./textures/bricks.xpm
+SO ./textures/circles.xpm
+WE ./textures/hypno.xpm
+EA ./textures/wood.xpm
 
 C 220,30,0
 F 120,69,0

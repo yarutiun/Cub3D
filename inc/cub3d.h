@@ -2,11 +2,11 @@
 # define CUB3D_H
 
 /* Macros */
-/* Window Dimensions */
+// Window Dimensions //
 # define WIDTH 1920
 # define HEIGHT 1080
 
-/* Keys */
+// Keys //
 # define ESCAPE 17
 
 /* Libraries */
@@ -46,8 +46,8 @@ typedef struct s_mlx
 
 typedef struct s_cube
 {
-	t_param				*param;
-	t_mlx				*mlx;
+	t_param				param;
+	t_mlx				mlx;
 }						t_cube;
 
 /* Functions */

@@ -132,7 +132,7 @@ void	check_invalid_spaces(char **map, t_cube *cube)
 
     i = 0;
     j = 0;
-    while (map[i])
+    while (map[i][j])
     {
         j = 0;
         while (map[i][j])

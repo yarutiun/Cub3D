@@ -78,12 +78,12 @@ void    assign_map(char **splitted_input, t_cube *cube)
         j++;
     }
     i = 6;
-    cube->param->map = malloc(sizeof(char *) * j);
-    cube->param->map[j] = NULL;
+    cube->param.map = malloc(sizeof(char *) * j);
+    cube->param.map[j] = NULL;
     j = 0;
     while (splitted_input[i])
     {
-        cube->param->map[j] = ft_strdup(splitted_input[i]);
+        cube->param.map[j] = ft_strdup(splitted_input[i]);
         i++;
         j++;
     }
@@ -99,8 +99,9 @@ void    check_forbidden_chars(char **map, t_cube *cube)
     symbols = "01NSEW ";
 
     i = 0;
+    j = 0;
     // printf("%c", map[7][6]);
-    while(map[i])
+    while(map[i][j])
     {
         j = 0;
         while(map[i][j])
@@ -122,10 +123,11 @@ void    check_player(char **map, t_cube *cube)
     int j;
     int flag;
     char *symbols;
-    symbols = "NSEW";
 
+    symbols = "NSEW";
     flag = 0;
     i = 0;
+    j = 0;
     while(map[i])
     {
         j = 0;
@@ -148,16 +150,18 @@ void     parse_input(int argc, char *path, t_cube *cube)
     if (argc != 2)
         argc_error(cube);
     check_extension(path, cube);
-    cube->param->input_str = read_from_file(path);
-    cube->param->splitted_input = split_input(cube->param->input_str);
-    init_elements(cube->param->splitted_input, cube->param);
-    // check_texture_files(&cube->param);
-    check_rgb(cube->param);
-    // check_colomn(cube->param->splitted_input, cube);
-    check_map_double_n(cube->param->input_str, cube);
-    check_map_row(cube->param->splitted_input, cube);
-    assign_map(cube->param->splitted_input, cube);
-    check_invalid_spaces(cube->param->map, cube);
-    check_forbidden_chars(cube->param->map, cube);
-    check_player(cube->param->map, cube);
+    cube->param.input_str = read_from_file(path);
+    cube->param.splitted_input = split_input(cube->param.input_str);
+    init_elements(cube->param.splitted_input, &cube->param);
+    check_texture_files(&cube->param);
+    check_rgb(&cube->param);
+    check_map_double_n(cube->param.input_str, cube);
+    check_map_row(cube->param.splitted_input, cube);
+    assign_map(cube->param.splitted_input, cube);
+    // check_map_column(); Julien's approach fill end of lines with spaces
+    // check_player_inside_wall(); Use same approach as above and check_map_row
+    check_invalid_spaces(cube->param.map, cube);
+    check_forbidden_chars(cube->param.map, cube);
+    check_player(cube->param.map, cube); // DEBUG
+
 }

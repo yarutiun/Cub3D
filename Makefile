@@ -2,7 +2,7 @@
 NAME = cub3D
 CC = cc
 CFLAGS = -Wextra -Wall -Werror -g
-DEBUG	= -fsanitize=address
+# DEBUG	= -fsanitize=address
 
 ## -Og -g3 -fsanitize=address
 
@@ -35,6 +35,7 @@ SRC		=	$(addprefix graphics/,\
 			errors.c \
 			free.c \
 			get_next_line.c \
+			init_mlx.c \
 			init_structs.c \
 			main.c
 

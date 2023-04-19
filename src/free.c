@@ -38,6 +38,7 @@ void	free_param(t_param *param)
 	free_str(param->input_str);
 	free_double_str_ptr(param->splitted_input);
 	free_double_str_ptr(param->map);
+	// printf("%s\n", param->no);// delete
 	free_str(param->no);
 	free_str(param->so);
 	free_str(param->we);
@@ -50,9 +51,12 @@ void	free_param(t_param *param)
 
 void	free_all(t_cube *cube)
 {
-	free_param(cube->param);
-	if (cube->mlx->mlx_ptr && cube->mlx->window)
-		mlx_destroy_window(cube->mlx->mlx_ptr, cube->mlx->window);
+	free_param(&cube->param);
+	if (cube->mlx.mlx_ptr && cube->mlx.window)
+	{
+		mlx_destroy_window(cube->mlx.mlx_ptr, cube->mlx.window);
+		cube->mlx.window = NULL;
+	}
 }
 
 // void 	free_ptr(void *ptr, void free_func(void *))

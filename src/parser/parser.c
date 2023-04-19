@@ -99,13 +99,17 @@ void    check_forbidden_chars(char **map, t_cube *cube)
     symbols = "01NSEW ";
 
     i = 0;
+    // printf("%c", map[7][6]);
     while(map[i])
     {
         j = 0;
         while(map[i][j])
         {
-            if(!ft_strchr(symbols, map[i][j]))
-                forbidden_chars_error(cube);
+            if(ft_isprint(map[i][j]))
+            {
+                if(ft_strchr(symbols, map[i][j]) == NULL)
+                    forbidden_chars_error(cube);
+            }
             j++;
         }
         i++;

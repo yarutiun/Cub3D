@@ -157,8 +157,7 @@ void     parse_input(int argc, char *path, t_cube *cube)
     assign_map(cube->param.splitted_input, cube);
     // check_map_column(); Julien's approach fill end of lines with spaces
     // check_player_inside_wall(); Use same approach as above and check_map_row
-    check_invalid_spaces(cube->param.map, cube); //Rewrite
+    check_invalid_spaces(cube->param.map, cube);
     check_forbidden_chars(cube->param.map, cube);
     check_player(cube->param.map, cube);
-
 }

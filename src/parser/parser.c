@@ -99,9 +99,7 @@ void    check_forbidden_chars(char **map, t_cube *cube)
     symbols = "01NSEW ";
 
     i = 0;
-    j = 0;
-    // printf("%c", map[7][6]);
-    while(map[i][j])
+    while(map[i])
     {
         j = 0;
         while(map[i][j])
@@ -127,7 +125,6 @@ void    check_player(char **map, t_cube *cube)
     symbols = "NSEW";
     flag = 0;
     i = 0;
-    j = 0;
     while(map[i])
     {
         j = 0;
@@ -160,8 +157,8 @@ void     parse_input(int argc, char *path, t_cube *cube)
     assign_map(cube->param.splitted_input, cube);
     // check_map_column(); Julien's approach fill end of lines with spaces
     // check_player_inside_wall(); Use same approach as above and check_map_row
-    check_invalid_spaces(cube->param.map, cube);
+    check_invalid_spaces(cube->param.map, cube); //Rewrite
     check_forbidden_chars(cube->param.map, cube);
-    check_player(cube->param.map, cube); // DEBUG
+    check_player(cube->param.map, cube);
 
 }

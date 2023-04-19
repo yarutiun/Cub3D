@@ -54,6 +54,12 @@ void    check_rgb(t_param *param)
         if(ft_atoi(rgb_c[i]) <= 255 && ft_atoi(rgb_c[i]) >= 0 \
         && ft_atoi(rgb_f[i]) <= 255 && ft_atoi(rgb_f[i]) >= 0)
         {
+            if (ft_atoi(rgb_c[i]) == -1 || ft_atoi(rgb_f[i]) == -1)
+            {
+                free_double_str_ptr(rgb_c);
+                free_double_str_ptr(rgb_f);
+                rgb_error(param->cube);
+            }
             param->f_rgb[i] = ft_atoi(rgb_f[i]);
             param->c_rgb[i] = ft_atoi(rgb_c[i]);
             i++;

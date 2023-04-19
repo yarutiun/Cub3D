@@ -63,6 +63,7 @@ void	parse_input(int argc, char *path, t_cube *cube);
 int		check_extension(const char *file_name, t_cube *cube);
 void	check_texture_files(t_param *param);
 void	check_rgb(t_param *param);
+void	check_rgb_digits(t_cube *cube);
 void	check_map_double_n(char *input, t_cube *cube);
 void    check_map_row(char **splitted_input, t_cube *cube);
 void	check_invalid_spaces(char **map, t_cube *cube);

@@ -38,7 +38,6 @@ void	free_param(t_param *param)
 	free_str(param->input_str);
 	free_double_str_ptr(param->splitted_input);
 	free_double_str_ptr(param->map);
-	// printf("%s\n", param->no);// delete
 	free_str(param->no);
 	free_str(param->so);
 	free_str(param->we);

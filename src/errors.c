@@ -10,7 +10,7 @@ void    error_exit(char *message, t_cube *cube)
 
 void    file_error(t_cube *cube)
 {
-    error_exit("File not found\n", cube);
+    error_exit("Texture file not found\n", cube);
 }
 
 void    rgb_error(t_cube *cube)

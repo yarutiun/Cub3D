@@ -51,6 +51,18 @@ void    check_rgb(t_param *param)
     rgb_f = ft_split(param->f, ',');
     while (rgb_c[i] && rgb_f[i])
     {
+        i++;
+    }
+    if (i != 3)
+    {
+        free_double_str_ptr(rgb_c);
+        free_double_str_ptr(rgb_f);
+        rgb_error(param->cube);
+    }
+
+    i = 0;
+    while (rgb_c[i] && rgb_f[i])
+    {
         if(ft_atoi(rgb_c[i]) <= 255 && ft_atoi(rgb_c[i]) >= 0 \
         && ft_atoi(rgb_f[i]) <= 255 && ft_atoi(rgb_f[i]) >= 0)
         {
@@ -137,8 +149,7 @@ void	check_invalid_spaces(char **map, t_cube *cube)
     int j;
 
     i = 0;
-    j = 0;
-    while (map[i][j])
+    while (map[i])
     {
         j = 0;
         while (map[i][j])

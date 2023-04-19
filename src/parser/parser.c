@@ -1,32 +1,5 @@
 #include "cub3d.h"
 
-//This function takes our ".cub" map as an input
-//Opens a file and copies the map with all symbols to char **map
-//Returns Null (almost impossible) or a filled map
-//Needs tests, also not sure is sets last map[i] to NULL
-// char **convert_map(char *file)
-// {
-//     char **map;
-//     int i;
-//     int fd;
-
-//     i = 0;
-//     fd = open(file, O_RDONLY);
-//     if(fd < 0)
-//     {
-//         map_err();
-//         return(NULL);
-//     }
-//     map = malloc(1000);
-//     map[i] = get_next_line(fd);
-//     while(map[i] != NULL)
-//     {
-//         i++;
-//         map[i] = get_next_line(fd);
-//     }
-//     return(map);
-// }
-
 char *read_from_file(char *path)
 {
     int     fd;
@@ -88,6 +61,10 @@ void    init_elements(char **splitted, t_param *param)
     }
 }
 
+//This function takes our ".cub" map as an input
+//Opens a file and copies the map with all symbols to char **map
+//Returns Null (almost impossible) or a filled map
+//Needs tests, also not sure is sets last map[i] to NULL
 void    assign_map(char **splitted_input, t_cube *cube)
 {
     int i;
@@ -164,15 +141,12 @@ void    check_player(char **map, t_cube *cube)
 
 void     parse_input(int argc, char *path, t_cube *cube)
 {
-    // int i = 0;
     if (argc != 2)
         argc_error(cube);
-    // printf("%s", cube->param.input_str);
     check_extension(path, cube);
     cube->param.input_str = read_from_file(path);
     cube->param.splitted_input = split_input(cube->param.input_str);
     init_elements(cube->param.splitted_input, &cube->param);
-    // check_files(&cube->param);
     check_rgb(&cube->param);
     check_map_double_n(cube->param.input_str, cube);
     check_map_row(cube->param.splitted_input, cube);
@@ -180,10 +154,4 @@ void     parse_input(int argc, char *path, t_cube *cube)
     check_invalid_spaces(cube->param.map, cube);
     check_forbidden_chars(cube->param.map, cube);
     check_player(cube->param.map, cube);
-    // while(cube->param.map[i])
-    // {
-    //     printf("%s\n", cube->param.map[i]);
-    //     i++;
-    // }
-    // printf("%s", cube->param.map[6]);
 }

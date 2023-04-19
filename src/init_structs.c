@@ -24,7 +24,8 @@ void	init_mlx(t_cube *cube)
 
 	mlx = cube->mlx;
 	mlx->mlx_ptr = mlx_init();
-	mlx->window = mlx_new_window(mlx->mlx_ptr, 1920,1080, "Cub3D");
+	mlx->window = mlx_new_window(mlx->mlx_ptr, 1920, 1080, "Cub3D");
+	mlx_loop(mlx->mlx_ptr);
 }
 
 void	init_cube(t_cube *cube)

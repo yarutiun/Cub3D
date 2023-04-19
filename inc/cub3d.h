@@ -2,7 +2,12 @@
 # define CUB3D_H
 
 /* Macros */
+/* Window Dimensions */
+# define WIDTH 1920
+# define HEIGHT 1080
 
+/* Keys */
+# define ESCAPE 17
 
 /* Libraries */
 # include <unistd.h>
@@ -49,6 +54,8 @@ typedef struct s_cube
 // Init Structs //
 void	init_cube(t_cube *cube);
 void	init_param(t_cube *cube);
+
+// MLX //
 void	init_mlx(t_cube *cube);
 
 // Parser //

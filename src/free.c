@@ -52,7 +52,10 @@ void	free_all(t_cube *cube)
 {
 	free_param(cube->param);
 	if (cube->mlx->mlx_ptr && cube->mlx->window)
+	{
 		mlx_destroy_window(cube->mlx->mlx_ptr, cube->mlx->window);
+		cube->mlx->window = NULL;
+	}
 }
 
 // void 	free_ptr(void *ptr, void free_func(void *))

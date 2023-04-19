@@ -153,6 +153,7 @@ void     parse_input(int argc, char *path, t_cube *cube)
     init_elements(cube->param->splitted_input, cube->param);
     // check_texture_files(&cube->param);
     check_rgb(cube->param);
+    // check_colomn(cube->param->splitted_input, cube);
     check_map_double_n(cube->param->input_str, cube);
     check_map_row(cube->param->splitted_input, cube);
     assign_map(cube->param->splitted_input, cube);

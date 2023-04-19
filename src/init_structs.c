@@ -18,6 +18,11 @@ void	init_param(t_cube *cube)
 	param->map = NULL;
 }
 
+int	x_close(void)
+{
+	exit(EXIT_SUCCESS);
+}
+
 void	init_mlx(t_cube *cube)
 {
 	t_mlx	*mlx;
@@ -25,6 +30,7 @@ void	init_mlx(t_cube *cube)
 	mlx = cube->mlx;
 	mlx->mlx_ptr = mlx_init();
 	mlx->window = mlx_new_window(mlx->mlx_ptr, 1920, 1080, "Cub3D");
+	mlx_hook(mlx->window, 17, 0, x_close, 0);
 	mlx_loop(mlx->mlx_ptr);
 	// mlx_destroy_window(mlx->mlx_ptr, mlx->window);
 }

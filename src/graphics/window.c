@@ -12,7 +12,7 @@ int	key_hooks(int keycode)
 	return (0);
 }
 
-void	loop_mlx(t_cube *cube)
+void	launch_mlx(t_cube *cube)
 {
 	t_mlx	*mlx;
 

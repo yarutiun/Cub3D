@@ -25,6 +25,7 @@ void    check_texture_files(t_param *param)
 {
     int fd;
 
+    fd = 0;
     fd = open(param->no, O_RDONLY);
     if(fd == -1)
         file_error(param->cube);

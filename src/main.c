@@ -6,6 +6,6 @@ int	main(int argc, char **argv)
 
 	init_structs(&cube);
 	parse_input(argc, argv[1], &cube);
-	mlx_loop(&cube);
+	launch_mlx(&cube);
 	return (0);
 }

@@ -115,6 +115,18 @@ void    check_forbidden_chars(char **map, t_cube *cube)
     }
 }
 
+int     array_size(char **arr)
+{
+    int i;
+
+    i = 0;
+    while (arr[i])
+    {
+        i++;
+    }
+    return (i);
+}
+
 void    check_player(char **map, t_cube *cube)
 {
     int i;
@@ -125,10 +137,10 @@ void    check_player(char **map, t_cube *cube)
     symbols = "NSEW";
     flag = 0;
     i = 0;
-    while(map[i])
+    while(i < array_size(map))
     {
         j = 0;
-        while(map[i][j])
+        while(j < (int)ft_strlen(map[i]))
         {
             if(ft_strchr(symbols, map[i][j]))
                 flag++;

@@ -52,11 +52,10 @@ typedef struct s_cube
 
 /* Functions */
 // Init Structs //
-void	init_cube(t_cube *cube);
-void	init_param(t_cube *cube);
+void	init_structs(t_cube *cube);
 
 // MLX //
-void	init_mlx(t_cube *cube);
+void	loop_mlx(t_cube *cube);
 
 // Parser //
 void	parse_input(int argc, char *path, t_cube *cube);

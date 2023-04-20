@@ -55,6 +55,8 @@ void	free_all(t_cube *cube)
 	{
 		mlx_destroy_window(cube->mlx.mlx_ptr, cube->mlx.window);
 		cube->mlx.window = NULL;
+		free(cube->mlx.mlx_ptr);
+		cube->mlx.mlx_ptr = NULL;
 	}
 }
 

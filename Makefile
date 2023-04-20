@@ -37,7 +37,8 @@ SRC		=	$(addprefix graphics/,\
 			get_next_line.c \
 			init_mlx.c \
 			init_structs.c \
-			main.c
+			main.c \
+			utils.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

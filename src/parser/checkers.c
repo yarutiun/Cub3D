@@ -150,10 +150,10 @@ void	check_invalid_spaces(char **map, t_cube *cube)
     int j;
 
     i = 0;
-    while (map[i])
+    while (i < array_size(map))
     {
         j = 0;
-        while (map[i][j])
+        while (j < (int)ft_strlen(map[i]))
         {
             if(map[i][j] == '0')
             {

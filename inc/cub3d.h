@@ -69,6 +69,7 @@ void	check_invalid_spaces(char **map, t_cube *cube);
 
 // Utils //
 char	*get_next_line(int fd);
+int     array_size(char **arr);
 
 // Errors //
 void    argc_error(t_cube *cube);

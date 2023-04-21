@@ -83,9 +83,8 @@ void	check_map_double_n(char *input, t_cube *cube);
 void    check_map_row(char **splitted_input, t_cube *cube);
 void	check_invalid_spaces(char **map, t_cube *cube);
 
-// Utils //
-char	*get_next_line(int fd);
-int     array_size(char **arr);
+// Raycasting //
+void	raycasting(t_cube *cube);
 
 // Errors //
 void    argc_error(t_cube *cube);
@@ -99,9 +98,12 @@ void    invalid_spaces_error(t_cube *cube);
 void	forbidden_chars_error(t_cube *cube);
 void	player_error(t_cube *cube, char *msg);
 
-
 // Free //
 void	free_all(t_cube *cube);
 void	free_double_str_ptr(char **arr);
+
+// Utils //
+char	*get_next_line(int fd);
+int     array_size(char **arr);
 
 #endif

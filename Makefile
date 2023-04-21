@@ -27,6 +27,7 @@ MLX_A = libmlx.a
 
 # Source and object files
 SRC		=	$(addprefix graphics/,\
+			raycasting.c \
 			window.c) \
 			$(addprefix parser/,\
 			parser.c) \

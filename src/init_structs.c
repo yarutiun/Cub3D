@@ -27,10 +27,23 @@ void	init_mlx(t_cube *cube)
 	mlx->window = NULL;
 }
 
+void	init_img(t_cube *cube)
+{
+	t_img	*img;
+
+	img = &cube->img;
+	img->img = NULL;
+	img->address = NULL;
+	img->bits_per_pixel = 0;
+	img->line_length = 0;
+	img->endian = 0;
+}
+
 void	init_cube(t_cube *cube)
 {
 	cube->param.cube = cube;
 	cube->mlx.cube = cube;
+	cube->img.cube = cube;
 }
 
 void	init_structs(t_cube *cube)

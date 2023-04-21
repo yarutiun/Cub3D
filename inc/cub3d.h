@@ -9,6 +9,9 @@
 // Keys //
 # define ESCAPE 17
 
+// Fd //
+# define MAX_FD 1024
+
 /* Libraries */
 # include <unistd.h>
 # include <stdlib.h>

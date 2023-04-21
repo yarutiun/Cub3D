@@ -48,6 +48,18 @@ void	free_param(t_param *param)
 	free_int_arr(param->c_rgb);
 }
 
+void	close_fds(void)
+{
+	int	i;
+
+	i = 3;
+	while (i < MAX_FD)
+	{
+		close(i);
+		i++;
+	}
+}
+
 void	free_all(t_cube *cube)
 {
 	free_param(&cube->param);
@@ -58,6 +70,7 @@ void	free_all(t_cube *cube)
 		free(cube->mlx.mlx_ptr);
 		cube->mlx.mlx_ptr = NULL;
 	}
+	close_fds();
 }
 
 // void 	free_ptr(void *ptr, void free_func(void *))

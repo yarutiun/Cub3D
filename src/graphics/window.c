@@ -2,7 +2,8 @@
 
 int	x_close(t_cube *cube)
 {
-	mlx_destroy_window(cube->mlx.mlx_ptr, cube->mlx.window);
+	(void) cube;
+	// mlx_destroy_window(cube->mlx.mlx_ptr, cube->mlx.window);
 	exit(EXIT_SUCCESS);
 }
 
@@ -13,6 +14,41 @@ int	key_hooks(int keycode, t_cube *cube)
 		x_close(cube);
 	}
 	return (0);
+}
+
+void	load_images(t_cube *cube)
+{
+	int i;
+	int j;
+
+	i = 100;
+	j = 100;
+	cube->img.wall_ptr = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.no, &i, &j);
+}
+
+void render_map(t_cube *cube)
+{
+	int		i;
+	int		j;
+	int		x_cord;
+	int		y_cord;
+
+	y_cord = 0;
+	i = 0;
+	while (i < (HEIGHT / 100))
+	{
+		x_cord = 0;
+		j = 0;
+		while (j < (WIDTH / 100))
+		{
+			mlx_put_image_to_window(cube->mlx.mlx_ptr, \
+			cube->mlx.window, cube->img.wall_ptr, x_cord, y_cord);
+			++j;
+			x_cord += 100;
+		}
+		y_cord += 100;
+		++i;
+	}	
 }
 
 void	launch_mlx(t_cube *cube)
@@ -31,5 +67,7 @@ void	launch_mlx(t_cube *cube)
 	mlx_hook(mlx->window, ESCAPE, 0, x_close, 0);
 	mlx_key_hook(mlx->window, key_hooks, cube);
 	mlx_do_sync(mlx->mlx_ptr);
+	load_images(cube);
+	render_map(cube);
 	mlx_loop(mlx->mlx_ptr);
 }

@@ -56,6 +56,7 @@ typedef struct s_img
 	int					bits_per_pixel;
 	int					line_length;
 	int					endian;
+	void				*wall_ptr;
 }						t_img;
 
 typedef struct s_cube

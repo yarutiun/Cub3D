@@ -1,13 +1,11 @@
 #include "cub3d.h"
 
-int	x_close(t_cube *cube)
+int	x_close(void)
 {
-	// (void)cube;
-	free_all(cube);
 	exit(EXIT_SUCCESS);
 }
 
-int	key_hooks(int keycode, t_cube *cube)
+int	key_hooks(int keycode)
 {
 	if (keycode == 53)
 		x_close(cube);
@@ -27,8 +25,8 @@ void	launch_mlx(t_cube *cube)
 	img->address = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
 									&img->line_length, &img->endian);
 	// raycasting(cube);
-	mlx_hook(mlx->window, ESCAPE, 0, &x_close, &cube);
-	mlx_key_hook(mlx->window, &key_hooks, &cube);
+	mlx_hook(mlx->window, ESCAPE, 0, x_close, 0);
+	mlx_key_hook(mlx->window, key_hooks, 0);
 	mlx_do_sync(mlx->mlx_ptr);
 	mlx_loop(mlx->mlx_ptr);
 }

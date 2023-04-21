@@ -60,6 +60,14 @@ void	close_fds(void)
 	}
 }
 
+void	free_img(t_img *img)
+{
+	if (img->img)
+		free(img->img);
+	img->img = NULL;
+	free_str(img->address);
+}
+
 void	free_all(t_cube *cube)
 {
 	free_param(&cube->param);
@@ -70,6 +78,7 @@ void	free_all(t_cube *cube)
 		free(cube->mlx.mlx_ptr);
 		cube->mlx.mlx_ptr = NULL;
 	}
+	free_img(&cube->img);
 	close_fds();
 }
 

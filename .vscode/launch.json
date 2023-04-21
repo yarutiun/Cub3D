@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-		
         {
             "name": "(lldb) Launch",
             "type": "cppdbg",
@@ -42,6 +41,18 @@
             "request": "launch",
             "program": "/Users/santiago/Code/github/cub3D/cub3D",
             "args": ["/Users/santiago/Code/github/cub3D/maps/test.cub"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "Santiago (42 Mac)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/Users/stena-he/Code/github/cube3D/cub3D",
+            "args": ["/Users/stena-he/Code/github/cube3D/maps/test.cub"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

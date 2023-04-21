@@ -39,16 +39,12 @@ void	init_img(t_cube *cube)
 	img->endian = 0;
 }
 
-void	init_cube(t_cube *cube)
-{
-	cube->param.cube = cube;
-	cube->mlx.cube = cube;
-	cube->img.cube = cube;
-}
-
 void	init_structs(t_cube *cube)
 {
-	init_cube(cube);
+	cube->param.cube = cube;
 	init_param(cube);
+	cube->mlx.cube = cube;
 	init_mlx(cube);
+	cube->img.cube = cube;
+	init_img(cube);
 }

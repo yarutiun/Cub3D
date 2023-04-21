@@ -45,12 +45,24 @@ typedef struct s_mlx
 	struct s_cube		*cube;
 	void				*mlx_ptr;
 	void				*window;
+
 }						t_mlx;
+
+typedef struct s_img 
+{
+	struct s_cube		*cube;
+	void				*img;
+	char				*address;
+	int					bits_per_pixel;
+	int					line_length;
+	int					endian;
+}						t_img;
 
 typedef struct s_cube
 {
 	t_param				param;
 	t_mlx				mlx;
+	t_img				img;
 }						t_cube;
 
 /* Functions */

@@ -35,7 +35,7 @@ void render_map(t_cube *cube)
 	}	
 }
 
-void	launch_mlx(t_cube *cube)
+void	launch_window(t_cube *cube)
 {
 	t_mlx	*mlx;
 	t_img	*img;

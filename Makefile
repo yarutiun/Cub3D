@@ -29,7 +29,7 @@ MLX_A = libmlx.a
 SRC		=	error_handling/errors.c \
 			free_memory/free.c \
 			parsing/checkers.c \
-			parsing/parser.c \
+			parsing/parse_input.c \
 			raycasting/raycasting.c \
 			window/hooks.c \
 			window/launch_window.c \

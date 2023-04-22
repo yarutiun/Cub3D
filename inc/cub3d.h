@@ -91,15 +91,13 @@ void	check_invalid_spaces(char **map, t_cube *cube);
 void	check_forbidden_chars(char **map, t_cube *cube);
 void	check_player(char **map, t_cube *cube);
 
-// MLX //
-void	launch_mlx(t_cube *cube);
+// Window //
+void	launch_window(t_cube *cube);
+void	render_window(t_cube *cube);
 
 // Hooks //
 int		x_close(void);
 int		key_hooks(int keycode);
-
-// Window //
-void	render_window(t_cube *cube);
 
 // Raycasting //
 int		raycasting(t_cube *cube);

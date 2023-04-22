@@ -56,14 +56,24 @@ typedef struct s_img
 	int					bits_per_pixel;
 	int					line_length;
 	int					endian;
-	void				*wall_ptr;
+	void				*wall_ptr; // 2D
+	int					pixel_x; // Might delete
+	int					pixel_y; // Might delete
 }						t_img;
+
+typedef	struct s_ray
+{
+	struct s_cube		*cube;
+	char				*placeholder; // Delete
+}						t_ray;
+
 
 typedef struct s_cube
 {
 	t_param				param;
 	t_mlx				mlx;
 	t_img				img;
+	t_ray				ray;
 }						t_cube;
 
 /* Functions */
@@ -84,7 +94,7 @@ void    check_map_row(char **splitted_input, t_cube *cube);
 void	check_invalid_spaces(char **map, t_cube *cube);
 
 // Raycasting //
-void	raycasting(t_cube *cube);
+void	render_window(t_cube *cube);
 
 // Errors //
 void    argc_error(t_cube *cube);

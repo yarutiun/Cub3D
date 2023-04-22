@@ -37,6 +37,17 @@ void	init_img(t_cube *cube)
 	img->bits_per_pixel = 0;
 	img->line_length = 0;
 	img->endian = 0;
+	img->wall_ptr = NULL;
+	img->pixel_x = 0;
+	img->pixel_y = 0;
+}
+
+void	init_ray(t_cube *cube)
+{
+	t_ray	*ray;
+
+	ray = &cube->ray;
+	ray->placeholder = NULL;
 }
 
 void	init_structs(t_cube *cube)
@@ -47,4 +58,6 @@ void	init_structs(t_cube *cube)
 	init_mlx(cube);
 	cube->img.cube = cube;
 	init_img(cube);
+	cube->ray.cube = cube;
+	init_ray(cube);
 }

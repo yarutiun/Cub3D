@@ -26,15 +26,14 @@ LIB_A = libft.a
 MLX_A = libmlx.a
 
 # Source and object files
-SRC		=	$(addprefix graphics/,\
-			raycasting.c \
-			window.c) \
-			$(addprefix parser/,\
-			parser.c) \
-			$(addprefix parser/,\
-			checkers.c) \
-			errors.c \
-			free.c \
+SRC		=	error_handling/errors.c \
+			free_memory/free.c \
+			parsing/checkers.c \
+			parsing/parser.c \
+			raycasting/raycasting.c \
+			window/hooks.c \
+			window/launch_window.c \
+			window/render_window.c \
 			init_structs.c \
 			main.c \
 			utils.c
@@ -53,7 +52,11 @@ all: $(NAME)
 ## Update folder names here ##
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	@mkdir -p obj/graphics obj/parser
+	@mkdir -p	obj/error_handling \
+				obj/free_memory \
+				obj/parsing \
+				obj/raycasting \
+				obj/window
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 	
 $(NAME): $(OBJS)

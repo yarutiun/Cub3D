@@ -80,10 +80,7 @@ typedef struct s_cube
 // Init Structs //
 void	init_structs(t_cube *cube);
 
-// MLX //
-void	launch_mlx(t_cube *cube);
-
-// Parser //
+// Parsing //
 void	parse_input(int argc, char *path, t_cube *cube);
 int		check_extension(const char *file_name, t_cube *cube);
 void	check_texture_files(t_param *param);
@@ -92,11 +89,27 @@ void	check_rgb_digits(t_cube *cube);
 void	check_map_double_n(char *input, t_cube *cube);
 void    check_map_row(char **splitted_input, t_cube *cube);
 void	check_invalid_spaces(char **map, t_cube *cube);
+void    check_forbidden_chars(char **map, t_cube *cube);
+void    check_player(char **map, t_cube *cube);
 
-// Raycasting //
+// MLX //
+void	launch_mlx(t_cube *cube);
+
+// Hooks //
+int	x_close(void);
+int	key_hooks(int keycode);
+
+// Window //
 void	render_window(t_cube *cube);
 
-// Errors //
+// Raycasting //
+int		raycasting(t_cube *cube);
+
+// Utils //
+char	*get_next_line(int fd);
+int     array_size(char **arr);
+
+// Error Handling //
 void    argc_error(t_cube *cube);
 void	extension_error(t_cube *cube);
 void    init_elements_error(t_cube *cube);
@@ -108,12 +121,8 @@ void    invalid_spaces_error(t_cube *cube);
 void	forbidden_chars_error(t_cube *cube);
 void	player_error(t_cube *cube, char *msg);
 
-// Free //
+// Free Memory //
 void	free_all(t_cube *cube);
 void	free_double_str_ptr(char **arr);
-
-// Utils //
-char	*get_next_line(int fd);
-int     array_size(char **arr);
 
 #endif

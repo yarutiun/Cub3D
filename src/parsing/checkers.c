@@ -171,3 +171,56 @@ void	check_invalid_spaces(char **map, t_cube *cube)
         i++;
     }
 }
+
+//Returns 1 if any other characters detected in map but 01NSEW
+//Retunrs 0 if check went successful
+void    check_forbidden_chars(char **map, t_cube *cube)
+{
+    int i;
+    int j;
+    char *symbols;
+    symbols = "01NSEW ";
+
+    i = 0;
+    while(i < array_size(map))
+    {
+        j = 0;
+        while(j < (int)ft_strlen(map[i]))
+        {
+            if(ft_isprint(map[i][j]))
+            {
+                if(ft_strchr(symbols, map[i][j]) == NULL)
+                    forbidden_chars_error(cube);
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
+void    check_player(char **map, t_cube *cube)
+{
+    int i;
+    int j;
+    int flag;
+    char *symbols;
+
+    symbols = "NSEW";
+    flag = 0;
+    i = 0;
+    while(i < array_size(map))
+    {
+        j = 0;
+        while(j < (int)ft_strlen(map[i]))
+        {
+            if(ft_strchr(symbols, map[i][j]))
+                flag++;
+            j++;
+        }
+        i++;
+    }
+    if(flag == 0)
+        player_error(cube, "No players on the map\n");
+    else if(flag > 1)
+        player_error(cube, "Too many players on the map\n");
+}

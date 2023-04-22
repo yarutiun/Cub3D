@@ -48,12 +48,12 @@ void    invalid_spaces_error(t_cube *cube)
     error_exit("Invalid space positon\n", cube);
 }
 
-void forbidden_chars_error(t_cube *cube)
+void    forbidden_chars_error(t_cube *cube)
 {
     error_exit("Invalid characters\n", cube);
 }
 
-void player_error(t_cube *cube, char *msg)
+void    player_error(t_cube *cube, char *msg)
 {
     error_exit(msg, cube);
 }

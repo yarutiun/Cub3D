@@ -8,10 +8,11 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	add_pixel_color(t_cube *cube, int x, int y)
+void	add_pixel(t_cube *cube, int x, int y)
 {
 	int color = 0x000066FF;
 
+	color = raycasting(cube);
 	my_mlx_pixel_put(&cube->img, x, y, color);
 }
 
@@ -28,7 +29,7 @@ void	draw_vertical_lines(t_cube *cube)
 		pixel_y = 0;
 		while (pixel_y < HEIGHT)
 		{
-			add_pixel_color(cube, pixel_x, pixel_y);
+			add_pixel(cube, pixel_x, pixel_y);
 			pixel_y++;
 		}
 		pixel_x++;

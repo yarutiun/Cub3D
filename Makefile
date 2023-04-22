@@ -35,8 +35,6 @@ SRC		=	$(addprefix graphics/,\
 			checkers.c) \
 			errors.c \
 			free.c \
-			get_next_line.c \
-			init_mlx.c \
 			init_structs.c \
 			main.c \
 			utils.c

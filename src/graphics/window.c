@@ -59,11 +59,13 @@ void	launch_mlx(t_cube *cube)
 	img->img = mlx_new_image(mlx->mlx_ptr, WIDTH, HEIGHT);
 	img->address = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
 									&img->line_length, &img->endian);
-	// raycasting(cube);
+	
+	load_images(cube);
+	render_map(cube);
+	
+	render_window(cube);
 	mlx_hook(mlx->window, ESCAPE, 0, x_close, 0);
 	mlx_key_hook(mlx->window, key_hooks, 0);
 	mlx_do_sync(mlx->mlx_ptr);
-	load_images(cube);
-	render_map(cube);
 	mlx_loop(mlx->mlx_ptr);
 }

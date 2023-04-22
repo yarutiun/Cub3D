@@ -10,8 +10,9 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	add_pixel(t_cube *cube, int x, int y)
 {
-	int color = 0x000066FF;
+	int color;
 
+	// color = 0x000066FF;
 	color = raycasting(cube);
 	my_mlx_pixel_put(&cube->img, x, y, color);
 }

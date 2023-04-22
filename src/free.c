@@ -60,12 +60,23 @@ void	close_fds(void)
 	}
 }
 
+void	free_void_ptr(void *var)
+{
+	if (var)
+		free(var);
+	var = NULL;
+}
+
 void	free_img(t_img *img)
 {
-	if (img->img)
-		free(img->img);
-	img->img = NULL;
+	free_void_ptr(img->img);
 	free_str(img->address);
+	free_void_ptr(img->wall_ptr);
+}
+
+void	free_ray(t_ray *ray)
+{
+	free_str(ray->placeholder);
 }
 
 void	free_all(t_cube *cube)
@@ -79,32 +90,6 @@ void	free_all(t_cube *cube)
 		cube->mlx.mlx_ptr = NULL;
 	}
 	free_img(&cube->img);
+	free_ray(&cube->ray);
 	close_fds();
 }
-
-// void 	free_ptr(void *ptr, void free_func(void *))
-// {
-// 	if(ptr)
-// 		free_func(ptr);
-// }
-
-// void	free_double_char_ptr(void *arr_p)
-// {
-// 	int	i;
-// 	char **arr = arr_p;
-// 	i = 0;
-// 	while (arr[i])
-// 	{
-// 		free(arr[i]);
-// 		arr[i] = NULL;
-// 		i++;
-// 	}
-// 	free(arr);
-// }
-
-// void	free_param(t_param *param)
-// {
-// 	free_ptr(param->input_str, free);
-// 	param->input_str = NULL;
-// 	free_ptr(param->splitted_input, free_double_char_ptr);
-// }

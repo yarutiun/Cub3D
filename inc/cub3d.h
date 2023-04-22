@@ -27,8 +27,8 @@
 typedef struct s_param
 {
 	struct s_cube		*cube;
-	char 				*input_str;
-    char 				**splitted_input;
+	char				*input_str;
+	char				**splitted_input;
 	char				*no;
 	char				*so;
 	char				*we;
@@ -37,7 +37,7 @@ typedef struct s_param
 	char				*c;
 	int					*f_rgb;
 	int					*c_rgb;
-	char 				**map;
+	char				**map;
 }						t_param;
 
 typedef struct s_mlx
@@ -48,7 +48,7 @@ typedef struct s_mlx
 
 }						t_mlx;
 
-typedef struct s_img 
+typedef struct s_img
 {
 	struct s_cube		*cube;
 	void				*img;
@@ -61,12 +61,11 @@ typedef struct s_img
 	int					pixel_y; // Might delete
 }						t_img;
 
-typedef	struct s_ray
+typedef struct s_ray
 {
 	struct s_cube		*cube;
 	char				*placeholder; // Delete
 }						t_ray;
-
 
 typedef struct s_cube
 {
@@ -87,17 +86,17 @@ void	check_texture_files(t_param *param);
 void	check_rgb(t_param *param);
 void	check_rgb_digits(t_cube *cube);
 void	check_map_double_n(char *input, t_cube *cube);
-void    check_map_row(char **splitted_input, t_cube *cube);
+void	check_map_row(char **splitted_input, t_cube *cube);
 void	check_invalid_spaces(char **map, t_cube *cube);
-void    check_forbidden_chars(char **map, t_cube *cube);
-void    check_player(char **map, t_cube *cube);
+void	check_forbidden_chars(char **map, t_cube *cube);
+void	check_player(char **map, t_cube *cube);
 
 // MLX //
 void	launch_mlx(t_cube *cube);
 
 // Hooks //
-int	x_close(void);
-int	key_hooks(int keycode);
+int		x_close(void);
+int		key_hooks(int keycode);
 
 // Window //
 void	render_window(t_cube *cube);
@@ -107,17 +106,17 @@ int		raycasting(t_cube *cube);
 
 // Utils //
 char	*get_next_line(int fd);
-int     array_size(char **arr);
+int		array_size(char **arr);
 
 // Error Handling //
-void    argc_error(t_cube *cube);
+void	argc_error(t_cube *cube);
 void	extension_error(t_cube *cube);
-void    init_elements_error(t_cube *cube);
-void    file_error(t_cube *cube);
-void    rgb_error(t_cube *cube);
+void	init_elements_error(t_cube *cube);
+void	file_error(t_cube *cube);
+void	rgb_error(t_cube *cube);
 void	error_double_n(t_cube *cube);
-void    map_row_error(t_cube *cube);
-void    invalid_spaces_error(t_cube *cube);
+void	map_row_error(t_cube *cube);
+void	invalid_spaces_error(t_cube *cube);
 void	forbidden_chars_error(t_cube *cube);
 void	player_error(t_cube *cube, char *msg);
 

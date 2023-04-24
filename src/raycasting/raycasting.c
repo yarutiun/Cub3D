@@ -8,18 +8,18 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-
-void	rotate_direction(t_ray *ray, int i)
+t_xy	rotate_direction(t_ray *ray, int i)
 {
 	double	angle;
-	double	tmp_x;
-	double	tmp_y;
 
 	angle = (-1 * FOV/2) + (ray->ray_angle_diff * i);
-	tmp_x = ray->direction.x;
-	tmp_y = ray->direction.y;
-	ray->direction.x = (tmp_x * cos(angle * M_PI/180)) - (tmp_y * sin(angle * M_PI/180));
-	ray->direction.y = (tmp_x * sin(angle * M_PI/180)) + (tmp_y * cos(angle * M_PI/180));
+	ray->tmp_direction.x = (ray->direction.x * cos(angle * M_PI/180)) - (ray->direction.y * sin(angle * M_PI/180));
+	ray->tmp_direction.y = (ray->direction.x * sin(angle * M_PI/180)) + (ray->direction.y * cos(angle * M_PI/180));
+}
+
+double	h_raycast(t_ray *ray)
+{
+
 }
 
 double	single_ray(t_ray *ray)
@@ -31,7 +31,7 @@ double	single_ray(t_ray *ray)
 	vertical_rc = v_raycast(ray);
 	if (horizontal_rc < vertical_rc)
 	{
-		if (ray->direction.y < 0)
+		if (ray->tmp_direction.y < 0)
 			ray->current_wall = NORTH_WALL;
 		else
 			ray->current_wall = SOUTH_WALL;
@@ -40,7 +40,7 @@ double	single_ray(t_ray *ray)
 	}
 	else
 	{
-		if (ray->direction.x < 0)
+		if (ray->tmp_direction.x < 0)
 			ray->current_wall = WEST_WALL;
 		else
 			ray->current_wall = EAST_WALL;
@@ -61,5 +61,4 @@ void	raycasting(t_cube *cube)
 		ray->distance = single_ray(ray);
 		i++;
 	}
-	
 }

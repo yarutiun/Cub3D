@@ -81,6 +81,7 @@ typedef struct s_ray
 	double				ray_angle_diff;
 	double				distance;
 	t_xy				direction;
+	t_xy				tmp_direction;
 	double				radiant_diff;
 	int					current_wall;
 	t_xy				intersection;

@@ -47,8 +47,10 @@ void	init_ray(t_cube *cube)
 	ray = &cube->ray;
 	ray->ray_angle_diff = FOV / RAY_COUNT;
 	ray->distance = 0;
-	ray->direction.x = 0; // NSWE - When N = 0
-	ray->direction.y = 1; // NSWE - When N = 1
+	ray->direction.x = 0; // Parsing NSWE - When N = 0
+	ray->direction.y = 1; // Parsing NSWE - When N = 1
+	ray->tmp_direction.x = 0;
+	ray->tmp_direction.y = 0;
 	ray->radiant_diff = 0;
 	ray->current_wall = 0;
 	ray->intersection.x = 0;

@@ -38,8 +38,6 @@ void	init_img(t_cube *cube)
 	img->line_length = 0;
 	img->endian = 0;
 	img->wall_ptr = NULL;
-	img->pixel_x = 0;
-	img->pixel_y = 0;
 }
 
 void	init_ray(t_cube *cube)
@@ -47,7 +45,19 @@ void	init_ray(t_cube *cube)
 	t_ray	*ray;
 
 	ray = &cube->ray;
-	ray->placeholder = NULL;
+	ray->ray_angle_diff = FOV / RAY_COUNT;
+	ray->distance = 0;
+	ray->direction.x = 0; // NSWE - When N = 0
+	ray->direction.y = 1; // NSWE - When N = 1
+	ray->radiant_diff = 0;
+	ray->current_wall = 0;
+	ray->intersection.x = 0;
+	ray->intersection.y = 0;
+	ray->h_intersection.x = 0;
+	ray->h_intersection.y = 0;
+	ray->v_intersection.x = 0;
+	ray->v_intersection.y = 0;
+
 }
 
 void	init_structs(t_cube *cube)

@@ -45,21 +45,27 @@ void	init_ray(t_cube *cube)
 	t_ray	*ray;
 
 	ray = &cube->ray;
-	ray->ray_angle_diff = FOV / RAY_COUNT;
 	ray->distance = 0;
+	ray->radiant_diff = 0;
+	ray->current_wall = 0;
 	ray->direction.x = 0; // Parsing NSWE - When N = 0
 	ray->direction.y = 1; // Parsing NSWE - When N = 1
 	ray->tmp_direction.x = 0;
 	ray->tmp_direction.y = 0;
-	ray->radiant_diff = 0;
-	ray->current_wall = 0;
 	ray->intersection.x = 0;
 	ray->intersection.y = 0;
 	ray->h_intersection.x = 0;
 	ray->h_intersection.y = 0;
 	ray->v_intersection.x = 0;
 	ray->v_intersection.y = 0;
-
+	ray->position.x = 0; // Parsing - starting position
+	ray->position.y = 0; // Parsing- starting position
+	ray->delta_x = 0;
+	ray->delta_y = 0;
+	ray->current_cube.x = 0;
+	ray->current_cube.y = 0;
+	ray->next_cube.x = 0;
+	ray->next_cube.y = 0;
 }
 
 void	init_structs(t_cube *cube)

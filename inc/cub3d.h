@@ -13,7 +13,8 @@
 # define FOV 90
 # define RAY_COUNT WIDTH
 
-// Walls //
+// Map //
+# define TILE 100
 # define NORTH_WALL 0
 # define SOUTH_WALL 1
 # define WEST_WALL 2
@@ -22,6 +23,8 @@
 // Fd //
 # define MAX_FD 1024
 
+// Misc //
+#define INT_MAX 2147483647
 /* Libraries */
 # include <unistd.h>
 # include <stdlib.h>
@@ -78,15 +81,19 @@ typedef struct			s_xy
 typedef struct s_ray
 {
 	struct s_cube		*cube;
-	double				ray_angle_diff;
 	double				distance;
-	t_xy				direction;
-	t_xy				tmp_direction;
 	double				radiant_diff;
 	int					current_wall;
+	t_xy				direction;
+	t_xy				tmp_direction;
 	t_xy				intersection;
 	t_xy				h_intersection;
 	t_xy				v_intersection;
+	t_xy				position;
+	double				delta_x;
+	double				delta_y;
+	t_xy				current_cube;
+	t_xy				next_cube;
 
 
 
@@ -130,6 +137,7 @@ void	raycasting(t_cube *cube);
 // Utils //
 char	*get_next_line(int fd);
 int		array_size(char **arr);
+double	pythagoras(t_xy coord);
 
 // Error Handling //
 void	argc_error(t_cube *cube);

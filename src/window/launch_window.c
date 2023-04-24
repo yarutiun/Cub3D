@@ -38,7 +38,7 @@ void render_map(t_cube *cube)
 void	render_window(t_cube *cube)
 {
 	mlx_clear_window(cube->mlx.mlx_ptr, cube->mlx.window);
-	raycast(cube);
+	raycasting(cube);
 	mlx_put_image_to_window(cube->mlx.mlx_ptr, cube->mlx.window, \
 							cube->img.img, 0, 0);
 }

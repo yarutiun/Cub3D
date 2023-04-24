@@ -40,3 +40,8 @@ char *get_next_line(int fd)
 	buff[i] = '\0';
 	return(buff);
 }
+
+double	pythagoras(t_xy coord)
+{
+	return(sqrt((coord.x * coord.x) + (coord.y * coord.y)));
+}

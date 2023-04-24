@@ -76,7 +76,8 @@ void	free_img(t_img *img)
 
 void	free_ray(t_ray *ray)
 {
-	free_str(ray->placeholder);
+	(void) ray;
+	// free_str(ray->placeholder);
 }
 
 void	free_all(t_cube *cube)

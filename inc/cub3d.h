@@ -9,6 +9,16 @@
 // Keys //
 # define ESCAPE 17
 
+// Raycast //
+# define FOV 90
+# define RAY_COUNT WIDTH
+
+// Walls //
+# define NORTH_WALL 0
+# define SOUTH_WALL 1
+# define WEST_WALL 2
+# define EAST_WALL 3
+
 // Fd //
 # define MAX_FD 1024
 
@@ -57,14 +67,28 @@ typedef struct s_img
 	int					line_length;
 	int					endian;
 	void				*wall_ptr; // 2D
-	int					pixel_x; // Might delete
-	int					pixel_y; // Might delete
 }						t_img;
+
+typedef struct			s_xy
+{
+	double				x;
+	double				y;
+}						t_xy;
 
 typedef struct s_ray
 {
 	struct s_cube		*cube;
-	char				*placeholder; // Delete
+	double				ray_angle_diff;
+	double				distance;
+	t_xy				direction;
+	double				radiant_diff;
+	int					current_wall;
+	t_xy				intersection;
+	t_xy				h_intersection;
+	t_xy				v_intersection;
+
+
+
 }						t_ray;
 
 typedef struct s_cube
@@ -100,7 +124,7 @@ int		x_close(void);
 int		key_hooks(int keycode);
 
 // Raycasting //
-int		raycasting(t_cube *cube);
+void	raycasting(t_cube *cube);
 
 // Utils //
 char	*get_next_line(int fd);

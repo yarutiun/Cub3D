@@ -47,6 +47,8 @@ void	init_ray(t_cube *cube)
 	ray = &cube->ray;
 	ray->distance = 0;
 	ray->radiant_diff = 0;
+	ray->ceiling_color = 0;
+	ray->floor_color = 0;
 	ray->current_wall = 0;
 	ray->direction.x = 0; // Parsing NSWE - When N = 0
 	ray->direction.y = 1; // Parsing NSWE - When N = 1
@@ -66,6 +68,8 @@ void	init_ray(t_cube *cube)
 	ray->current_cube.y = 0;
 	ray->next_cube.x = 0;
 	ray->next_cube.y = 0;
+	ray->wall_height = 0;
+	ray->wall_offset = 0;
 }
 
 void	init_structs(t_cube *cube)

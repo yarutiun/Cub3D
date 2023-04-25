@@ -72,6 +72,13 @@ typedef struct s_img
 	void				*wall_ptr; // 2D
 }						t_img;
 
+typedef struct	s_wall_stats
+{
+	t_img				*img;
+	int					width;
+	int					height;
+}						t_wall_stats;
+
 typedef struct			s_xy
 {
 	double				x;
@@ -83,6 +90,9 @@ typedef struct s_ray
 	struct s_cube		*cube;
 	double				distance;
 	double				radiant_diff;
+	int					ceiling_color;
+	int					floor_color;
+	t_wall_stats		walls[4];
 	int					current_wall;
 	t_xy				direction;
 	t_xy				tmp_direction;
@@ -94,9 +104,8 @@ typedef struct s_ray
 	double				delta_y;
 	t_xy				current_cube;
 	t_xy				next_cube;
-
-
-
+	double				wall_height;
+	double				wall_offset;
 }						t_ray;
 
 typedef struct s_cube

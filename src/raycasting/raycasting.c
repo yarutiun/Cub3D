@@ -233,7 +233,45 @@ void	calculate_rad_diff(t_ray *ray)
 	ray->radiant_diff = acos(tmp_result);	
 }
 
+int	calculate_texture_x(t_ray *ray)
+{
+	double	texture_x_d;
 
+	if (ray->current_wall == NORTH_WALL || ray->current_wall == SOUTH_WALL)
+		texture_x_d = fmod(ray->intersection.x, TILE);
+	else
+		texture_x_d = fmod(ray->intersection.y, TILE);
+	return ((int)(ray->walls[ray->current_wall].width * texture_x_d / 100));
+}
+
+void	draw_pixel_columns(t_ray *ray, int x)
+{
+	int		texture_x;
+	int		texture_y;
+	double	y_perc;
+	int		y;
+	t_img	*img;
+
+	img = &ray->cube->img;
+	texture_x = calculate_texture_x(ray);
+	ray->wall_height = HEIGHT * TILE / ray->distance;
+	ray->wall_offset = (HEIGHT - ray->wall_height) / 2;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		if (y < ray->wall_offset)
+			my_mlx_pixel_put(img, x, y, ray->ceiling_color);
+		else if (y > ray->wall_height + ray->wall_offset)
+			my_mlx_pixel_put(img, x, y, ray->floor_color);
+		else
+		{
+			y_perc = (double)(y - ray->wall_offset) / ray->wall_height;
+			texture_y = ray->walls[ray->current_wall].height * y_perc;
+			my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(ray->walls[ray->current_wall].img, texture_x, texture_y));
+		}
+		y++;
+	}
+}
 
 void	raycasting(t_cube *cube)
 {
@@ -248,7 +286,7 @@ void	raycasting(t_cube *cube)
 		single_ray(ray);
 		calculate_rad_diff(ray);
 		ray->distance = ray->distance * cos(ray->radiant_diff);
-		// draw_pixel(ray, i);
+		draw_pixel_columns(ray, i);
 		i++;
 	}
 }

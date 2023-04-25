@@ -30,6 +30,7 @@ SRC		=	error_handling/errors.c \
 			free_memory/free.c \
 			parsing/checkers.c \
 			parsing/parse_input.c \
+			raycasting/cpp.c \
 			raycasting/raycasting.c \
 			raycasting/vector_calculations.c \
 			window/hooks.c \

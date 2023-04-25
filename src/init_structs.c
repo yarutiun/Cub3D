@@ -72,6 +72,31 @@ void	init_ray(t_cube *cube)
 	ray->wall_offset = 0;
 }
 
+void init_rc(t_cube *cube)
+{
+	t_rc	*rc;
+
+	rc = &cube->rc;
+	rc->position.x = 0;
+	rc->position.y = 0;
+	rc->direction.x = 0;
+	rc->direction.y = 0;
+	rc->camera_plane.x = 0;
+	rc->camera_plane.y = 0;
+	rc->cameraX = 0;
+	rc->ray_dir.x = 0;
+	rc->ray_dir.y = 0;
+	rc->map.x = 0;
+	rc->map.y = 0;
+	rc->side_dist.x = 0;
+	rc->side_dist.y = 0;
+	rc->delta_dist.x = 0;
+	rc->delta_dist.y = 0;
+	rc->step.x = 0;
+	rc->step.y = 0;
+	rc->side = 0;
+}
+
 void	init_structs(t_cube *cube)
 {
 	cube->param.cube = cube;
@@ -82,4 +107,6 @@ void	init_structs(t_cube *cube)
 	init_img(cube);
 	cube->ray.cube = cube;
 	init_ray(cube);
+	cube->rc.cube = cube;
+	init_rc(cube);
 }

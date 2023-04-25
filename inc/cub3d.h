@@ -85,6 +85,12 @@ typedef struct			s_xy
 	double				y;
 }						t_xy;
 
+typedef struct			s_xy_int
+{
+	int					x;
+	int					y;
+}						t_xy_int;
+
 typedef struct s_ray
 {
 	struct s_cube		*cube;
@@ -108,12 +114,29 @@ typedef struct s_ray
 	double				wall_offset;
 }						t_ray;
 
+typedef struct			s_rc
+{
+	struct s_cube		*cube;
+	t_xy				position; //posX
+	t_xy				direction; //dirX
+	t_xy				camera_plane; //planeX
+	double				cameraX;
+	t_xy				ray_dir; //rayDirX
+	t_xy_int			map; //mapX
+	t_xy				side_dist; //sideDistX
+	t_xy				delta_dist; //deltaDistX
+	t_xy				step; //stepX
+	int					side; //side
+
+}						t_rc;
+
 typedef struct s_cube
 {
 	t_param				param;
 	t_mlx				mlx;
 	t_img				img;
 	t_ray				ray;
+	t_rc				rc;
 }						t_cube;
 
 /* Functions */
@@ -131,6 +154,10 @@ void	check_map_row(char **splitted_input, t_cube *cube);
 void	check_invalid_spaces(char **map, t_cube *cube);
 void	check_forbidden_chars(char **map, t_cube *cube);
 void	check_player(char **map, t_cube *cube);
+
+// Starting Values //
+void	init_starting_values(t_cube *cube);
+
 
 // Window //
 void	launch_window(t_cube *cube);

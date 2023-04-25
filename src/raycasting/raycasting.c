@@ -249,20 +249,20 @@ void	rotate_direction(t_ray *ray, int i)
 	ray->tmp_direction.y = (ray->direction.x * sin(angle * M_PI/180)) + (ray->direction.y * cos(angle * M_PI/180));
 }
 
-void	raycasting(t_cube *cube)
-{
-	t_ray	*ray;
-	int		x;
+// void	raycasting(t_cube *cube)
+// {
+// 	t_ray	*ray;
+// 	int		x;
 
-	ray = &cube->ray;
-	x = 0;
-	while (x < RAY_COUNT)
-	{
-		rotate_direction(ray, x);
-		single_ray(ray);
-		calculate_rad_diff(ray);
-		ray->distance = ray->distance * cos(ray->radiant_diff);
-		draw_pixel_columns(ray, x);
-		x++;
-	}
-}
+// 	ray = &cube->ray;
+// 	x = 0;
+// 	while (x < RAY_COUNT)
+// 	{
+// 		rotate_direction(ray, x);
+// 		single_ray(ray);
+// 		calculate_rad_diff(ray);
+// 		ray->distance = ray->distance * cos(ray->radiant_diff);
+// 		draw_pixel_columns(ray, x);
+// 		x++;
+// 	}
+// }

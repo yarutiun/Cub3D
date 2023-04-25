@@ -25,44 +25,49 @@ void	rotate_direction(t_ray *ray, int i)
 	ray->tmp_direction.y = (ray->direction.x * sin(angle * M_PI/180)) + (ray->direction.y * cos(angle * M_PI/180));
 }
 
-// int			map_width_for_y(t_data *data, int y)
-// {
-// 	if (y < data->map_y)
-// 	{
-// 		if (data->map[y] != NULL)
-// 			return (ft_strlen(data->map[y]));
-// 	}
-// 	return (-1);
-// }
+int			map_width_for_y(t_ray *ray, int y)
+{
+	int	map_y;
 
-// bool		its_a_wall(t_data *data, t_vec pos)
-// {
-// 	int	x = pos.x / 100;
-// 	int	y = pos.y / 100;
-// 	if(x < 0 || y < 0 || y > data->map_y || x > map_width_for_y(data, y))
-// 	{
-// 		write(2, "error in its a wall\n", 21);
-// 		exit(1);
-// 	}
-// 	if (data->map[y][x] == '1')
-// 		return (true);
-// 	return (false);
-// }
+	map_y = array_size(ray->cube->param.map);
+	if (y < map_y)
+	{
+		if (ray->cube->param.map[y] != NULL)
+			return (ft_strlen(ray->cube->param.map[y]));
+	}
+	return (-1);
+}
 
+bool	its_a_wall(t_ray *ray)
+{
+	int	x;
+	int	y;
+	int	map_y;
 
-// static int	end_ray(t_data *data, t_vec pos)
-// {
-// 	if (pos.x < 0 || pos.y < 0 || 
-// 			pos.y > (data->map_y * TILE) || 
-// 			pos.x > (double) map_width_for_y(data, (pos.y / 100)) * TILE)
-// 		return (2);
-// 	return(its_a_wall(data, pos));
-// }
+	map_y = array_size(ray->cube->param.map);
+	x = ray->position.x / 100;
+	y = ray->position.y / 100;
+	if (x < 0 || y < 0 || y > map_y || x > map_width_for_y(ray, y))
+	{
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Raycast into a wall\n", 2);
+		exit(1);
+	}
+	if (ray->cube->param.map[y][x] == '1')
+		return (true);
+	return (false);
+}
 
 int	end_ray(t_ray *ray)
 {
-	(void) ray;
-	return (1);
+	int	map_y;
+
+	map_y = array_size(ray->cube->param.map);
+	if (ray->position.x < 0 || ray->position.y < 0 || 
+			ray->position.y > (map_y * TILE) || 
+			ray->position.x > (double)map_width_for_y(ray ,(ray->position.y / 100) * TILE))
+		return (2);
+	return (its_a_wall(ray));
 }
 
 t_xy	add_vector(t_xy v1, t_xy v2)

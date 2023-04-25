@@ -92,7 +92,7 @@ typedef struct s_ray
 	double				radiant_diff;
 	int					ceiling_color;
 	int					floor_color;
-	t_wall_stats		walls[4];
+	t_wall_stats		walls[4]; // Need to initiliaze and load
 	int					current_wall;
 	t_xy				direction;
 	t_xy				tmp_direction;
@@ -143,10 +143,15 @@ int		key_hooks(int keycode);
 // Raycasting //
 void	raycasting(t_cube *cube);
 
+// Vector Calculations //
+double	pythagoras(t_xy coord);
+t_xy	add_vector(t_xy v1, t_xy v2);
+t_xy	sub_vector(t_xy v1, t_xy v2);
+t_xy	normalize_vector(t_xy vector);
+
 // Utils //
 char	*get_next_line(int fd);
 int		array_size(char **arr);
-double	pythagoras(t_xy coord);
 
 // Error Handling //
 void	argc_error(t_cube *cube);

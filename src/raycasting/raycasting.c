@@ -16,15 +16,6 @@ unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-void	rotate_direction(t_ray *ray, int i)
-{
-	double	angle;
-
-	angle = (-1 * FOV / 2) + ((FOV / RAY_COUNT) * i);
-	ray->tmp_direction.x = (ray->direction.x * cos(angle * M_PI/180)) - (ray->direction.y * sin(angle * M_PI/180));
-	ray->tmp_direction.y = (ray->direction.x * sin(angle * M_PI/180)) + (ray->direction.y * cos(angle * M_PI/180));
-}
-
 int			map_width_for_y(t_ray *ray, int y)
 {
 	int	map_y;
@@ -70,22 +61,56 @@ int	end_ray(t_ray *ray)
 	return (its_a_wall(ray));
 }
 
-t_xy	add_vector(t_xy v1, t_xy v2)
+int	calculate_texture_x(t_ray *ray)
 {
-	t_xy	result;
+	double	texture_x_d;
 
-	result.x = v1.x + v2.x;
-	result.y = v2.y + v2.y;
-	return (result);
+	if (ray->current_wall == NORTH_WALL || ray->current_wall == SOUTH_WALL)
+		texture_x_d = fmod(ray->intersection.x, TILE);
+	else
+		texture_x_d = fmod(ray->intersection.y, TILE);
+	return ((int)(ray->walls[ray->current_wall].width * texture_x_d / 100));
 }
 
-t_xy	sub_vector(t_xy v1, t_xy v2)
+void	draw_pixel_columns(t_ray *ray, int x)
 {
-	t_xy	result;
+	int		texture_x;
+	int		texture_y;
+	double	y_perc;
+	int		y;
+	t_img	*img;
 
-	result.x = v1.x - v2.x;
-	result.y = v2.y - v2.y;
-	return (result);
+	img = &ray->cube->img;
+	texture_x = calculate_texture_x(ray);
+	ray->wall_height = HEIGHT * TILE / ray->distance;
+	ray->wall_offset = (HEIGHT - ray->wall_height) / 2;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		if (y < ray->wall_offset)
+			my_mlx_pixel_put(img, x, y, ray->ceiling_color);
+		else if (y > ray->wall_height + ray->wall_offset)
+			my_mlx_pixel_put(img, x, y, ray->floor_color);
+		else
+		{
+			y_perc = (double)(y - ray->wall_offset) / ray->wall_height;
+			texture_y = ray->walls[ray->current_wall].height * y_perc;
+			my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(ray->walls[ray->current_wall].img, texture_x, texture_y));
+		}
+		y++;
+	}
+}
+
+void	calculate_rad_diff(t_ray *ray)
+{
+	double	tmp_result;
+	t_xy	tmp1;
+	t_xy	tmp2;
+
+	tmp1 = normalize_vector(ray->direction);
+	tmp2 = normalize_vector(ray->tmp_direction);
+	tmp_result = (tmp1.x * tmp2.x) + (tmp1.y * tmp2.y);
+	ray->radiant_diff = acos(tmp_result);	
 }
 
 double v_raycast_cont(t_ray *ray, int check, double ratio)
@@ -215,83 +240,29 @@ void	single_ray(t_ray *ray)
 	}
 }
 
-t_xy	normalize_vector(t_xy vector)
+void	rotate_direction(t_ray *ray, int i)
 {
-	t_xy	result;
-	double	length;
-	
-	length = sqrt(vector.x * vector.x + vector.y * vector.y);
-	result.x = vector.x / length;
-	result.y = vector.y / length;
-	return (result);
-}
+	double	angle;
 
-void	calculate_rad_diff(t_ray *ray)
-{
-	double	tmp_result;
-	t_xy	tmp1;
-	t_xy	tmp2;
-
-	tmp1 = normalize_vector(ray->direction);
-	tmp2 = normalize_vector(ray->tmp_direction);
-	tmp_result = (tmp1.x * tmp2.x) + (tmp1.y * tmp2.y);
-	ray->radiant_diff = acos(tmp_result);	
-}
-
-int	calculate_texture_x(t_ray *ray)
-{
-	double	texture_x_d;
-
-	if (ray->current_wall == NORTH_WALL || ray->current_wall == SOUTH_WALL)
-		texture_x_d = fmod(ray->intersection.x, TILE);
-	else
-		texture_x_d = fmod(ray->intersection.y, TILE);
-	return ((int)(ray->walls[ray->current_wall].width * texture_x_d / 100));
-}
-
-void	draw_pixel_columns(t_ray *ray, int x)
-{
-	int		texture_x;
-	int		texture_y;
-	double	y_perc;
-	int		y;
-	t_img	*img;
-
-	img = &ray->cube->img;
-	texture_x = calculate_texture_x(ray);
-	ray->wall_height = HEIGHT * TILE / ray->distance;
-	ray->wall_offset = (HEIGHT - ray->wall_height) / 2;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		if (y < ray->wall_offset)
-			my_mlx_pixel_put(img, x, y, ray->ceiling_color);
-		else if (y > ray->wall_height + ray->wall_offset)
-			my_mlx_pixel_put(img, x, y, ray->floor_color);
-		else
-		{
-			y_perc = (double)(y - ray->wall_offset) / ray->wall_height;
-			texture_y = ray->walls[ray->current_wall].height * y_perc;
-			my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(ray->walls[ray->current_wall].img, texture_x, texture_y));
-		}
-		y++;
-	}
+	angle = (-1 * FOV / 2) + ((FOV / RAY_COUNT) * i);
+	ray->tmp_direction.x = (ray->direction.x * cos(angle * M_PI/180)) - (ray->direction.y * sin(angle * M_PI/180));
+	ray->tmp_direction.y = (ray->direction.x * sin(angle * M_PI/180)) + (ray->direction.y * cos(angle * M_PI/180));
 }
 
 void	raycasting(t_cube *cube)
 {
 	t_ray	*ray;
-	int		i;
+	int		x;
 
 	ray = &cube->ray;
-	i = 0;
-	while (i < RAY_COUNT)
+	x = 0;
+	while (x < RAY_COUNT)
 	{
-		rotate_direction(ray, i);
+		rotate_direction(ray, x);
 		single_ray(ray);
 		calculate_rad_diff(ray);
 		ray->distance = ray->distance * cos(ray->radiant_diff);
-		draw_pixel_columns(ray, i);
-		i++;
+		draw_pixel_columns(ray, x);
+		x++;
 	}
 }

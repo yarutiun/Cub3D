@@ -31,6 +31,7 @@ SRC		=	error_handling/errors.c \
 			parsing/checkers.c \
 			parsing/parse_input.c \
 			raycasting/raycasting.c \
+			raycasting/vector_calculations.c \
 			window/hooks.c \
 			window/launch_window.c \
 			window/render_window.c \

@@ -3,13 +3,22 @@
 
 /* Macros */
 // Window Dimensions //
-// # define WIDTH 640
-// # define HEIGHT 480
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 640
+# define HEIGHT 480
+// # define WIDTH 1920
+// # define HEIGHT 1080
 
 // Keys //
-# define ESCAPE 17
+# define ESCAPE_KEY 53
+# define W_KEY 13
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define LEFT_KEY 123
+# define RIGHT_KEY 124
+
+// MLX //
+# define CLOSE_WINDOW 17
 
 // Raycast //
 # define FOV 90
@@ -170,7 +179,7 @@ void	render_window(t_cube *cube);
 
 // Hooks //
 int		x_close(void);
-int		key_hooks(int keycode);
+int		key_hooks(int keycode, t_rc *rc);
 
 // Raycasting //
 void	raycasting(t_cube *cube);

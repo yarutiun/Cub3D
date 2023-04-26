@@ -56,8 +56,8 @@ void	launch_window(t_cube *cube)
 	img->address = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
 									&img->line_length, &img->endian);
 	
-	load_images(cube);
-	render_map(cube);
+	// load_images(cube);
+	// render_map(cube);
 	
 	render_window(cube);
 	mlx_hook(mlx->window, ESCAPE, 0, x_close, 0);

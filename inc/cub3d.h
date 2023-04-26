@@ -10,6 +10,7 @@
 
 // Keys //
 # define ESCAPE_KEY 53
+# define KEY_DOWN 2
 # define W_KEY 13
 # define A_KEY 0
 # define S_KEY 1
@@ -171,7 +172,6 @@ void	check_player(char **map, t_cube *cube);
 
 // Starting Values //
 void	init_starting_values(t_cube *cube);
-
 
 // Window //
 void	launch_window(t_cube *cube);

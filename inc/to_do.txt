@@ -8,9 +8,9 @@
 
 Subject notes (Parser):
 ◦ Except for the map, each type of information from an element can be separated by one or more space(s).
-◦ The map must be parsed as it looks in the file. Spaces are a valid part of the map and are up to you to handle. You must be able to parse any kind of map, as long as it respects the rules of the map.
 
 
 Bonuses?
-• Wall collisions.
-• A minimap system.
+•Mouse
+•A minimap system.
+•Wall collisions.

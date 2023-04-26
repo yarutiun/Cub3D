@@ -3,6 +3,8 @@
 
 /* Macros */
 // Window Dimensions //
+// # define WIDTH 640
+// # define HEIGHT 480
 # define WIDTH 1920
 # define HEIGHT 1080
 
@@ -120,7 +122,7 @@ typedef struct			s_rc
 	t_xy				position; //posX posY
 	t_xy				direction; //dirX
 	t_xy				camera_plane; //planeX
-	double				cameraX;
+	double				cameraX; //cameraX
 	t_xy				ray_dir; //rayDirX
 	t_xy_int			map; //mapX
 	t_xy				side_dist; //sideDistX
@@ -131,7 +133,6 @@ typedef struct			s_rc
 	int					line_height; //lineHeight
 	int					draw_start; //drawStart
 	int					draw_end; //drawEnd
-
 }						t_rc;
 
 typedef struct s_cube

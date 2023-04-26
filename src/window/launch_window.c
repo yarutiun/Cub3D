@@ -61,7 +61,6 @@ void	launch_window(t_cube *cube)
 	
 	render_window(cube);
 	mlx_hook(mlx->window, CLOSE_WINDOW, 0, x_close, 0);
-	// mlx_key_hook(mlx->window, key_hooks, 0);
 	mlx_key_hook(mlx->window, key_hooks, &cube->rc);
 	mlx_do_sync(mlx->mlx_ptr);
 	mlx_loop(mlx->mlx_ptr);

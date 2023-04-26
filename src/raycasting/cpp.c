@@ -18,8 +18,8 @@ void	calculate_deltas(t_rc *rc, int x)
 
 void	calculate_side_distance(t_rc *rc)
 {
-	rc->map.x = (int)rc->position.x; // Use floor?
-	rc->map.y = (int)rc->position.y; // Use floor?
+	rc->map.x = (int)rc->position.x; // Use floor(rc->position.x) ?
+	rc->map.y = (int)rc->position.y; // Use floor(rc->position.y) ?
 	if (rc->ray_dir.x < 0)
 	{
 		rc->step.x = -1;
@@ -69,6 +69,21 @@ void	perform_dda(t_rc *rc)
 	}
 }
 
+void	fix_fisheye(t_rc *rc)
+{
+	if (rc->side == 0)
+		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
+	else
+		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
+	rc->line_height = (int)(HEIGHT / rc->perp_wall_dist);
+	rc->draw_start = -rc->line_height / 2 + HEIGHT / 2;
+	if (rc->draw_start < 0)
+		rc->draw_start = 0;
+	rc->draw_end = rc->line_height / 2 + HEIGHT / 2;
+	if (rc->draw_end >= HEIGHT)
+		rc->draw_end = HEIGHT - 1;
+}
+
 void	raycasting(t_cube *cube)
 {
 	t_rc	*rc;
@@ -81,6 +96,8 @@ void	raycasting(t_cube *cube)
 		calculate_deltas(rc, x);
 		calculate_side_distance(rc);
 		perform_dda(rc);
+		fix_fisheye(rc);
+		
 		x++;
 	}
 	ft_putstr_fd("Test\n", 1);
@@ -91,8 +108,8 @@ void	init_starting_values(t_cube *cube)
 	t_rc	*rc;
 
 	rc = &cube->rc;
-	rc->position.x = 22;
-	rc->position.y = 12;
+	rc->position.x = 3;
+	rc->position.y = 3;
 	rc->direction.x = -1;
 	rc->direction.y = 0;
 	rc->camera_plane.x = 0;

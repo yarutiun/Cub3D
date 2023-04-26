@@ -117,7 +117,7 @@ typedef struct s_ray
 typedef struct			s_rc
 {
 	struct s_cube		*cube;
-	t_xy				position; //posX
+	t_xy				position; //posX posY
 	t_xy				direction; //dirX
 	t_xy				camera_plane; //planeX
 	double				cameraX;
@@ -127,6 +127,10 @@ typedef struct			s_rc
 	t_xy				delta_dist; //deltaDistX
 	t_xy				step; //stepX
 	int					side; //side
+	double				perp_wall_dist; //perpWallDist
+	int					line_height; //lineHeight
+	int					draw_start; //drawStart
+	int					draw_end; //drawEnd
 
 }						t_rc;
 

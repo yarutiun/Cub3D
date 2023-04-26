@@ -95,6 +95,10 @@ void init_rc(t_cube *cube)
 	rc->step.x = 0;
 	rc->step.y = 0;
 	rc->side = 0;
+	rc->perp_wall_dist = 0;
+	rc->line_height = 0;
+	rc->draw_start = 0;
+	rc->draw_end = 0;
 }
 
 void	init_structs(t_cube *cube)

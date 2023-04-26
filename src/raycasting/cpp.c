@@ -111,7 +111,7 @@ void	perform_dda(t_rc *rc)
 		}
 		// if (rc->cube->param.map[rc->map.x][rc->map.y])
 		// {
-		// 	if (rc->cube->param.map[rc->map.x][rc->map.y] > 0)
+		// 	if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
 		// 		hit = 1;	
 		// }
 		if (worldMap[rc->map.x][rc->map.y])
@@ -188,9 +188,9 @@ void	init_starting_values(t_cube *cube)
 	t_rc	*rc;
 
 	rc = &cube->rc;
-	rc->position.x = 22;
-	rc->position.y = 12;
-	rc->direction.x = -1;
+	rc->position.x = 3;
+	rc->position.y = 3;
+	rc->direction.x = 1;
 	rc->direction.y = 0;
 	rc->camera_plane.x = 0;
 	rc->camera_plane.y = 0.66;

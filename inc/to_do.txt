@@ -3,14 +3,14 @@
 [ ] Initialize wall textures
 [ ] Initialize floor and ceiling colors
 
-[ ] Bind keys for movement
+[x] Bind keys for movement
 
 
 Subject notes (Parser):
-◦ Except for the map, each type of information from an element can be separated by one or more space(s).
+[ ] Except for the map, each type of information from an element can be separated by one or more space(s).
 
 
 Bonuses?
-•Mouse
-•A minimap system.
-•Wall collisions.
+[ ] Mouse
+[ ] A minimap system.
+[x] Wall collisions.

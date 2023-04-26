@@ -18,33 +18,33 @@ int	x_close(void)
 
 int	key_hooks(int keycode, t_rc *rc)
 {
-	// int worldMap[24][24]=
-	// {
-	// {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	// {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-	// {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	// {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	// };
+	int worldMap[24][24]=
+	{
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	};
 
 	t_xy	rotation;
 	double	old_plane_x;
@@ -58,33 +58,38 @@ int	key_hooks(int keycode, t_rc *rc)
 	else if (keycode == W_KEY)
 	{
 		ft_putstr_fd("W\n",1);
-		// if (worldMap[(int)(rc->position.x + rc->direction.x)][(int)rc->position.y] == false)
+		if (worldMap[(int)(rc->position.x + rc->direction.x * move_speed)][(int)rc->position.y] == false)
 			rc->position.x += rc->direction.x * move_speed;
-		// if (worldMap[(int)rc->position.x][(int)(rc->position.y + rc->position.y)] == false)
+		if (worldMap[(int)rc->position.x][(int)(rc->position.y + rc->position.y * move_speed)] == false)
 			rc->position.y += rc->direction.y * move_speed;
 	}
 	else if (keycode == S_KEY)
 	{
 		ft_putstr_fd("S\n",1);
-		rc->position.x -= rc->direction.x * move_speed;
-		rc->position.y -= rc->direction.y * move_speed;
+		if (worldMap[(int)(rc->position.x - rc->direction.x * move_speed)][(int)rc->position.y] == false)
+			rc->position.x -= rc->direction.x * move_speed;
+		if (worldMap[(int)rc->position.x][(int)(rc->position.y - rc->position.y * move_speed)] == false)
+			rc->position.y -= rc->direction.y * move_speed;
 	}
 	if (keycode == A_KEY)
 	{
 		ft_putstr_fd("A\n",1);
 		rotation = rotate_direction(rc->direction, 90);
-
-		rc->position.x -= rotation.x * move_speed;
-		rc->position.y -= rotation.y * move_speed;
-
+		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == false)
+		{
+			rc->position.x -= rotation.x * move_speed;
+			rc->position.y -= rotation.y * move_speed;
+		}
 	}
 	if (keycode == D_KEY)
 	{
 		ft_putstr_fd("D\n",1);
 		rotation = rotate_direction(rc->direction, -90);
-
-		rc->position.x -= rotation.x * move_speed;
-		rc->position.y -= rotation.y * move_speed;
+		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == false)
+		{
+			rc->position.x -= rotation.x * move_speed;
+			rc->position.y -= rotation.y * move_speed;
+		}
 	}
 	if (keycode == LEFT_KEY)
 	{
@@ -109,11 +114,3 @@ int	key_hooks(int keycode, t_rc *rc)
 	render_window(rc->cube);
 	return (0);
 }
-
-
-// double oldDirX = dirX;
-// dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
-// dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
-// double oldPlaneX = planeX;
-// planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-// planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);

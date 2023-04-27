@@ -248,6 +248,7 @@ void	init_starting_values(t_cube *cube)
 	rc->camera_plane.y = 0.66;  //Calc after direction
 
 	// To be init:
+	// int **map
 	// ceiling_color;
 	// floor_color;
 	// walls[4];

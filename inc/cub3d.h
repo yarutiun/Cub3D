@@ -3,10 +3,10 @@
 
 /* Macros */
 // Window Dimensions //
-# define WIDTH 640
-# define HEIGHT 480
-// # define WIDTH 1920
-// # define HEIGHT 1080
+// # define WIDTH 640
+// # define HEIGHT 480
+# define WIDTH 1024
+# define HEIGHT 800
 
 // Keys //
 # define ESCAPE_KEY 53

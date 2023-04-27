@@ -7,8 +7,12 @@
 
 
 Subject notes (Parser):
-[ ] Except for the map, each type of information from an element can be separated by one or more space(s).
-
+[ ] Except for the map, each type of information from an element can be 
+	separated by one or more space(s).
+[ ] Take care to not segfault in corners like this:
+111111
+10000N1
+1000001
 
 Bonuses?
 [ ] Mouse

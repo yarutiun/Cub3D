@@ -37,6 +37,7 @@
 
 // Misc //
 #define INT_MAX 2147483647
+
 /* Libraries */
 # include <unistd.h>
 # include <stdlib.h>
@@ -54,10 +55,7 @@ typedef struct s_param
 	struct s_cube		*cube;
 	char				*input_str;
 	char				**splitted_input;
-	char				*no;
-	char				*so;
-	char				*we;
-	char				*ea;
+	char				*wall_path[4];
 	char				*f;
 	char				*c;
 	int					*f_rgb;
@@ -84,12 +82,12 @@ typedef struct s_img
 	void				*wall_ptr; // 2D
 }						t_img;
 
-typedef struct	s_wall_stats
+typedef struct	s_wall
 {
 	t_img				*img;
 	int					width;
 	int					height;
-}						t_wall_stats;
+}						t_wall;
 
 typedef struct			s_xy
 {
@@ -110,7 +108,7 @@ typedef struct s_ray
 	double				radiant_diff;
 	int					ceiling_color;
 	int					floor_color;
-	t_wall_stats		walls[4]; // Need to initiliaze and load
+	// t_wall_stats		walls[4]; // Need to initiliaze and load
 	int					current_wall;
 	t_xy				direction;
 	t_xy				tmp_direction;
@@ -143,6 +141,15 @@ typedef struct			s_rc
 	int					line_height; //lineHeight
 	int					draw_start; //drawStart
 	int					draw_end; //drawEnd
+	int					pitch; // pitch
+	t_wall				walls[4];
+	int					wall_type;
+	t_xy				texture;
+	double				texture_step;
+	double				texture_position;
+
+	int					floor_color;
+	int					ceiling_color;
 }						t_rc;
 
 typedef struct s_cube

@@ -16,46 +16,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-//Texture version (Consider using pitch = 100 at drawStart and drawEnd)
-// void	draw_vertical_line(t_rc *rc, int x)
-// {
-// 	int	y;
-// 	int	floor_color;
-// 	int	ceiling_color;
-// 	int	wall_color;
-
-// 	floor_color = 0x0000CC66; // init_starting_values
-// 	ceiling_color = 0x00000000; // init_starting_values
-// 	// determine_wall_type(rc);
-// 	// determine_wall_coordinates(rc);
-// 	wall_color = 0x000066FF;
-// 	// wall_color = my_mlx_pixel_get;
-// 	if (rc->side == 1)
-// 		wall_color = wall_color / 2;
-
-// 	if (rc->draw_end < rc->draw_start)
-// 	{
-// 		rc->draw_start += rc->draw_end;
-// 		rc->draw_end = rc->draw_start - rc->draw_end;
-// 		rc->draw_start -= rc->draw_end;
-// 	}
-// 	if (rc->draw_end < 0 || rc->draw_start >= HEIGHT || x < 0 || x >= WIDTH)
-// 		return ;
-// 	y = 0;
-// 	while (y < HEIGHT)
-// 	{
-// 		if (y < rc->draw_start)
-// 			my_mlx_pixel_put(&rc->cube->img, x, y, ceiling_color);
-// 		else if (y > rc->draw_end)
-// 			my_mlx_pixel_put(&rc->cube->img, x, y, floor_color);
-// 		else
-// 			my_mlx_pixel_put(&rc->cube->img, x, y, wall_color);
-// 			// my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(ray->walls[ray->current_wall].img, texture_x, texture_y));
-// 		y++;
-// 	}
-// }
-
-// Color version
+//Color version
 void	draw_vertical_line(t_rc *rc, int x)
 {
 	int	y;
@@ -98,6 +59,78 @@ void	draw_vertical_line(t_rc *rc, int x)
 // Black: 0x00000000
 // Green: 0x0000CC66
 
+void	determine_wall_type(t_rc *rc)
+{
+	if (rc->side == 1)
+	{
+		if (rc->direction.x >= 0)
+			rc->wall_type = EAST_WALL;
+		else
+			rc->wall_type = WEST_WALL;
+	}
+	else
+	{
+		if (rc->direction.y >= 0)
+			rc->wall_type = NORTH_WALL;
+		else
+			rc->wall_type = SOUTH_WALL;
+	}
+}
+
+void	determine_wall_coordinates(t_rc *rc)
+{
+	double	wall_hit;
+
+	if (rc->side == 0)
+		wall_hit = rc->position.y + rc->perp_wall_dist * rc->direction.y;
+	else
+		wall_hit = rc->position.x + rc->perp_wall_dist * rc->direction.x;
+	wall_hit -= floor(wall_hit);
+	rc->texture.x = (int)(wall_hit * (double)(rc->walls->width));
+	if (rc->side == 0 && rc->direction.x > 0)
+		rc->texture.x = rc->walls->width - rc->texture.x - 1;
+	if (rc->side == 1 && rc->direction.y > 0)
+		rc->texture.x = rc->walls->width - rc->texture.x - 1;
+	rc->texture_step = 1.0 * rc->walls->height / rc->line_height;
+	rc->texture_position = (rc->draw_start - rc->pitch - HEIGHT / 2 + rc->line_height / 2) * rc->texture_step;
+}
+
+// Texture version (Consider using pitch = 100 at drawStart and drawEnd)
+// void	draw_vertical_line(t_rc *rc, int x)
+// {
+// 	int				y;
+// 	unsigned int	wall_color;
+
+// 	determine_wall_type(rc);
+// 	determine_wall_coordinates(rc);
+// 	if (rc->draw_end < rc->draw_start)
+// 	{
+// 		rc->draw_start += rc->draw_end;
+// 		rc->draw_end = rc->draw_start - rc->draw_end;
+// 		rc->draw_start -= rc->draw_end;
+// 	}
+// 	if (rc->draw_end < 0 || rc->draw_start >= HEIGHT || x < 0 || x >= WIDTH)
+// 		return ;
+// 	y = 0;
+// 	while (y < HEIGHT)
+// 	{
+// 		if (y < rc->draw_start)
+// 			my_mlx_pixel_put(&rc->cube->img, x, y, rc->ceiling_color);
+// 		else if (y > rc->draw_end)
+// 			my_mlx_pixel_put(&rc->cube->img, x, y, rc->floor_color);
+// 		else
+// 		{
+// 			rc->texture.y = (int)rc->texture_position & (rc->walls[rc->wall_type].height - 1);
+// 			rc->texture_position += rc->texture_step;
+// 			wall_color = my_mlx_pixel_get(rc->walls[rc->wall_type].img, rc->texture.x, rc->texture.y);
+// 			if (rc->side == 1)
+// 				wall_color = wall_color / 2;
+// 			my_mlx_pixel_put(&rc->cube->img, x, y, wall_color);
+// 		}
+// 		y++;
+// 	}
+// }
+
 void	fix_fisheye(t_rc *rc)
 {
 	if (rc->side == 0)
@@ -105,10 +138,10 @@ void	fix_fisheye(t_rc *rc)
 	else
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
 	rc->line_height = (int)(HEIGHT / rc->perp_wall_dist);
-	rc->draw_start = -rc->line_height / 2 + HEIGHT / 2;
+	rc->draw_start = -rc->line_height / 2 + HEIGHT / 2 + rc->pitch;
 	if (rc->draw_start < 0)
 		rc->draw_start = 0;
-	rc->draw_end = rc->line_height / 2 + HEIGHT / 2;
+	rc->draw_end = rc->line_height / 2 + HEIGHT / 2 + rc->pitch;
 	if (rc->draw_end >= HEIGHT)
 		rc->draw_end = HEIGHT - 1;
 }
@@ -246,13 +279,34 @@ void	init_starting_values(t_cube *cube)
 	rc->direction.y = 0; //NSWE
 	rc->camera_plane.x = 0; //Calc after direction
 	rc->camera_plane.y = 0.66;  //Calc after direction
+	rc->pitch = 100; // Constant
+	rc->floor_color = 0x0000CC66; // init_starting_values
+	rc->ceiling_color = 0x00000000; // init_starting_values
+	rc->walls[NORTH_WALL].height = 128; // Parsing or constant?
+	rc->walls[NORTH_WALL].width = 128; // Parsing or constant?
+	rc->walls[SOUTH_WALL].height = 128; // Parsing or constant?
+	rc->walls[SOUTH_WALL].width = 128; // Parsing or constant?
+	rc->walls[WEST_WALL].height = 128; // Parsing or constant?
+	rc->walls[WEST_WALL].width = 128; // Parsing or constant?
+	rc->walls[EAST_WALL].height = 128; // Parsing or constant?
+	rc->walls[EAST_WALL].width = 128; // Parsing or constant?
+	
 
 	// To be init:
 	// int **map
-	// ceiling_color;
-	// floor_color;
 	// walls[4];
-	// current_wall;
-	// texture.x
-	// texture.y
+	// texture_height; // Inside s_wall
+	// texture_width; // Inside s_wall
+}
+
+void	init_texture(t_cube *cube, int type)
+{
+	t_wall	*wall;
+
+	wall = &cube->rc.walls[type];
+	wall->img->img = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.wall_path[type], &wall->width, &wall->height);
+	if (wall->img == NULL)
+		exit (1); //error_exit function here!
+	wall->img->address = mlx_get_data_addr(wall->img->img, &(wall->img->bits_per_pixel),
+				&(wall->img->line_length), &(wall->img->endian));
 }

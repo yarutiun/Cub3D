@@ -38,10 +38,7 @@ void	free_param(t_param *param)
 	free_str(param->input_str);
 	free_double_str_ptr(param->splitted_input);
 	free_double_str_ptr(param->map);
-	free_str(param->no);
-	free_str(param->so);
-	free_str(param->we);
-	free_str(param->ea);
+	free_double_str_ptr(param->wall_path);
 	free_str(param->f);
 	free_str(param->c);
 	free_int_arr(param->f_rgb);

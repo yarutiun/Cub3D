@@ -240,12 +240,12 @@ void	init_starting_values(t_cube *cube)
 	t_rc	*rc;
 
 	rc = &cube->rc;
-	rc->position.x = 3;
-	rc->position.y = 3;
-	rc->direction.x = 1;
-	rc->direction.y = 0;
-	rc->camera_plane.x = 0;
-	rc->camera_plane.y = 0.66;
+	rc->position.x = 3; //Position of player char
+	rc->position.y = 3; //Position of player char
+	rc->direction.x = 1; //NSWE
+	rc->direction.y = 0; //NSWE
+	rc->camera_plane.x = 0; //Calc after direction
+	rc->camera_plane.y = 0.66;  //Calc after direction
 
 	// To be init:
 	// ceiling_color;

@@ -26,16 +26,16 @@ void    check_texture_files(t_param *param)
     int fd;
 
     fd = 0;
-    fd = open(param->no, O_RDONLY);
+    fd = open(param->wall_path[NORTH_WALL], O_RDONLY);
     if(fd == -1)
         file_error(param->cube);
-    fd = open(param->so, O_RDONLY);
+    fd = open(param->wall_path[SOUTH_WALL], O_RDONLY);
     if(fd == -1)
         file_error(param->cube);
-        fd = open(param->we, O_RDONLY);
+        fd = open(param->wall_path[WEST_WALL], O_RDONLY);
     if(fd == -1)
         file_error(param->cube);
-        fd = open(param->ea, O_RDONLY);
+        fd = open(param->wall_path[EAST_WALL], O_RDONLY);
     if(fd == -1)
         file_error(param->cube);
 

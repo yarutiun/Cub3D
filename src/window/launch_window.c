@@ -7,7 +7,7 @@ void	load_images(t_cube *cube)
 
 	i = 100;
 	j = 100;
-	cube->img.wall_ptr = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.no, &i, &j);
+	cube->img.wall_ptr = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.wall_path[NORTH_WALL], &i, &j);
 }
 
 void render_map(t_cube *cube)

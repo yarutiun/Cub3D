@@ -7,7 +7,7 @@
 
 
 Subject notes (Parser):
-[ ] Except for the map, each type of information from an element can be 
+[x] Except for the map, each type of information from an element can be 
 	separated by one or more space(s).
 [ ] Take care to not segfault in corners like this:
 111111

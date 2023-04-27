@@ -34,6 +34,22 @@ char **split_input(char *input_str)
     return(output);
 }
 
+char    *remove_non_print(char *string)
+{
+    int i;
+
+    i = 3;
+    while (string[i])
+    {
+        if (ft_isalnum(string[i]))
+        {
+            return(ft_strdup(&string[i]));
+        }
+        i++;
+    }
+    return (NULL);
+}
+
 void    init_elements(char **splitted, t_param *param)
 {
     int i;
@@ -44,17 +60,17 @@ void    init_elements(char **splitted, t_param *param)
     while (i < 6)
     {
         if (ft_strncmp(splitted[i], "NO ", 3) == 0)
-            param->no = ft_strdup(&splitted[i][3]);
+            param->no = remove_non_print(splitted[i]);
         else if (ft_strncmp(splitted[i], "SO ", 3) == 0)
-            param->so = ft_strdup(&splitted[i][3]);
+            param->so = remove_non_print(splitted[i]);
         else if (ft_strncmp(splitted[i], "WE ", 3) == 0)
-            param->we = ft_strdup(&splitted[i][3]);
+            param->we = remove_non_print(splitted[i]);
         else if (ft_strncmp(splitted[i], "EA ", 3) == 0)
-            param->ea = ft_strdup(&splitted[i][3]);
+            param->ea = remove_non_print(splitted[i]);
         else if (ft_strncmp(splitted[i], "F ", 2) == 0)
-            param->f = ft_strdup(&splitted[i][2]);
+            param->f = remove_non_print(splitted[i]);
         else if (ft_strncmp(splitted[i], "C ", 2) == 0)
-            param->c = ft_strdup(&splitted[i][2]);
+            param->c = remove_non_print(splitted[i]);
         else
             init_elements_error(cube);
         i++;

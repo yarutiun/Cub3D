@@ -7,7 +7,10 @@ void	init_param(t_cube *cube)
 	param = &cube->param;
 	param->input_str = NULL;
 	param->splitted_input = NULL;
-	// param->wall_path = NULL;
+	param->wall_path[0] = NULL;
+	param->wall_path[1] = NULL;
+	param->wall_path[2] = NULL;
+	param->wall_path[3] = NULL;
 	param->f = NULL;
 	param->c = NULL;
 	param->f_rgb = malloc(sizeof(int) * 3);

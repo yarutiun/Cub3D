@@ -13,6 +13,7 @@ Subject notes (Parser):
 111111
 10000N1
 1000001
+	Santiago: I suggest replacing valid spaces with 1s
 
 Bonuses?
 [ ] Mouse

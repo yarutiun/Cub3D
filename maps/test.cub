@@ -1,7 +1,7 @@
 NO ./textures/bricks.xpm
-SO ./textures/circles.xpm
-WE ./textures/hypno.xpm
-EA ./textures/wood.xpm
+SO ./textures/wood.xpm
+WE ./textures/circles.xpm
+EA ./textures/hypno.xpm
 
 C 220,30,0
 F 120,69,0

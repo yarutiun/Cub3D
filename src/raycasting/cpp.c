@@ -3,8 +3,6 @@
 unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
 {
 	char	*dst;
-	// if (!img->address)
-	// 	ft_putstr_fd("LOL\n", 1);
 	dst = img->address + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
 }
@@ -17,7 +15,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-//Color version
+// // Color version
 // void	draw_vertical_line(t_rc *rc, int x)
 // {
 // 	int	y;
@@ -54,27 +52,31 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 // 			// my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(ray->walls[ray->current_wall].img, texture_x, texture_y));
 // 		y++;
 // 	}
+// 	// Blue: 0x000066FF
+// 	// Black: 0x00000000
+// 	// Green: 0x0000CC66
 // }
-
-// Blue: 0x000066FF
-// Black: 0x00000000
-// Green: 0x0000CC66
 
 void	determine_wall_type(t_rc *rc)
 {
-	if (rc->side == 1)
+	double	x;
+	double	y;
+
+	x = rc->direction.x;
+	y = rc->direction.y;
+	if (rc->side == 0)
 	{
-		if (rc->direction.y >= 0)
-			rc->wall_type = EAST_WALL;
-		else
-			rc->wall_type = WEST_WALL;
-	}
-	else
-	{
-		if (rc->direction.x >= 0)
+		if (rc->direction.x <= 0)
 			rc->wall_type = NORTH_WALL;
 		else
 			rc->wall_type = SOUTH_WALL;
+	}
+	else
+	{
+		if (rc->direction.y >= 0)
+			rc->wall_type = WEST_WALL;
+		else
+			rc->wall_type = EAST_WALL;
 	}
 }
 
@@ -83,20 +85,21 @@ void	determine_wall_coordinates(t_rc *rc)
 	double	wall_hit;
 
 	if (rc->side == 0)
-		wall_hit = rc->position.y + rc->perp_wall_dist * rc->direction.y;
+		wall_hit = rc->position.y + rc->perp_wall_dist * rc->ray_dir.y;
 	else
-		wall_hit = rc->position.x + rc->perp_wall_dist * rc->direction.x;
+		wall_hit = rc->position.x + rc->perp_wall_dist * rc->ray_dir.x;
 	wall_hit -= floor(wall_hit);
-	rc->texture.x = (int)(wall_hit * (double)(rc->walls->width));
-	if (rc->side == 0 && rc->direction.x > 0)
-		rc->texture.x = rc->walls->width - rc->texture.x - 1;
-	if (rc->side == 1 && rc->direction.y > 0)
-		rc->texture.x = rc->walls->width - rc->texture.x - 1;
+
+	rc->texture.x = (int)(wall_hit * (double)(rc->walls[rc->wall_type].width));
+	if (rc->side == 0 && rc->ray_dir.x > 0)
+		rc->texture.x = rc->walls[rc->wall_type].width - rc->texture.x - 1;
+	if (rc->side == 1 && rc->ray_dir.y < 0)
+		rc->texture.x = rc->walls[rc->wall_type].width - rc->texture.x - 1;
+
 	rc->texture_step = 1.0 * rc->walls->height / rc->line_height;
 	rc->texture_position = (rc->draw_start - rc->pitch - HEIGHT / 2 + rc->line_height / 2) * rc->texture_step;
 }
 
-// Texture version (Consider using pitch = 100 at drawStart and drawEnd)
 void	draw_vertical_line(t_rc *rc, int x)
 {
 	int				y;
@@ -104,14 +107,6 @@ void	draw_vertical_line(t_rc *rc, int x)
 
 	determine_wall_type(rc);
 	determine_wall_coordinates(rc);
-	if (rc->draw_end < rc->draw_start)
-	{
-		rc->draw_start += rc->draw_end;
-		rc->draw_end = rc->draw_start - rc->draw_end;
-		rc->draw_start -= rc->draw_end;
-	}
-	if (rc->draw_end < 0 || rc->draw_start >= HEIGHT || x < 0 || x >= WIDTH)
-		return ;
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -123,14 +118,7 @@ void	draw_vertical_line(t_rc *rc, int x)
 		{
 			rc->texture.y = (int)rc->texture_position & (rc->walls[rc->wall_type].height - 1);
 			rc->texture_position += rc->texture_step;
-		
-			// rc->texture.y = y - rc->draw_start;
-			// double y_perc = (double)(rc->texture.y / (rc->draw_end - rc->draw_start));
-			// rc->texture.y = rc->walls[rc->wall_type].height * y_perc;
-		
 			wall_color = my_mlx_pixel_get(rc->walls[rc->wall_type].img, rc->texture.x, rc->texture.y);
-			if (rc->side == 1)
-				wall_color = wall_color / 2;
 			my_mlx_pixel_put(&rc->cube->img, x, y, wall_color);
 		}
 		y++;
@@ -160,7 +148,7 @@ void	perform_dda(t_rc *rc)
 	int worldMap[7][7]=
 	{
 	{1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,1},
+	{1,0,1,0,1,0,1},
 	{1,0,0,0,0,0,1},
 	{1,0,0,0,0,0,1},
 	{1,0,0,0,0,0,1},
@@ -183,23 +171,17 @@ void	perform_dda(t_rc *rc)
 			rc->map.y += rc->step.y;
 			rc->side = 1;
 		}
-		// if (rc->cube->param.map[rc->map.x][rc->map.y])
-		// {
-		// 	if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
-		// 		hit = 1;	
-		// }
-		if (worldMap[rc->map.x][rc->map.y])
-		{
-			if (worldMap[rc->map.x][rc->map.y] > 0)
-				hit = 1;	
-		}
+		// if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
+		// 	hit = 1;
+		if (worldMap[rc->map.x][rc->map.y] > 0)
+				hit = 1;
 	}
 }
 
 void	calculate_side_distance(t_rc *rc)
 {
-	rc->map.x = (int)rc->position.x; // Use floor(rc->position.x) ?
-	rc->map.y = (int)rc->position.y; // Use floor(rc->position.y) ?
+	rc->map.x = (int)rc->position.x;
+	rc->map.y = (int)rc->position.y;
 	if (rc->ray_dir.x < 0)
 	{
 		rc->step.x = -1;
@@ -254,7 +236,10 @@ void	raycasting(t_cube *cube)
 		draw_vertical_line(rc, x);
 		x++;
 	}
-	ft_putstr_fd("Test\n", 1);
+	printf("DirX = %f\n", rc->direction.x);
+	printf("DirY = %f\n", rc->direction.y);
+	printf("cPlaneX = %f\n", rc->camera_plane.x);
+	printf("cPlaneY = %f\n", rc->camera_plane.y);
 }
 
 
@@ -311,4 +296,28 @@ void	init_starting_values(t_cube *cube)
 	// walls[4];
 	// texture_height; // Inside s_wall
 	// texture_width; // Inside s_wall
+
+	// SOUTH
+	// DirX = 1
+	// DirY = 0
+	// cPlaneX = 0
+	// cPlaneY = 0.66 
+
+	// WEST
+	// DirX = 0
+	// DirY = 1
+	// cPlaneX = -0.66
+	// cPlaneY = 0
+
+	// NORTH
+	// DirX = -1
+	// DirY = 0
+	// cPlaneX = 0
+	// cPlaneY = -0.66
+
+	// EAST
+	// DirX = 0
+	// DirY = -1
+	// cPlaneX = 0.66
+	// cPlaneY = 0
 }

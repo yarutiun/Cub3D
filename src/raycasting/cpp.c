@@ -15,48 +15,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// // Color version
-// void	draw_vertical_line(t_rc *rc, int x)
-// {
-// 	int	y;
-// 	int	floor_color;
-// 	int	ceiling_color;
-// 	int	wall_color;
-
-// 	floor_color = 0x0000CC66; // init_starting_values
-// 	ceiling_color = 0x00000000; // init_starting_values
-// 	// determine_wall_type(rc);
-// 	// determine_wall_coordinates(rc);
-// 	wall_color = 0x000066FF;
-// 	// wall_color = my_mlx_pixel_get;
-// 	if (rc->side == 1)
-// 		wall_color = wall_color / 2;
-
-// 	if (rc->draw_end < rc->draw_start)
-// 	{
-// 		rc->draw_start += rc->draw_end;
-// 		rc->draw_end = rc->draw_start - rc->draw_end;
-// 		rc->draw_start -= rc->draw_end;
-// 	}
-// 	if (rc->draw_end < 0 || rc->draw_start >= HEIGHT || x < 0 || x >= WIDTH)
-// 		return ;
-// 	y = 0;
-// 	while (y < HEIGHT)
-// 	{
-// 		if (y < rc->draw_start)
-// 			my_mlx_pixel_put(&rc->cube->img, x, y, ceiling_color);
-// 		else if (y > rc->draw_end)
-// 			my_mlx_pixel_put(&rc->cube->img, x, y, floor_color);
-// 		else
-// 			my_mlx_pixel_put(&rc->cube->img, x, y, wall_color);
-// 			// my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(ray->walls[ray->current_wall].img, texture_x, texture_y));
-// 		y++;
-// 	}
-// 	// Blue: 0x000066FF
-// 	// Black: 0x00000000
-// 	// Green: 0x0000CC66
-// }
-
 void	determine_wall_type(t_rc *rc)
 {
 	double	x;
@@ -237,7 +195,6 @@ void	raycasting(t_cube *cube)
 		x++;
 	}
 }
-
 
 void	init_texture(t_cube *cube, int type)
 {

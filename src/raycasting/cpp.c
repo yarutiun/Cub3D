@@ -236,10 +236,6 @@ void	raycasting(t_cube *cube)
 		draw_vertical_line(rc, x);
 		x++;
 	}
-	printf("DirX = %f\n", rc->direction.x);
-	printf("DirY = %f\n", rc->direction.y);
-	printf("cPlaneX = %f\n", rc->camera_plane.x);
-	printf("cPlaneY = %f\n", rc->camera_plane.y);
 }
 
 

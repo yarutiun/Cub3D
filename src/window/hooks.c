@@ -40,7 +40,7 @@ int	key_hooks(int keycode, t_rc *rc)
 		x_close();
 	else if (keycode == W_KEY)
 	{
-		ft_putstr_fd("W\n",1);
+		// ft_putstr_fd("W\n",1);
 		if (worldMap[(int)(rc->position.x + rc->direction.x * move_speed)][(int)rc->position.y] == false)
 			rc->position.x += rc->direction.x * move_speed;
 		if (worldMap[(int)rc->position.x][(int)(rc->position.y + rc->position.y * move_speed)] == false)
@@ -48,7 +48,7 @@ int	key_hooks(int keycode, t_rc *rc)
 	}
 	else if (keycode == S_KEY)
 	{
-		ft_putstr_fd("S\n",1);
+		// ft_putstr_fd("S\n",1);
 		if (worldMap[(int)(rc->position.x - rc->direction.x * move_speed)][(int)rc->position.y] == false)
 			rc->position.x -= rc->direction.x * move_speed;
 		if (worldMap[(int)rc->position.x][(int)(rc->position.y - rc->position.y * move_speed)] == false)
@@ -56,7 +56,7 @@ int	key_hooks(int keycode, t_rc *rc)
 	}
 	if (keycode == A_KEY)
 	{
-		ft_putstr_fd("A\n",1);
+		// ft_putstr_fd("A\n",1);
 		rotation = rotate_direction(rc->direction, 90);
 		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == false)
 		{
@@ -66,7 +66,7 @@ int	key_hooks(int keycode, t_rc *rc)
 	}
 	if (keycode == D_KEY)
 	{
-		ft_putstr_fd("D\n",1);
+		// ft_putstr_fd("D\n",1);
 		rotation = rotate_direction(rc->direction, -90);
 		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == false)
 		{
@@ -76,7 +76,7 @@ int	key_hooks(int keycode, t_rc *rc)
 	}
 	if (keycode == LEFT_KEY)
 	{
-		ft_putstr_fd("LEFT\n",1);
+		// ft_putstr_fd("LEFT\n",1);
 		old_direction_x = rc->direction.x;
 		rc->direction.x = rc->direction.x * cos(-rotation_speed) - rc->direction.y * sin(-rotation_speed);
 		rc->direction.y = old_direction_x * sin(-rotation_speed) + rc->direction.y * cos(-rotation_speed);
@@ -86,7 +86,7 @@ int	key_hooks(int keycode, t_rc *rc)
 	}
 	if (keycode == RIGHT_KEY)
 	{
-		ft_putstr_fd("RIGHT\n",1);
+		// ft_putstr_fd("RIGHT\n",1);
 		old_direction_x = rc->direction.x;
 		rc->direction.x = rc->direction.x * cos(rotation_speed) - rc->direction.y * sin(rotation_speed);
 		rc->direction.y = old_direction_x * sin(rotation_speed) + rc->direction.y * cos(rotation_speed);

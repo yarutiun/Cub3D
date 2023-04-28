@@ -182,6 +182,7 @@ void	init_starting_values(t_cube *cube);
 
 // Window //
 void	launch_window(t_cube *cube);
+void	load_textures(t_cube *cube);
 void	render_window(t_cube *cube);
 
 // Hooks //

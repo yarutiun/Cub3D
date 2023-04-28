@@ -64,14 +64,14 @@ void	determine_wall_type(t_rc *rc)
 {
 	if (rc->side == 1)
 	{
-		if (rc->direction.x >= 0)
+		if (rc->direction.y >= 0)
 			rc->wall_type = EAST_WALL;
 		else
 			rc->wall_type = WEST_WALL;
 	}
 	else
 	{
-		if (rc->direction.y >= 0)
+		if (rc->direction.x >= 0)
 			rc->wall_type = NORTH_WALL;
 		else
 			rc->wall_type = SOUTH_WALL;
@@ -157,32 +157,15 @@ void	perform_dda(t_rc *rc)
 	int	hit;
 
 	//Delete
-	int worldMap[24][24]=
+	int worldMap[7][7]=
 	{
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	{1,1,1,1,1,1,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1}
 	};
 
 	hit = 0;
@@ -274,6 +257,7 @@ void	raycasting(t_cube *cube)
 	ft_putstr_fd("Test\n", 1);
 }
 
+
 void	init_texture(t_cube *cube, int type)
 {
 	t_wall	*wall;
@@ -283,14 +267,28 @@ void	init_texture(t_cube *cube, int type)
 	wall->img->img = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.wall_path[type], &wall->width, &wall->height);
 	if (!wall->img)
 		exit (1); //error_exit function here!
-	// wall->img->address = (char *)malloc(sizeof(char) * 10000); //FREE!!!
-	
-	printf("HIELLO %s\n\n", cube->param.wall_path[type]);
-	
-	if (!wall->img->img)
-		exit (1);
 	wall->img->address = mlx_get_data_addr(wall->img->img, &wall->img->bits_per_pixel,
 				&wall->img->line_length, &wall->img->endian);
+}
+
+void	load_textures(t_cube *cube)
+{
+	t_rc	*rc;
+
+	rc = &cube->rc;
+	rc->walls[NORTH_WALL].height = 128; // Parsing or constant?
+	rc->walls[NORTH_WALL].width = 128; // Parsing or constant?
+	rc->walls[SOUTH_WALL].height = 128; // Parsing or constant?
+	rc->walls[SOUTH_WALL].width = 128; // Parsing or constant?
+	rc->walls[WEST_WALL].height = 128; // Parsing or constant?
+	rc->walls[WEST_WALL].width = 128; // Parsing or constant?
+	rc->walls[EAST_WALL].height = 128; // Parsing or constant?
+	rc->walls[EAST_WALL].width = 128; // Parsing or constant?
+	
+	init_texture(cube, NORTH_WALL);
+	init_texture(cube, SOUTH_WALL);
+	init_texture(cube, WEST_WALL);
+	init_texture(cube, EAST_WALL);
 }
 
 void	init_starting_values(t_cube *cube)
@@ -307,19 +305,7 @@ void	init_starting_values(t_cube *cube)
 	rc->pitch = 100; // Constant
 	rc->floor_color = 0x0000CC66; // init_starting_values
 	rc->ceiling_color = 0x00000000; // init_starting_values
-	rc->walls[NORTH_WALL].height = 128; // Parsing or constant?
-	rc->walls[NORTH_WALL].width = 128; // Parsing or constant?
-	rc->walls[SOUTH_WALL].height = 128; // Parsing or constant?
-	rc->walls[SOUTH_WALL].width = 128; // Parsing or constant?
-	rc->walls[WEST_WALL].height = 128; // Parsing or constant?
-	rc->walls[WEST_WALL].width = 128; // Parsing or constant?
-	rc->walls[EAST_WALL].height = 128; // Parsing or constant?
-	rc->walls[EAST_WALL].width = 128; // Parsing or constant?
-	
-	init_texture(cube, NORTH_WALL);
-	init_texture(cube, SOUTH_WALL);
-	init_texture(cube, WEST_WALL);
-	init_texture(cube, EAST_WALL);
+
 	// To be init:
 	// int **map
 	// walls[4];

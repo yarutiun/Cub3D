@@ -1,7 +1,7 @@
-NO      ./textures/bricks.xpm
+NO  ./textures/bricks.xpm
 SO  ./textures/circles.xpm
-WE                    ./textures/hypno.xpm
-EA ./textures/wood.xpm
+WE  ./textures/circles.xpm
+EA  ./textures/circles.xpm
 
 C 220,30,0
 F 120,69,0
@@ -10,7 +10,7 @@ F 120,69,0
 1111111
 1000001
 1000001
-1100001
+1000001
 1000S01
 1000001
 1000001

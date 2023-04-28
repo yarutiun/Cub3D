@@ -59,6 +59,7 @@ void	launch_window(t_cube *cube)
 	// load_images(cube);
 	// render_map(cube);
 	
+	load_textures(cube);
 	render_window(cube);
 	mlx_hook(mlx->window, CLOSE_WINDOW, 0, x_close, 0);
 	mlx_hook(mlx->window, 2, 0, key_hooks, &cube->rc);

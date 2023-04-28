@@ -1,7 +1,10 @@
 [ ] Finish parser
+	[ ] Detect errors
+	[ ] Feed all needed values to init_starting_values
 
-[ ] Initialize wall textures
+[x] Initialize wall textures
 [ ] Initialize floor and ceiling colors
+[ ] Properly render walls
 
 [x] Bind keys for movement
 

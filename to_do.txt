@@ -3,12 +3,10 @@
 	[ ] Feed all needed values to init_starting_values
 
 [x] Initialize wall textures
-[ ] Initialize floor and ceiling colors
-[ ] Properly render walls
-	[ ] Direction is not finished yet
+[x] Properly render walls
 
 [x] Bind keys for movement
-[ ] Collison detection
+[ ] Improve collison detection
 
 Subject notes (Parser):
 [x] Except for the map, each type of information from an element can be 

@@ -108,7 +108,7 @@ typedef struct s_ray
 	double				radiant_diff;
 	int					ceiling_color;
 	int					floor_color;
-	// t_wall_stats		walls[4]; // Need to initiliaze and load
+	// t_wall			walls[4]; // Need to initiliaze and load
 	int					current_wall;
 	t_xy				direction;
 	t_xy				tmp_direction;

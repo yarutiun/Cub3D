@@ -3,7 +3,8 @@
 unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
 {
 	char	*dst;
-
+	// if (!img->address)
+	// 	ft_putstr_fd("LOL\n", 1);
 	dst = img->address + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
 }
@@ -122,6 +123,11 @@ void	draw_vertical_line(t_rc *rc, int x)
 		{
 			rc->texture.y = (int)rc->texture_position & (rc->walls[rc->wall_type].height - 1);
 			rc->texture_position += rc->texture_step;
+		
+			// rc->texture.y = y - rc->draw_start;
+			// double y_perc = (double)(rc->texture.y / (rc->draw_end - rc->draw_start));
+			// rc->texture.y = rc->walls[rc->wall_type].height * y_perc;
+		
 			wall_color = my_mlx_pixel_get(rc->walls[rc->wall_type].img, rc->texture.x, rc->texture.y);
 			if (rc->side == 1)
 				wall_color = wall_color / 2;
@@ -268,6 +274,25 @@ void	raycasting(t_cube *cube)
 	ft_putstr_fd("Test\n", 1);
 }
 
+void	init_texture(t_cube *cube, int type)
+{
+	t_wall	*wall;
+
+	wall = &cube->rc.walls[type];
+	wall->img = malloc(sizeof(t_img)); //FREE!
+	wall->img->img = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.wall_path[type], &wall->width, &wall->height);
+	if (!wall->img)
+		exit (1); //error_exit function here!
+	// wall->img->address = (char *)malloc(sizeof(char) * 10000); //FREE!!!
+	
+	printf("HIELLO %s\n\n", cube->param.wall_path[type]);
+	
+	if (!wall->img->img)
+		exit (1);
+	wall->img->address = mlx_get_data_addr(wall->img->img, &wall->img->bits_per_pixel,
+				&wall->img->line_length, &wall->img->endian);
+}
+
 void	init_starting_values(t_cube *cube)
 {
 	t_rc	*rc;
@@ -291,22 +316,13 @@ void	init_starting_values(t_cube *cube)
 	rc->walls[EAST_WALL].height = 128; // Parsing or constant?
 	rc->walls[EAST_WALL].width = 128; // Parsing or constant?
 	
-
+	init_texture(cube, NORTH_WALL);
+	init_texture(cube, SOUTH_WALL);
+	init_texture(cube, WEST_WALL);
+	init_texture(cube, EAST_WALL);
 	// To be init:
 	// int **map
 	// walls[4];
 	// texture_height; // Inside s_wall
 	// texture_width; // Inside s_wall
-}
-
-void	init_texture(t_cube *cube, int type)
-{
-	t_wall	*wall;
-
-	wall = &cube->rc.walls[type];
-	wall->img->img = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.wall_path[type], &wall->width, &wall->height);
-	if (wall->img == NULL)
-		exit (1); //error_exit function here!
-	wall->img->address = mlx_get_data_addr(wall->img->img, &(wall->img->bits_per_pixel),
-				&(wall->img->line_length), &(wall->img->endian));
 }

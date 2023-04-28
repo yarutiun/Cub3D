@@ -5,9 +5,10 @@
 [x] Initialize wall textures
 [ ] Initialize floor and ceiling colors
 [ ] Properly render walls
+	[ ] Direction is not finished yet
 
 [x] Bind keys for movement
-
+[ ] Collison detection
 
 Subject notes (Parser):
 [x] Except for the map, each type of information from an element can be 

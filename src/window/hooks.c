@@ -29,47 +29,59 @@ int	key_hooks(int keycode, t_rc *rc)
 	map = rc->cube->param.map;
 	rotation_speed = 0.15;
 	move_speed = rotation_speed * (5 / 3);
-	factor = move_speed * 1.25;
+	factor = move_speed * 1;
 	if (keycode == ESCAPE_KEY)
 		x_close();
 	else if (keycode == W_KEY)
 	{
-		if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] == '0')
+		if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)(rc->position.y + rc->position.y * factor)])
 		{
-			if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] == '0')
+			if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] == '0')
 			{
-				rc->position.x += rc->direction.x * move_speed;
-				rc->position.y += rc->direction.y * move_speed;
+				if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] == '0')
+				{
+					rc->position.x += rc->direction.x * move_speed;
+					rc->position.y += rc->direction.y * move_speed;
+				}
 			}
 		}
 	}
 	else if (keycode == S_KEY)
 	{
-		if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)rc->position.y] == '0')
+		if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)(rc->position.y - rc->position.y * factor)])
 		{
-			if (map[(int)rc->position.x][(int)(rc->position.y - rc->position.y * factor)] == '0')
+			if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)rc->position.y] == '0')
 			{
-				rc->position.x -= rc->direction.x * move_speed;
-				rc->position.y -= rc->direction.y * move_speed;
+				if (map[(int)rc->position.x][(int)(rc->position.y - rc->position.y * factor)] == '0')
+				{
+					rc->position.x -= rc->direction.x * move_speed;
+					rc->position.y -= rc->direction.y * move_speed;
+				}
 			}
 		}
 	}
 	if (keycode == A_KEY)
 	{
 		rotation = rotate_direction(rc->direction, 90);
-		if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] == '0')
+		if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)])
 		{
-			rc->position.x -= rotation.x * move_speed;
-			rc->position.y -= rotation.y * move_speed;
+			if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] == '0')
+			{
+				rc->position.x -= rotation.x * move_speed;
+				rc->position.y -= rotation.y * move_speed;
+			}
 		}
 	}
 	if (keycode == D_KEY)
 	{
 		rotation = rotate_direction(rc->direction, -90);
-		if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] == '0')
+		if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)])
 		{
-			rc->position.x -= rotation.x * move_speed;
-			rc->position.y -= rotation.y * move_speed;
+			if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] == '0')
+			{
+				rc->position.x -= rotation.x * move_speed;
+				rc->position.y -= rotation.y * move_speed;
+			}
 		}
 	}
 	if (keycode == LEFT_KEY)

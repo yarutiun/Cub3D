@@ -75,6 +75,7 @@ void init_rc(t_cube *cube)
 	rc->texture_position = 0;
 	rc->floor_color = 0;
 	rc->ceiling_color = 0;
+	rc->player_char = '\0';
 }
 
 void	init_structs(t_cube *cube)

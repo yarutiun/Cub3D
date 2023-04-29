@@ -36,9 +36,9 @@ int	key_hooks(int keycode, t_rc *rc)
 	{
 		if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)(rc->position.y + rc->position.y * factor)])
 		{
-			if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] == '0')
+			if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] != '1')
 			{
-				if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] == '0')
+				if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] != '1')
 				{
 					rc->position.x += rc->direction.x * move_speed;
 					rc->position.y += rc->direction.y * move_speed;
@@ -50,9 +50,9 @@ int	key_hooks(int keycode, t_rc *rc)
 	{
 		if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)(rc->position.y - rc->position.y * factor)])
 		{
-			if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)rc->position.y] == '0')
+			if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)rc->position.y] != '1')
 			{
-				if (map[(int)rc->position.x][(int)(rc->position.y - rc->position.y * factor)] == '0')
+				if (map[(int)rc->position.x][(int)(rc->position.y - rc->position.y * factor)] != '1')
 				{
 					rc->position.x -= rc->direction.x * move_speed;
 					rc->position.y -= rc->direction.y * move_speed;
@@ -65,7 +65,7 @@ int	key_hooks(int keycode, t_rc *rc)
 		rotation = rotate_direction(rc->direction, 90);
 		if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)])
 		{
-			if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] == '0')
+			if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] != '1')
 			{
 				rc->position.x -= rotation.x * move_speed;
 				rc->position.y -= rotation.y * move_speed;
@@ -77,7 +77,7 @@ int	key_hooks(int keycode, t_rc *rc)
 		rotation = rotate_direction(rc->direction, -90);
 		if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)])
 		{
-			if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] == '0')
+			if (map[(int)(rc->position.x - rotation.x * factor)][(int)(rc->position.y - rotation.y * factor)] != '1')
 			{
 				rc->position.x -= rotation.x * move_speed;
 				rc->position.y -= rotation.y * move_speed;

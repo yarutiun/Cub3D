@@ -114,7 +114,7 @@ void	perform_dda(t_rc *rc)
 		}
 		if (rc->cube->param.map[rc->map.x][rc->map.y])
 		{
-			if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
+			if (rc->cube->param.map[rc->map.x][rc->map.y] == '1')
 				hit = 1;
 		}
 	}
@@ -221,39 +221,36 @@ void	init_starting_values(t_cube *cube)
 	t_rc	*rc;
 
 	rc = &cube->rc;
-	//check_player
-	rc->position.x = 3; //Position of player char
-	rc->position.y = 3; //Position of player char
-	rc->direction.x = 1; //NSWE
-	rc->direction.y = 0; //NSWE
-	rc->camera_plane.x = 0; //Calc after direction
-	rc->camera_plane.y = 0.66;  //Calc after direction
-
 	//Use f_rgb and c_rgb
 	rc->floor_color = 0x0000CC66; // init_starting_values
 	rc->ceiling_color = 0x00000000; // init_starting_values
 
-	// SOUTH
-	// DirX = 1
-	// DirY = 0
-	// cPlaneX = 0
-	// cPlaneY = 0.66 
-
-	// WEST
-	// DirX = 0
-	// DirY = 1
-	// cPlaneX = -0.66
-	// cPlaneY = 0
-
-	// NORTH
-	// DirX = -1
-	// DirY = 0
-	// cPlaneX = 0
-	// cPlaneY = -0.66
-
-	// EAST
-	// DirX = 0
-	// DirY = -1
-	// cPlaneX = 0.66
-	// cPlaneY = 0
+	if (rc->player_char == 'N')
+	{
+		rc->direction.x = 1;
+		rc->direction.y = 0;
+		rc->camera_plane.x = 0;
+		rc->camera_plane.y = CAMERA_PLANE;
+	}
+	if (rc->player_char == 'S')
+	{
+		rc->direction.x = -1;
+		rc->direction.y = 0;
+		rc->camera_plane.x = 0;
+		rc->camera_plane.y = -CAMERA_PLANE;
+	}
+	if (rc->player_char == 'W')
+	{
+		rc->direction.x = 0;
+		rc->direction.y = -1;
+		rc->camera_plane.x = CAMERA_PLANE;
+		rc->camera_plane.y = 0;
+	}
+	if (rc->player_char == 'E')
+	{
+		rc->direction.x = 0;
+		rc->direction.y = 1;
+		rc->camera_plane.x = -CAMERA_PLANE;
+		rc->camera_plane.y = 0;
+	}
 }

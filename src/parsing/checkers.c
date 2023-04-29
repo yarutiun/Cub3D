@@ -211,7 +211,12 @@ void    check_player(char **map, t_cube *cube)
         while(j < (int)ft_strlen(map[i]))
         {
             if(ft_strchr(symbols, map[i][j]))
+            {
+                cube->rc.position.x = i;
+                cube->rc.position.y = j;
+                cube->rc.player_char = map[i][j];
                 flag++;
+            }
             j++;
         }
         i++;

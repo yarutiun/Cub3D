@@ -24,6 +24,7 @@
 // Raycast //
 # define FOV 90
 # define RAY_COUNT WIDTH
+# define CAMERA_PLANE 0.66
 # define PITCH 100
 
 // Map //
@@ -127,6 +128,7 @@ typedef struct			s_rc
 	double				texture_position;
 	int					floor_color;
 	int					ceiling_color;
+	char				player_char;
 }						t_rc;
 
 typedef struct s_cube

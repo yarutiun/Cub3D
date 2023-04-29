@@ -1,6 +1,6 @@
 [ ] Finish parser
 	[ ] Detect errors
-	[ ] Feed all needed values to init_starting_values
+	[x] Feed all needed values to init_starting_values
 
 [x] Initialize wall textures
 [x] Properly render walls

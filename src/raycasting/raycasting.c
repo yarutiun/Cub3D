@@ -119,7 +119,7 @@ void	perform_dda(t_rc *rc)
 		}
 		if (rc->cube->param.map[rc->map.x][rc->map.y])
 		{
-			if (rc->cube->param.map[rc->map.x][rc->map.y] == '1')
+			if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
 				hit = 1;
 		}
 	}

@@ -2,6 +2,7 @@
 	[ ] Detect errors
 	[x] Feed all needed values to init_starting_values
 	[ ] Some valid rgb values are not accepted. Test
+	[ ] Check load_textures func
 
 [x] Initialize wall textures
 [x] Properly render walls

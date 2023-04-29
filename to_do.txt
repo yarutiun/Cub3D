@@ -17,6 +17,7 @@ Subject notes (Parser):
 10000N1
 1000001
 	Santiago: I suggest replacing valid spaces with 1s
+	Might need to add extra layer of sorrounding 1s
 
 Bonuses?
 [ ] Mouse

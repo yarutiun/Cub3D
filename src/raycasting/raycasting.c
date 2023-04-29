@@ -201,19 +201,18 @@ void	load_textures(t_cube *cube)
 	t_rc	*rc;
 
 	rc = &cube->rc;
-	rc->walls[NORTH_WALL].height = 128; // Parsing or constant?
-	rc->walls[NORTH_WALL].width = 128; // Parsing or constant?
-	rc->walls[SOUTH_WALL].height = 128; // Parsing or constant?
-	rc->walls[SOUTH_WALL].width = 128; // Parsing or constant?
-	rc->walls[WEST_WALL].height = 128; // Parsing or constant?
-	rc->walls[WEST_WALL].width = 128; // Parsing or constant?
-	rc->walls[EAST_WALL].height = 128; // Parsing or constant?
-	rc->walls[EAST_WALL].width = 128; // Parsing or constant?
-	
 	init_texture(cube, NORTH_WALL);
 	init_texture(cube, SOUTH_WALL);
 	init_texture(cube, WEST_WALL);
 	init_texture(cube, EAST_WALL);
+	rc->walls[NORTH_WALL].height = 128;
+	rc->walls[NORTH_WALL].width = 128;
+	rc->walls[SOUTH_WALL].height = 128;
+	rc->walls[SOUTH_WALL].width = 128;
+	rc->walls[WEST_WALL].height = 128;
+	rc->walls[WEST_WALL].width = 128;
+	rc->walls[EAST_WALL].height = 128;
+	rc->walls[EAST_WALL].width = 128;
 }
 
 int	rgb_to_hex(int *rgb)

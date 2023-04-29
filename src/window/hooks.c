@@ -18,44 +18,36 @@ int	x_close(void)
 
 int	key_hooks(int keycode, t_rc *rc)
 {
-	int worldMap[7][7]=
-	{
-	{1,1,1,1,1,1,1},
-	{1,0,1,0,1,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1}
-	};
-
+	char	**worldMap;
 	t_xy	rotation;
 	double	old_plane_x;
 	double	old_direction_x;
 	double	rotation_speed;
 	double	move_speed;
+
+	worldMap = rc->cube->param.map;
 	rotation_speed = 0.2;
 	move_speed = rotation_speed * (5 / 3);
 	if (keycode == ESCAPE_KEY)
 		x_close();
 	else if (keycode == W_KEY)
 	{
-		if (worldMap[(int)(rc->position.x + rc->direction.x * move_speed)][(int)rc->position.y] == false)
+		if (worldMap[(int)(rc->position.x + rc->direction.x * move_speed)][(int)rc->position.y] == '0')
 			rc->position.x += rc->direction.x * move_speed;
-		if (worldMap[(int)rc->position.x][(int)(rc->position.y + rc->position.y * move_speed)] == false)
+		if (worldMap[(int)rc->position.x][(int)(rc->position.y + rc->position.y * move_speed)] == '0')
 			rc->position.y += rc->direction.y * move_speed;
 	}
 	else if (keycode == S_KEY)
 	{
-		if (worldMap[(int)(rc->position.x - rc->direction.x * move_speed)][(int)rc->position.y] == false)
+		if (worldMap[(int)(rc->position.x - rc->direction.x * move_speed)][(int)rc->position.y] == '0')
 			rc->position.x -= rc->direction.x * move_speed;
-		if (worldMap[(int)rc->position.x][(int)(rc->position.y - rc->position.y * move_speed)] == false)
+		if (worldMap[(int)rc->position.x][(int)(rc->position.y - rc->position.y * move_speed)] == '0')
 			rc->position.y -= rc->direction.y * move_speed;
 	}
 	if (keycode == A_KEY)
 	{
 		rotation = rotate_direction(rc->direction, 90);
-		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == false)
+		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == '0')
 		{
 			rc->position.x -= rotation.x * move_speed;
 			rc->position.y -= rotation.y * move_speed;
@@ -64,7 +56,7 @@ int	key_hooks(int keycode, t_rc *rc)
 	if (keycode == D_KEY)
 	{
 		rotation = rotate_direction(rc->direction, -90);
-		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == false)
+		if (worldMap[(int)(rc->position.x - rotation.x * move_speed)][(int)(rc->position.y - rotation.y * move_speed)] == '0')
 		{
 			rc->position.x -= rotation.x * move_speed;
 			rc->position.y -= rotation.y * move_speed;

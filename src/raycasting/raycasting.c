@@ -102,18 +102,6 @@ void	perform_dda(t_rc *rc)
 {
 	int	hit;
 
-	//Delete
-	int worldMap[7][7]=
-	{
-	{1,1,1,1,1,1,1},
-	{1,0,1,0,1,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1}
-	};
-
 	hit = 0;
 	while (hit == 0)
 	{
@@ -129,10 +117,8 @@ void	perform_dda(t_rc *rc)
 			rc->map.y += rc->step.y;
 			rc->side = 1;
 		}
-		// if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
-		// 	hit = 1;
-		if (worldMap[rc->map.x][rc->map.y] > 0)
-				hit = 1;
+		if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
+			hit = 1;
 	}
 }
 
@@ -252,7 +238,7 @@ void	init_starting_values(t_cube *cube)
 	rc->ceiling_color = 0x00000000; // init_starting_values
 
 	//Load map
-	// int **map 
+	// char **map 
 
 	// SOUTH
 	// DirX = 1

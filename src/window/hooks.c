@@ -29,22 +29,30 @@ int	key_hooks(int keycode, t_rc *rc)
 	map = rc->cube->param.map;
 	rotation_speed = 0.2;
 	move_speed = rotation_speed * (5 / 3);
-	factor = move_speed * 1.0;
+	factor = move_speed * 1;
 	if (keycode == ESCAPE_KEY)
 		x_close();
 	else if (keycode == W_KEY)
 	{
 		if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] == '0')
-			rc->position.x += rc->direction.x * move_speed;
-		if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] == '0')
-			rc->position.y += rc->direction.y * move_speed;
+		{
+			if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] == '0')
+			{
+				rc->position.x += rc->direction.x * move_speed;
+				rc->position.y += rc->direction.y * move_speed;
+			}
+		}
 	}
 	else if (keycode == S_KEY)
 	{
 		if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)rc->position.y] == '0')
-			rc->position.x -= rc->direction.x * move_speed;
-		if (map[(int)rc->position.x][(int)(rc->position.y - rc->position.y * factor)] == '0')
-			rc->position.y -= rc->direction.y * move_speed;
+		{
+			if (map[(int)rc->position.x][(int)(rc->position.y - rc->position.y * factor)] == '0')
+			{
+				rc->position.x -= rc->direction.x * move_speed;
+				rc->position.y -= rc->direction.y * move_speed;
+			}
+		}
 	}
 	if (keycode == A_KEY)
 	{

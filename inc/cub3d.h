@@ -24,6 +24,7 @@
 // Raycast //
 # define FOV 90
 # define RAY_COUNT WIDTH
+# define PITCH 100
 
 // Map //
 # define TILE 100

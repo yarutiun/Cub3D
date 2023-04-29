@@ -17,11 +17,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	determine_wall_type(t_rc *rc)
 {
-	double	x;
-	double	y;
-
-	x = rc->direction.x;
-	y = rc->direction.y;
 	if (rc->side == 0)
 	{
 		if (rc->ray_dir.x <= 0)
@@ -55,7 +50,7 @@ void	determine_wall_coordinates(t_rc *rc)
 		rc->texture.x = rc->walls[rc->wall_type].width - rc->texture.x - 1;
 
 	rc->texture_step = 1.0 * rc->walls->height / rc->line_height;
-	rc->texture_position = (rc->draw_start - rc->pitch - HEIGHT / 2 + rc->line_height / 2) * rc->texture_step;
+	rc->texture_position = (rc->draw_start - PITCH - HEIGHT / 2 + rc->line_height / 2) * rc->texture_step;
 }
 
 void	draw_vertical_line(t_rc *rc, int x)
@@ -90,10 +85,10 @@ void	fix_fisheye(t_rc *rc)
 	else
 		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
 	rc->line_height = (int)(HEIGHT / rc->perp_wall_dist);
-	rc->draw_start = -rc->line_height / 2 + HEIGHT / 2 + rc->pitch;
+	rc->draw_start = -rc->line_height / 2 + HEIGHT / 2 + PITCH;
 	if (rc->draw_start < 0)
 		rc->draw_start = 0;
-	rc->draw_end = rc->line_height / 2 + HEIGHT / 2 + rc->pitch;
+	rc->draw_end = rc->line_height / 2 + HEIGHT / 2 + PITCH;
 	if (rc->draw_end >= HEIGHT)
 		rc->draw_end = HEIGHT - 1;
 }
@@ -234,14 +229,9 @@ void	init_starting_values(t_cube *cube)
 	rc->camera_plane.x = 0; //Calc after direction
 	rc->camera_plane.y = 0.66;  //Calc after direction
 
-	rc->pitch = 100; // Constant
-
 	//Use f_rgb and c_rgb
 	rc->floor_color = 0x0000CC66; // init_starting_values
 	rc->ceiling_color = 0x00000000; // init_starting_values
-
-	//Load map
-	// char **map 
 
 	// SOUTH
 	// DirX = 1

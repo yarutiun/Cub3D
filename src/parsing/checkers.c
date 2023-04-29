@@ -20,7 +20,6 @@ int check_extension(const char *file_name, t_cube *cube)
     return(1);
 }
 
-// Needs testing
 void    check_texture_files(t_param *param)
 {
     int fd;
@@ -38,7 +37,6 @@ void    check_texture_files(t_param *param)
         fd = open(param->wall_path[EAST_WALL], O_RDONLY);
     if(fd == -1)
         file_error(param->cube);
-
 }
 
 void    check_rgb(t_param *param)
@@ -95,7 +93,6 @@ void    check_map_double_n(char *input, t_cube *cube)
 
     count = 0;
     flag = 0;
-
     while(flag < 6)
     {
         if(ft_isalpha(input[count]))

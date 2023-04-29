@@ -33,6 +33,32 @@ void	free_double_str_ptr(char **arr)
 	}
 }
 
+void	free_void_ptr(void *var)
+{
+	if (var)
+		free(var);
+	var = NULL;
+}
+
+void	free_img(t_img *img)
+{
+	free_void_ptr(img->img);
+	free_str(img->address);
+	free_void_ptr(img->wall_ptr);
+}
+
+void	close_fds(void)
+{
+	int	i;
+
+	i = 3;
+	while (i < MAX_FD)
+	{
+		close(i);
+		i++;
+	}
+}
+
 void	free_param(t_param *param)
 {
 	free_str(param->input_str);
@@ -48,38 +74,6 @@ void	free_param(t_param *param)
 	free_int_arr(param->c_rgb);
 }
 
-void	close_fds(void)
-{
-	int	i;
-
-	i = 3;
-	while (i < MAX_FD)
-	{
-		close(i);
-		i++;
-	}
-}
-
-void	free_void_ptr(void *var)
-{
-	if (var)
-		free(var);
-	var = NULL;
-}
-
-void	free_img(t_img *img)
-{
-	free_void_ptr(img->img);
-	free_str(img->address);
-	free_void_ptr(img->wall_ptr);
-}
-
-void	free_ray(t_ray *ray)
-{
-	(void) ray;
-	// free_str(ray->placeholder);
-}
-
 void	free_all(t_cube *cube)
 {
 	free_param(&cube->param);
@@ -91,6 +85,5 @@ void	free_all(t_cube *cube)
 		cube->mlx.mlx_ptr = NULL;
 	}
 	free_img(&cube->img);
-	free_ray(&cube->ray);
 	close_fds();
 }

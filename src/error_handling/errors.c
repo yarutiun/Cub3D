@@ -57,3 +57,8 @@ void    player_error(t_cube *cube, char *msg)
 {
     error_exit(msg, cube);
 }
+
+void    texture_not_loaded_error(t_cube *cube)
+{
+    error_exit("Could not load texture file\n", cube);
+}

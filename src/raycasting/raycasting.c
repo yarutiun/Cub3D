@@ -1,268 +1,280 @@
-// #include "cub3d.h"
+#include "cub3d.h"
 
-// void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-// {
-// 	char	*dst;
+unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
+{
+	char	*dst;
+	dst = img->address + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
+}
 
-// 	dst = img->address + (y * img->line_length + x * (img->bits_per_pixel / 8));
-// 	*(unsigned int *)dst = color;
-// }
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
 
-// unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
-// {
-// 	char	*dst;
+	dst = img->address + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
-// 	dst = img->address + (y * img->line_length + x * (img->bits_per_pixel / 8));
-// 	return (*(unsigned int *)dst);
-// }
+void	determine_wall_type(t_rc *rc)
+{
+	double	x;
+	double	y;
 
-// int			map_width_for_y(t_ray *ray, int y)
-// {
-// 	int	map_y;
+	x = rc->direction.x;
+	y = rc->direction.y;
+	if (rc->side == 0)
+	{
+		if (rc->ray_dir.x <= 0)
+			rc->wall_type = NORTH_WALL;
+		else
+			rc->wall_type = SOUTH_WALL;
+	}
+	else
+	{
+		if (rc->ray_dir.y >= 0)
+			rc->wall_type = WEST_WALL;
+		else
+			rc->wall_type = EAST_WALL;
+	}
+}
 
-// 	map_y = array_size(ray->cube->param.map);
-// 	if (y < map_y)
-// 	{
-// 		if (ray->cube->param.map[y] != NULL)
-// 			return (ft_strlen(ray->cube->param.map[y]));
-// 	}
-// 	return (-1);
-// }
+void	determine_wall_coordinates(t_rc *rc)
+{
+	double	wall_hit;
 
-// bool	its_a_wall(t_ray *ray)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	map_y;
+	if (rc->side == 0)
+		wall_hit = rc->position.y + rc->perp_wall_dist * rc->ray_dir.y;
+	else
+		wall_hit = rc->position.x + rc->perp_wall_dist * rc->ray_dir.x;
+	wall_hit -= floor(wall_hit);
 
-// 	map_y = array_size(ray->cube->param.map);
-// 	x = ray->position.x / 100;
-// 	y = ray->position.y / 100;
-// 	if (x < 0 || y < 0 || y > map_y || x > map_width_for_y(ray, y))
-// 	{
-// 		ft_putstr_fd("Error\n", 2);
-// 		ft_putstr_fd("Raycast into a wall\n", 2);
-// 		exit(1);
-// 	}
-// 	if (ray->cube->param.map[y][x] == '1')
-// 		return (true);
-// 	return (false);
-// }
+	rc->texture.x = (int)(wall_hit * (double)(rc->walls[rc->wall_type].width));
+	if (rc->side == 0 && rc->ray_dir.x > 0)
+		rc->texture.x = rc->walls[rc->wall_type].width - rc->texture.x - 1;
+	if (rc->side == 1 && rc->ray_dir.y < 0)
+		rc->texture.x = rc->walls[rc->wall_type].width - rc->texture.x - 1;
 
-// int	end_ray(t_ray *ray)
-// {
-// 	int	map_y;
+	rc->texture_step = 1.0 * rc->walls->height / rc->line_height;
+	rc->texture_position = (rc->draw_start - rc->pitch - HEIGHT / 2 + rc->line_height / 2) * rc->texture_step;
+}
 
-// 	map_y = array_size(ray->cube->param.map);
-// 	if (ray->position.x < 0 || ray->position.y < 0 || 
-// 			ray->position.y > (map_y * TILE) || 
-// 			ray->position.x > (double)map_width_for_y(ray ,(ray->position.y / 100) * TILE))
-// 		return (2);
-// 	return (its_a_wall(ray));
-// }
+void	draw_vertical_line(t_rc *rc, int x)
+{
+	int				y;
+	unsigned int	wall_color;
 
-// int	calculate_texture_x(t_ray *ray)
-// {
-// 	double	texture_x_d;
+	determine_wall_type(rc);
+	determine_wall_coordinates(rc);
+	y = 0;
+	while (y < HEIGHT)
+	{
+		if (y < rc->draw_start)
+			my_mlx_pixel_put(&rc->cube->img, x, y, rc->ceiling_color);
+		else if (y > rc->draw_end)
+			my_mlx_pixel_put(&rc->cube->img, x, y, rc->floor_color);
+		else
+		{
+			rc->texture.y = (int)rc->texture_position & (rc->walls[rc->wall_type].height - 1);
+			rc->texture_position += rc->texture_step;
+			wall_color = my_mlx_pixel_get(rc->walls[rc->wall_type].img, rc->texture.x, rc->texture.y);
+			my_mlx_pixel_put(&rc->cube->img, x, y, wall_color);
+		}
+		y++;
+	}
+}
 
-// 	if (ray->current_wall == NORTH_WALL || ray->current_wall == SOUTH_WALL)
-// 		texture_x_d = fmod(ray->intersection.x, TILE);
-// 	else
-// 		texture_x_d = fmod(ray->intersection.y, TILE);
-// 	return ((int)(ray->walls[ray->current_wall].width * texture_x_d / 100));
-// }
+void	fix_fisheye(t_rc *rc)
+{
+	if (rc->side == 0)
+		rc->perp_wall_dist = rc->side_dist.x - rc->delta_dist.x;
+	else
+		rc->perp_wall_dist = rc->side_dist.y - rc->delta_dist.y;
+	rc->line_height = (int)(HEIGHT / rc->perp_wall_dist);
+	rc->draw_start = -rc->line_height / 2 + HEIGHT / 2 + rc->pitch;
+	if (rc->draw_start < 0)
+		rc->draw_start = 0;
+	rc->draw_end = rc->line_height / 2 + HEIGHT / 2 + rc->pitch;
+	if (rc->draw_end >= HEIGHT)
+		rc->draw_end = HEIGHT - 1;
+}
 
-// void	draw_pixel_columns(t_ray *ray, int x)
-// {
-// 	int		texture_x;
-// 	int		texture_y;
-// 	double	y_perc;
-// 	int		y;
-// 	t_img	*img;
+void	perform_dda(t_rc *rc)
+{
+	int	hit;
 
-// 	img = &ray->cube->img;
-// 	texture_x = calculate_texture_x(ray);
-// 	ray->wall_height = HEIGHT * TILE / ray->distance;
-// 	ray->wall_offset = (HEIGHT - ray->wall_height) / 2;
-// 	y = 0;
-// 	while (y < HEIGHT)
-// 	{
-// 		if (y < ray->wall_offset)
-// 			my_mlx_pixel_put(img, x, y, ray->ceiling_color);
-// 		else if (y > ray->wall_height + ray->wall_offset)
-// 			my_mlx_pixel_put(img, x, y, ray->floor_color);
-// 		else
-// 		{
-// 			y_perc = (double)(y - ray->wall_offset) / ray->wall_height;
-// 			texture_y = ray->walls[ray->current_wall].height * y_perc;
-// 			my_mlx_pixel_put(img, x, y, my_mlx_pixel_get(ray->walls[ray->current_wall].img, texture_x, texture_y));
-// 		}
-// 		y++;
-// 	}
-// }
+	//Delete
+	int worldMap[7][7]=
+	{
+	{1,1,1,1,1,1,1},
+	{1,0,1,0,1,0,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1}
+	};
 
-// void	calculate_rad_diff(t_ray *ray)
-// {
-// 	double	tmp_result;
-// 	t_xy	tmp1;
-// 	t_xy	tmp2;
+	hit = 0;
+	while (hit == 0)
+	{
+		if (rc->side_dist.x < rc->side_dist.y)
+		{
+			rc->side_dist.x += rc->delta_dist.x;
+			rc->map.x += rc->step.x;
+			rc->side = 0;
+		}
+		else
+		{
+			rc->side_dist.y += rc->delta_dist.y;
+			rc->map.y += rc->step.y;
+			rc->side = 1;
+		}
+		// if (rc->cube->param.map[rc->map.x][rc->map.y] > '0')
+		// 	hit = 1;
+		if (worldMap[rc->map.x][rc->map.y] > 0)
+				hit = 1;
+	}
+}
 
-// 	tmp1 = normalize_vector(ray->direction);
-// 	tmp2 = normalize_vector(ray->tmp_direction);
-// 	tmp_result = (tmp1.x * tmp2.x) + (tmp1.y * tmp2.y);
-// 	ray->radiant_diff = acos(tmp_result);	
-// }
+void	calculate_side_distance(t_rc *rc)
+{
+	rc->map.x = (int)rc->position.x;
+	rc->map.y = (int)rc->position.y;
+	if (rc->ray_dir.x < 0)
+	{
+		rc->step.x = -1;
+		rc->side_dist.x = (rc->position.x - rc->map.x) * rc->delta_dist.x;
+	}
+	else
+	{
+		rc->step.x = 1;
+		rc->side_dist.x = (rc->map.x + 1.0 - rc->position.x) * rc->delta_dist.x;
+	}
+	if (rc->ray_dir.y < 0)
+	{
+		rc->step.y = -1;
+		rc->side_dist.y = (rc->position.y - rc->map.y) * rc->delta_dist.y;
+	}
+	else
+	{
+		rc->step.y = 1;
+		rc->side_dist.y = (rc->map.y + 1.0 - rc->position.y) * rc->delta_dist.y;
+	}
+}
 
-// double v_raycast_cont(t_ray *ray, int check, double ratio)
-// {
-// 	check = end_ray(ray);
-// 	if (ray->tmp_direction.x < 0)
-// 		ray->delta_x += 0.01;
-// 	if (check == 0)
-// 	{
-// 		ratio = fabs(ray->tmp_direction.x) / TILE;
-// 		if (ray->tmp_direction.x < 0)
-// 			ray->next_cube.x = -TILE - 0.01;
-// 		else
-// 			ray->next_cube.x = TILE;
-// 		ray->next_cube.y = ray->tmp_direction.y / ratio;
-// 		while (check == 0)
-// 		{
-// 			ray->current_cube = add_vector(ray->current_cube, ray->next_cube);
-// 			check = end_ray(ray);
-// 		}
-// 	}
-// 	if (check == 2)
-// 		return (INT_MAX);
-// 	else
-// 	{
-// 		ray->v_intersection = ray->current_cube;
-// 		ray->current_cube = sub_vector(ray->position, ray->current_cube);
-// 		return (pythagoras(ray->current_cube));
-// 	}
-// }
+void	calculate_deltas(t_rc *rc, int x)
+{
+	rc->cameraX = 2 * x / (double)WIDTH - 1;
+	rc->ray_dir.x = rc->direction.x + rc->camera_plane.x * rc->cameraX;
+	rc->ray_dir.y = rc->direction.y + rc->camera_plane.y * rc->cameraX;
+	if (rc->ray_dir.x == 0)
+		rc->delta_dist.x = INT_MAX;
+	else
+		rc->delta_dist.x = fabs(1 / rc->ray_dir.x);
 
-// double	v_raycast(t_ray *ray)
-// {
-// 	double		ratio;
-// 	int			check;
+	if (rc->ray_dir.y == 0)
+		rc->delta_dist.y = INT_MAX;
+	else
+		rc->delta_dist.y = fabs(1 / rc->ray_dir.y);
+}
 
-// 	check = 0;
-// 	if (ray->tmp_direction.x == 0)
-// 		return (INT_MAX);
-// 	if (ray->tmp_direction.x < 0)
-// 		ray->delta_x = fmod(ray->position.x, TILE);
-// 	else
-// 		ray->delta_x = TILE - fmod(ray->position.x, TILE);
-// 	ratio = fabs(ray->tmp_direction.x) / ray->delta_x;
-// 	ray->delta_y = ray->tmp_direction.y / ratio;
-// 	if (ray->tmp_direction.x < 0)
-// 		ray->delta_x = (ray->delta_x * -1) - 0.01;
-// 	ray->current_cube.x = ray->position.x + ray->delta_x;
-// 	ray->current_cube.y = ray->position.y + ray->delta_y;
-// 	return (v_raycast_cont(ray, check, ratio));
-// }
+void	raycasting(t_cube *cube)
+{
+	t_rc	*rc;
+	int		x;
 
-// double h_raycast_cont(t_ray *ray, int check, double ratio)
-// {
-// 	check = end_ray(ray);
-// 	if (ray->tmp_direction.y < 0)
-// 		ray->delta_y += 0.01;
-// 	if (check == 0)
-// 	{
-// 		ratio = fabs(ray->tmp_direction.y) / TILE;
-// 		if (ray->tmp_direction.y < 0)
-// 			ray->next_cube.y = -TILE - 0.01;
-// 		else
-// 			ray->next_cube.y = TILE;
-// 		ray->next_cube.x = ray->tmp_direction.x / ratio;
-// 		while (check == 0)
-// 		{
-// 			ray->current_cube = add_vector(ray->current_cube, ray->next_cube);
-// 			check = end_ray(ray);
-// 		}
-// 	}
-// 	if (check == 2)
-// 		return (INT_MAX);
-// 	else
-// 	{
-// 		ray->h_intersection = ray->current_cube;
-// 		ray->current_cube = sub_vector(ray->position, ray->current_cube);
-// 		return (pythagoras(ray->current_cube));
-// 	}
-// }
+	rc = &cube->rc;
+	x = 0;
+	while (x < WIDTH)
+	{
+		calculate_deltas(rc, x);
+		calculate_side_distance(rc);
+		perform_dda(rc);
+		fix_fisheye(rc);
+		draw_vertical_line(rc, x);
+		x++;
+	}
+}
 
-// double	h_raycast(t_ray *ray)
-// {
-// 	double		ratio;
-// 	int			check;
+void	init_texture(t_cube *cube, int type)
+{
+	t_wall	*wall;
 
-// 	check = 0;
-// 	if (ray->tmp_direction.y == 0)
-// 		return (INT_MAX);
-// 	if (ray->tmp_direction.y < 0)
-// 		ray->delta_y = fmod(ray->position.y, TILE);
-// 	else
-// 		ray->delta_y = TILE - fmod(ray->position.y, TILE);
-// 	ratio = fabs(ray->tmp_direction.y) / ray->delta_y;
-// 	ray->delta_x = ray->tmp_direction.x / ratio;
-// 	if (ray->tmp_direction.y < 0)
-// 		ray->delta_y = (ray->delta_y * -1) - 0.01;
-// 	ray->current_cube.x = ray->position.x + ray->delta_x;
-// 	ray->current_cube.y = ray->position.y + ray->delta_y;
-// 	return (h_raycast_cont(ray, check, ratio));	
-// }
+	wall = &cube->rc.walls[type];
+	wall->img = malloc(sizeof(t_img));
+	wall->img->img = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.wall_path[type], &wall->width, &wall->height);
+	if (!wall->img)
+	{
+		free(wall->img);
+		texture_not_loaded_error(cube);
+	}
+	wall->img->address = mlx_get_data_addr(wall->img->img, &wall->img->bits_per_pixel,
+				&wall->img->line_length, &wall->img->endian);
+}
 
-// void	single_ray(t_ray *ray)
-// {
-// 	double	horizontal_rc;
-// 	double	vertical_rc;
+void	load_textures(t_cube *cube)
+{
+	t_rc	*rc;
 
-// 	horizontal_rc = h_raycast(ray);
-// 	vertical_rc = v_raycast(ray);
-// 	if (horizontal_rc < vertical_rc)
-// 	{
-// 		if (ray->tmp_direction.y < 0)
-// 			ray->current_wall = NORTH_WALL;
-// 		else
-// 			ray->current_wall = SOUTH_WALL;
-// 		ray->intersection = ray->h_intersection;
-// 		ray->distance = horizontal_rc;
-// 	}
-// 	else
-// 	{
-// 		if (ray->tmp_direction.x < 0)
-// 			ray->current_wall = WEST_WALL;
-// 		else
-// 			ray->current_wall = EAST_WALL;
-// 		ray->intersection = ray->v_intersection;
-// 		ray->distance = vertical_rc;
-// 	}
-// }
+	rc = &cube->rc;
+	rc->walls[NORTH_WALL].height = 128; // Parsing or constant?
+	rc->walls[NORTH_WALL].width = 128; // Parsing or constant?
+	rc->walls[SOUTH_WALL].height = 128; // Parsing or constant?
+	rc->walls[SOUTH_WALL].width = 128; // Parsing or constant?
+	rc->walls[WEST_WALL].height = 128; // Parsing or constant?
+	rc->walls[WEST_WALL].width = 128; // Parsing or constant?
+	rc->walls[EAST_WALL].height = 128; // Parsing or constant?
+	rc->walls[EAST_WALL].width = 128; // Parsing or constant?
+	
+	init_texture(cube, NORTH_WALL);
+	init_texture(cube, SOUTH_WALL);
+	init_texture(cube, WEST_WALL);
+	init_texture(cube, EAST_WALL);
+}
 
-// void	rotate_direction(t_ray *ray, int i)
-// {
-// 	double	angle;
+void	init_starting_values(t_cube *cube)
+{
+	t_rc	*rc;
 
-// 	angle = (-1 * FOV / 2) + ((FOV / RAY_COUNT) * i);
-// 	ray->tmp_direction.x = (ray->direction.x * cos(angle * M_PI/180)) - (ray->direction.y * sin(angle * M_PI/180));
-// 	ray->tmp_direction.y = (ray->direction.x * sin(angle * M_PI/180)) + (ray->direction.y * cos(angle * M_PI/180));
-// }
+	rc = &cube->rc;
+	//check_player
+	rc->position.x = 3; //Position of player char
+	rc->position.y = 3; //Position of player char
+	rc->direction.x = 1; //NSWE
+	rc->direction.y = 0; //NSWE
+	rc->camera_plane.x = 0; //Calc after direction
+	rc->camera_plane.y = 0.66;  //Calc after direction
 
-// void	raycasting(t_cube *cube)
-// {
-// 	t_ray	*ray;
-// 	int		x;
+	rc->pitch = 100; // Constant
 
-// 	ray = &cube->ray;
-// 	x = 0;
-// 	while (x < RAY_COUNT)
-// 	{
-// 		rotate_direction(ray, x);
-// 		single_ray(ray);
-// 		calculate_rad_diff(ray);
-// 		ray->distance = ray->distance * cos(ray->radiant_diff);
-// 		draw_pixel_columns(ray, x);
-// 		x++;
-// 	}
-// }
+	//Use f_rgb and c_rgb
+	rc->floor_color = 0x0000CC66; // init_starting_values
+	rc->ceiling_color = 0x00000000; // init_starting_values
+
+	//Load map
+	// int **map 
+
+	// SOUTH
+	// DirX = 1
+	// DirY = 0
+	// cPlaneX = 0
+	// cPlaneY = 0.66 
+
+	// WEST
+	// DirX = 0
+	// DirY = 1
+	// cPlaneX = -0.66
+	// cPlaneY = 0
+
+	// NORTH
+	// DirX = -1
+	// DirY = 0
+	// cPlaneX = 0
+	// cPlaneY = -0.66
+
+	// EAST
+	// DirX = 0
+	// DirY = -1
+	// cPlaneX = 0.66
+	// cPlaneY = 0
+}

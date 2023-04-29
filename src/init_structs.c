@@ -40,38 +40,6 @@ void	init_img(t_cube *cube)
 	img->wall_ptr = NULL;
 }
 
-void	init_ray(t_cube *cube)
-{
-	t_ray	*ray;
-
-	ray = &cube->ray;
-	ray->distance = 0;
-	ray->radiant_diff = 0;
-	ray->ceiling_color = 0;
-	ray->floor_color = 0;
-	ray->current_wall = 0;
-	ray->direction.x = 0; // Parsing NSWE - When N = 0
-	ray->direction.y = 1; // Parsing NSWE - When N = 1
-	ray->tmp_direction.x = 0;
-	ray->tmp_direction.y = 0;
-	ray->intersection.x = 0;
-	ray->intersection.y = 0;
-	ray->h_intersection.x = 0;
-	ray->h_intersection.y = 0;
-	ray->v_intersection.x = 0;
-	ray->v_intersection.y = 0;
-	ray->position.x = 0; // Parsing - starting position
-	ray->position.y = 0; // Parsing- starting position
-	ray->delta_x = 0;
-	ray->delta_y = 0;
-	ray->current_cube.x = 0;
-	ray->current_cube.y = 0;
-	ray->next_cube.x = 0;
-	ray->next_cube.y = 0;
-	ray->wall_height = 0;
-	ray->wall_offset = 0;
-}
-
 void init_rc(t_cube *cube)
 {
 	t_rc	*rc;
@@ -99,6 +67,14 @@ void init_rc(t_cube *cube)
 	rc->line_height = 0;
 	rc->draw_start = 0;
 	rc->draw_end = 0;
+	rc->pitch = 0;
+	rc->wall_type = 0;
+	rc->texture.x = 0;
+	rc->texture.y = 0;
+	rc->texture_step = 0;
+	rc->texture_position = 0;
+	rc->floor_color = 0;
+	rc->ceiling_color = 0;
 }
 
 void	init_structs(t_cube *cube)
@@ -109,8 +85,6 @@ void	init_structs(t_cube *cube)
 	init_mlx(cube);
 	cube->img.cube = cube;
 	init_img(cube);
-	cube->ray.cube = cube;
-	init_ray(cube);
 	cube->rc.cube = cube;
 	init_rc(cube);
 }

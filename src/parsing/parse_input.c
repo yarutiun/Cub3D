@@ -113,7 +113,7 @@ void     parse_input(int argc, char *path, t_cube *cube)
     cube->param.input_str = read_from_file(path);
     cube->param.splitted_input = split_input(cube->param.input_str);
     init_elements(cube->param.splitted_input, &cube->param);
-    // check_texture_files(&cube->param); // Uncomment later
+    check_texture_files(&cube->param); // Comment out for debugging
     check_rgb(&cube->param);
     check_map_double_n(cube->param.input_str, cube);
     check_map_row(cube->param.splitted_input, cube);

@@ -101,29 +101,6 @@ typedef struct			s_xy_int
 	int					y;
 }						t_xy_int;
 
-typedef struct s_ray
-{
-	struct s_cube		*cube;
-	double				distance;
-	double				radiant_diff;
-	int					ceiling_color;
-	int					floor_color;
-	// t_wall			walls[4]; // Need to initiliaze and load
-	int					current_wall;
-	t_xy				direction;
-	t_xy				tmp_direction;
-	t_xy				intersection;
-	t_xy				h_intersection;
-	t_xy				v_intersection;
-	t_xy				position;
-	double				delta_x;
-	double				delta_y;
-	t_xy				current_cube;
-	t_xy				next_cube;
-	double				wall_height;
-	double				wall_offset;
-}						t_ray;
-
 typedef struct			s_rc
 {
 	struct s_cube		*cube;
@@ -147,7 +124,6 @@ typedef struct			s_rc
 	t_xy				texture;
 	double				texture_step;
 	double				texture_position;
-
 	int					floor_color;
 	int					ceiling_color;
 }						t_rc;
@@ -157,7 +133,6 @@ typedef struct s_cube
 	t_param				param;
 	t_mlx				mlx;
 	t_img				img;
-	t_ray				ray;
 	t_rc				rc;
 }						t_cube;
 
@@ -213,6 +188,7 @@ void	map_row_error(t_cube *cube);
 void	invalid_spaces_error(t_cube *cube);
 void	forbidden_chars_error(t_cube *cube);
 void	player_error(t_cube *cube, char *msg);
+void    texture_not_loaded_error(t_cube *cube);
 
 // Free Memory //
 void	free_all(t_cube *cube);

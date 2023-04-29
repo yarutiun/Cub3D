@@ -216,15 +216,21 @@ void	load_textures(t_cube *cube)
 	init_texture(cube, EAST_WALL);
 }
 
+int	rgb_to_hex(int *rgb)
+{
+	double	color;
+
+	color = 0 << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+	return (color);
+}
+
 void	init_starting_values(t_cube *cube)
 {
 	t_rc	*rc;
 
 	rc = &cube->rc;
-	//Use f_rgb and c_rgb
-	rc->floor_color = 0x0000CC66; // init_starting_values
-	rc->ceiling_color = 0x00000000; // init_starting_values
-
+	rc->floor_color = rgb_to_hex(cube->param.f_rgb);
+	rc->ceiling_color = rgb_to_hex(cube->param.c_rgb);
 	if (rc->player_char == 'N')
 	{
 		rc->direction.x = 1;

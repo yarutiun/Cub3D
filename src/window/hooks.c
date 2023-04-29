@@ -29,11 +29,21 @@ int	key_hooks(int keycode, t_rc *rc)
 	map = rc->cube->param.map;
 	rotation_speed = 0.15;
 	move_speed = rotation_speed * (5 / 3);
-	factor = move_speed * 1;
+	factor = move_speed * 2;
 	if (keycode == ESCAPE_KEY)
 		x_close();
 	else if (keycode == W_KEY)
 	{
+		
+		// printf("DirX: %f\n", rc->direction.x);
+		// printf("DirY: %f\n", rc->direction.y);
+		// if (rc->direction.y <= -0.5) //West wall
+		// {
+		// 	move_speed *= 1.5;
+		// 	factor *= 1.5;
+		// }
+		if (rc->direction.y >= 0.5) // East wall
+			factor *= 0.25;
 		if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)(rc->position.y + rc->position.y * factor)])
 		{
 			if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] != '1')

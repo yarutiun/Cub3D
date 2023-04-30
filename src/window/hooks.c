@@ -33,44 +33,59 @@ int	key_hooks(int keycode, t_rc *rc)
 	double	old_direction_x;
 	double	rotation_speed;
 	double	move_speed;
-	double	factor;
+	// double	factor;
 
 	map = rc->cube->param.map;
 	rotation_speed = 0.15;
 	move_speed = rotation_speed * (5 / 3);
-	factor = move_speed * 2;
+	// factor = move_speed * 2;
 	if (keycode == ESCAPE_KEY)
 		x_close();
 	else if (keycode == W_KEY)
 	{
-		// printf("DirX: %f\n", rc->direction.x);
-		// printf("DirY: %f\n", rc->direction.y);
 		// if (rc->direction.y >= 0.5) // East wall
 		// 	factor *= 0.20;
 		
-		if (rc->direction.y >= 0.5)
-		{
-			factor *= 0.20;
-			if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] != '1')
-			{
-				if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] != '1')
-				{
-					rc->position.x += rc->direction.x * move_speed;
-					rc->position.y += rc->direction.y * move_speed;
-				}
-			}
-		}
-		else
-		{
+		// if (rc->direction.y >= 0.5)
+		// {
+		// 	factor *= 0.20;
+		// 	if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] != '1')
+		// 	{
+		// 		if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] != '1')
+		// 		{
+		// 			rc->position.x += rc->direction.x * move_speed;
+		// 			rc->position.y += rc->direction.y * move_speed;
+		// 		}
+		// 	}
+		// }
+		// else
+		// {
 			t_xy	projection;
-			projection = add_vector(rc->position, rc->camera_plane);
+			// projection = add_vector(rc->position, rc->camera_plane);
+			projection.x = rc->position.x + rc->camera_plane.x;
+			projection.y = rc->position.y + rc->camera_plane.y;
 
-			if (map[(int)(projection.x + rc->direction.x * move_speed)][(int)(rc->position.y + rc->direction.y * move_speed)] != '1')
+			printf("PosX: %f\n", rc->position.x);
+			printf("PosY: %f\n", rc->position.y);
+			// printf("CamX: %f\n", rc->camera_plane.x);
+			// printf("CamY: %f\n", rc->camera_plane.y);
+			printf("ProjectionX: %f\n", projection.x);
+			printf("ProjectionY: %f\n", projection.y);
+			// printf("DirX: %f\n", rc->direction.x);
+			// printf("DirY: %f\n", rc->direction.y);
+			printf("x: %d\n", (int)(projection.y + rc->direction.y * move_speed));
+			printf("y: %d\n", (int)(projection.x + rc->direction.x * move_speed));
+			printf("Posmap[x][y]: %c\n", map[(int)(rc->position.x + rc->direction.x * move_speed * 2)][(int)(rc->position.y + rc->direction.y * move_speed * 2)]);
+			printf("map[x][y]: %c\n\n", map[(int)(projection.x + rc->direction.x * move_speed * 2)][(int)(projection.y + rc->direction.y * move_speed * 2)]);
+			
+			
+			if (map[(int)(rc->position.x + rc->direction.x * move_speed)][(int)(rc->position.y + rc->direction.y * move_speed)] != '1')
+			// if (map[(int)(projection.x + rc->direction.x * move_speed)][(int)(projection.y + rc->direction.y * move_speed)] != '1')
 			{
 				rc->position.x += rc->direction.x * move_speed;
 				rc->position.y += rc->direction.y * move_speed;
 			}
-		}
+		// }
 	}
 	else if (keycode == S_KEY)
 	{

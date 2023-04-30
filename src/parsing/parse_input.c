@@ -169,16 +169,15 @@ void     parse_input(int argc, char *path, t_cube *cube)
     cube->param.input_str = read_from_file(path);
     cube->param.splitted_input = split_input(cube->param.input_str);
     init_elements(cube->param.splitted_input, &cube->param);
-    check_texture_files(&cube->param); // Comment out for debugging
+    // check_texture_files(&cube->param); // Comment out for debugging
     check_rgb(&cube->param);
     check_map_double_n(cube->param.input_str, cube);
     check_map_row(cube->param.splitted_input, cube);
     assign_map(cube->param.splitted_input, cube);
     allocate_map_with_spaces(&cube->param);
-    // check_map_column(cube->param.map, cube); Julien's approach fill end of lines with spaces
-    // check_player_inside_walls(cube->param.map, cube); Use same approaches as above: check_map_row and column
     check_invalid_spaces(cube->param.map, cube);
-    // replace_spaces(cube->param.map); Replace spaces for 1s, prevent segfaults on corners
+    check_player_wihtin_walls(cube->param.map, cube);
+    // replace_spaces(cube->param.map);
     check_forbidden_chars(cube->param.map, cube);
     check_player(cube->param.map, cube);
 }

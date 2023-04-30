@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/01 01:39:06 by yarutiun          #+#    #+#             */
+/*   Updated: 2023/05/01 01:39:07 by yarutiun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void    error_exit(char *message, t_cube *cube)
@@ -6,11 +18,6 @@ void    error_exit(char *message, t_cube *cube)
     ft_putstr_fd(message, 2);
     free_all(cube);
     exit(1);
-}
-
-void    file_error(t_cube *cube)
-{
-    error_exit("Texture file not found\n", cube);
 }
 
 void    rgb_error(t_cube *cube)
@@ -31,39 +38,4 @@ void    init_elements_error(t_cube *cube)
 void    argc_error(t_cube *cube)
 {
     error_exit("Invalid number of arguments\n", cube);
-}
-
-void    error_double_n(t_cube *cube)
-{
-    error_exit("Empty line in map\n", cube);
-}
-
-void    map_row_error(t_cube *cube)
-{
-    error_exit("Open map\n", cube);
-}
-
-void    invalid_spaces_error(t_cube *cube)
-{
-    error_exit("Invalid space positon\n", cube);
-}
-
-void    forbidden_chars_error(t_cube *cube)
-{
-    error_exit("Invalid characters\n", cube);
-}
-
-void    player_error(t_cube *cube, char *msg)
-{
-    error_exit(msg, cube);
-}
-
-void    texture_not_loaded_error(t_cube *cube)
-{
-    error_exit("Could not load texture file\n", cube);
-}
-
-void    out_of_bounds_error(t_cube *cube)
-{
-    error_exit("Player out of bounds. Get gnomed!\n", cube);
 }

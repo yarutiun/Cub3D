@@ -27,8 +27,13 @@ MLX_A = libmlx.a
 
 # Source and object files
 SRC		=	error_handling/errors.c \
-			free_memory/free.c \
+			error_handling/errors_player_and_textures.c \
+			error_handling/errors_map.c \
+			free_memory/free_utils.c \
+			free_memory/free_general.c \
 			parsing/checkers.c \
+			parsing/map_checkers.c \
+			parsing/make_map_rectangular.c \
 			parsing/parse_input.c \
 			raycasting/raycasting.c \
 			window/hooks.c \

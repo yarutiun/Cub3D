@@ -51,19 +51,17 @@ void	launch_window(t_cube *cube)
 	mlx = &cube->mlx;
 	img = &cube->img;
 	mlx->mlx_ptr = mlx_init();
+	mlx_mouse_hide();
 	mlx->window = mlx_new_window(mlx->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	img->img = mlx_new_image(mlx->mlx_ptr, WIDTH, HEIGHT);
 	img->address = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
 									&img->line_length, &img->endian);
-	
-	// load_images(cube);
-	// render_map(cube);
-	
 	init_starting_values(cube);
 	load_textures(cube);
 	render_window(cube);
 	mlx_hook(mlx->window, CLOSE_WINDOW, 0, x_close, 0);
 	mlx_hook(mlx->window, 2, 0, key_hooks, &cube->rc);
+	mlx_mouse_move(mlx->window, 100, 100);
 	mlx_do_sync(mlx->mlx_ptr);
 	mlx_loop(mlx->mlx_ptr);
 }

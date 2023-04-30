@@ -156,6 +156,7 @@ void	check_map_row(char **splitted_input, t_cube *cube);
 void	check_invalid_spaces(char **map, t_cube *cube);
 void	check_forbidden_chars(char **map, t_cube *cube);
 void	check_player(char **map, t_cube *cube);
+void	check_player_wihtin_walls(char **map, t_cube *cube);
 
 // Starting Values //
 void	init_starting_values(t_cube *cube);
@@ -194,6 +195,7 @@ void	invalid_spaces_error(t_cube *cube);
 void	forbidden_chars_error(t_cube *cube);
 void	player_error(t_cube *cube, char *msg);
 void    texture_not_loaded_error(t_cube *cube);
+void    out_of_bounds_error(t_cube *cube);
 
 // Free Memory //
 void	free_all(t_cube *cube);

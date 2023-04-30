@@ -1,25 +1,36 @@
 [ ] Finish parser
-	[ ] Detect errors
+	[ ] fill_map_with_spaces(cube->param.map);
+	[ ] check_map_column(cube->param.map, cube);
+	[ ] check_player_inside_walls(cube->param.map, cube);
+	[ ] check_invalid_spaces(cube->param.map, cube);
+	[ ] replace_spaces
+	
 	[x] Feed all needed values to init_starting_values
 	[ ] Some valid rgb values are not accepted. Test (0,0,0)
+	[ ] Double check RGB converter
 
-[x] Initialize wall textures
-[x] Properly render walls
-
-[x] Bind keys for movement
-[ ] Improve collison detection
-
-Subject notes (Parser):
-[x] Except for the map, each type of information from an element can be 
-	separated by one or more space(s).
 [ ] Take care to not segfault in corners like this:
 111111
 10000N1
 1000001
 	Santiago: I suggest replacing valid spaces with 1s
-	Might need to add extra layer of sorrounding 1s
 
+[x] Initialize wall textures
+[x] Properly render walls
+
+[x] Bind keys for movement
+[x] Improve collison detection
+
+Subject notes (Parser):
+[x] Except for the map, each type of information from an element can be 
+	separated by one or more space(s).
+	
 Bonuses?
 [ ] Mouse
 [ ] A minimap system.
 [x] Wall collisions.
+
+[ ]Norminette
+[ ]Check for leaks
+	[ ]Try errors up until load_textures func
+	[ ]Check with successful run and exit

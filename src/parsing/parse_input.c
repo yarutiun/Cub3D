@@ -118,9 +118,11 @@ void     parse_input(int argc, char *path, t_cube *cube)
     check_map_double_n(cube->param.input_str, cube);
     check_map_row(cube->param.splitted_input, cube);
     assign_map(cube->param.splitted_input, cube);
-    // check_map_column(); Julien's approach fill end of lines with spaces
-    // check_player_inside_wall(); Use same approach as above and check_map_row
+    // fill_map_with_spaces(cube->param.map); Add spaces at the end of short rows
+    // check_map_column(cube->param.map, cube); Julien's approach fill end of lines with spaces
+    // check_player_inside_walls(cube->param.map, cube); Use same approaches as above: check_map_row and column
     check_invalid_spaces(cube->param.map, cube);
+    // replace_spaces(cube->param.map); Replace spaces for 1s, prevent segfaults on corners
     check_forbidden_chars(cube->param.map, cube);
     check_player(cube->param.map, cube);
 }

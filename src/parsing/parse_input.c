@@ -34,11 +34,8 @@ char **split_input(char *input_str)
     return(output);
 }
 
-char    *remove_non_alnum(char *string)
+char    *remove_non_alnum(char *string, int i)
 {
-    int i;
-
-    i = 3;
     while (string[i])
     {
         if (ft_isalnum(string[i]))
@@ -60,17 +57,17 @@ void    init_elements(char **splitted, t_param *param)
     while (i < 6)
     {
         if (ft_strncmp(splitted[i], "NO ", 3) == 0)
-            param->wall_path[NORTH_WALL] = remove_non_alnum(splitted[i]);
+            param->wall_path[NORTH_WALL] = remove_non_alnum(splitted[i], 3);
         else if (ft_strncmp(splitted[i], "SO ", 3) == 0)
-            param->wall_path[SOUTH_WALL] = remove_non_alnum(splitted[i]);
+            param->wall_path[SOUTH_WALL] = remove_non_alnum(splitted[i], 3);
         else if (ft_strncmp(splitted[i], "WE ", 3) == 0)
-            param->wall_path[WEST_WALL] = remove_non_alnum(splitted[i]);
+            param->wall_path[WEST_WALL] = remove_non_alnum(splitted[i], 3);
         else if (ft_strncmp(splitted[i], "EA ", 3) == 0)
-            param->wall_path[EAST_WALL] = remove_non_alnum(splitted[i]);
+            param->wall_path[EAST_WALL] = remove_non_alnum(splitted[i], 3);
         else if (ft_strncmp(splitted[i], "F ", 2) == 0)
-            param->f = remove_non_alnum(splitted[i]);
+            param->f = remove_non_alnum(splitted[i], 2);
         else if (ft_strncmp(splitted[i], "C ", 2) == 0)
-            param->c = remove_non_alnum(splitted[i]);
+            param->c = remove_non_alnum(splitted[i], 2);
         else
             init_elements_error(cube);
         i++;

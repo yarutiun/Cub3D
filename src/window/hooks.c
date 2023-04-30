@@ -25,7 +25,7 @@ int	key_hooks(int keycode, t_rc *rc)
 	double	rotation_speed;
 	double	move_speed;
 
-	map = rc->cube->param.map;
+	map = rc->cube->param.new_map;
 	rotation_speed = 0.15;
 	move_speed = rotation_speed * (5 / 3);
 	if (keycode == ESCAPE_KEY)

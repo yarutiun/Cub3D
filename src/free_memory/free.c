@@ -72,6 +72,7 @@ void	free_param(t_param *param)
 	free_str(param->c);
 	free_int_arr(param->f_rgb);
 	free_int_arr(param->c_rgb);
+	free_double_str_ptr(param->new_map);
 }
 
 void	free_all(t_cube *cube)

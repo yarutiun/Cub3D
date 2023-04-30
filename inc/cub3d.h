@@ -63,6 +63,8 @@ typedef struct s_param
 	int					*f_rgb;
 	int					*c_rgb;
 	char				**map;
+	int					longest_row_size;
+	char				**new_map;
 }						t_param;
 
 typedef struct s_mlx

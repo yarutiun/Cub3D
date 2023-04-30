@@ -141,6 +141,34 @@ void    check_map_row(char **splitted_input, t_cube *cube)
     }
 }
 
+void	check_player_wihtin_walls(char **map, t_cube *cube)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < array_size(map))
+    {
+        j = 0;
+        while (j < (int)ft_strlen(map[i]))
+        {
+            if(map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'W' || map[i][j] == 'S')
+            {
+                if (map[i][j + 1] && map[i][j + 1] == ' ')
+                    out_of_bounds_error(cube);
+                if (map[i][j - 1] && map[i][j - 1] == ' ')
+                    out_of_bounds_error(cube);
+                if (map[i + 1][j] && map[i + 1][j] == ' ')
+                    out_of_bounds_error(cube);
+                if (map[i - 1][j] && map[i - 1][j] == ' ')
+                    out_of_bounds_error(cube);
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
 void	check_invalid_spaces(char **map, t_cube *cube)
 {
     int i;

@@ -16,6 +16,15 @@ int	x_close(void)
 	exit(0);
 }
 
+t_xy	add_vector(t_xy v1, t_xy v2)
+{
+	t_xy	result;
+
+	result.x = v1.x + v2.x;
+	result.y = v2.y + v2.y;
+	return (result);
+}
+
 int	key_hooks(int keycode, t_rc *rc)
 {
 	char	**map;
@@ -34,40 +43,26 @@ int	key_hooks(int keycode, t_rc *rc)
 		x_close();
 	else if (keycode == W_KEY)
 	{
-		
 		// printf("DirX: %f\n", rc->direction.x);
 		// printf("DirY: %f\n", rc->direction.y);
-		// if (rc->direction.y <= -0.5) //West wall
-		// {
-		// 	move_speed *= 1.5;
-		// 	factor *= 1.5;
-		// }
-		if (rc->direction.y >= 0.5) // East wall
-			factor *= 0.25;
-		if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)(rc->position.y + rc->position.y * factor)])
+		// if (rc->direction.y >= 0.5) // East wall
+		// 	factor *= 0.20;
+		
+		t_xy	projection;
+		projection = add_vector(rc->position, rc->camera_plane);
+
+		if (map[(int)(projection.x + rc->direction.x * factor)][(int)(rc->position.y + rc->direction.y * factor)] != '1')
 		{
-			if (map[(int)(rc->position.x + rc->direction.x * factor)][(int)rc->position.y] != '1')
-			{
-				if (map[(int)rc->position.x][(int)(rc->position.y + rc->position.y * factor)] != '1')
-				{
-					rc->position.x += rc->direction.x * move_speed;
-					rc->position.y += rc->direction.y * move_speed;
-				}
-			}
+			rc->position.x += rc->direction.x * move_speed;
+			rc->position.y += rc->direction.y * move_speed;
 		}
 	}
 	else if (keycode == S_KEY)
 	{
-		if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)(rc->position.y - rc->position.y * factor)])
+		if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)(rc->position.y - rc->direction.y * factor)] != '1')
 		{
-			if (map[(int)(rc->position.x - rc->direction.x * factor)][(int)rc->position.y] != '1')
-			{
-				if (map[(int)rc->position.x][(int)(rc->position.y - rc->position.y * factor)] != '1')
-				{
-					rc->position.x -= rc->direction.x * move_speed;
-					rc->position.y -= rc->direction.y * move_speed;
-				}
-			}
+			rc->position.x -= rc->direction.x * move_speed;
+			rc->position.y -= rc->direction.y * move_speed;
 		}
 	}
 	if (keycode == A_KEY)

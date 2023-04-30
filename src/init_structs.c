@@ -16,6 +16,7 @@ void	init_param(t_cube *cube)
 	param->f_rgb = malloc(sizeof(int) * 3);
 	param->c_rgb = malloc(sizeof(int) * 3);
 	param->map = NULL;
+	param->new_map = NULL;
 }
 
 void	init_mlx(t_cube *cube)

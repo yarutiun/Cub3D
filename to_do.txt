@@ -1,15 +1,9 @@
-[ ] Finish parser
-	[x] fill_map_with_spaces(cube->param.map);
-	[ ] check_map_column(cube->param.map, cube);
-	[ ] check_player_inside_walls(cube->param.map, cube);
-	[ ] check_invalid_spaces(cube->param.map, cube);
-	[ ] replace_spaces(cube->param.map);
-	
+[x] Finish parser
 	[x] Feed all needed values to init_starting_values
 	[x] Some valid rgb values are not accepted. Test (0,0,0)
 	[x] Double check RGB converter
 
-[ ] Take care to not segfault in corners like this:
+[x] Take care to not segfault in corners like this:
 111111
 10000N1
 1000001

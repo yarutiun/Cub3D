@@ -40,3 +40,11 @@ char *get_next_line(int fd)
 	buff[i] = '\0';
 	return(buff);
 }
+
+int	rgb_to_hex(int *rgb)
+{
+	double	color;
+
+	color = 0 << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+	return (color);
+}

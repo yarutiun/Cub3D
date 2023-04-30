@@ -36,6 +36,7 @@ SRC		=	error_handling/errors.c \
 			parsing/make_map_rectangular.c \
 			parsing/parse_input.c \
 			raycasting/raycasting.c \
+			raycasting/pixels_and_textures.c \
 			window/hooks.c \
 			window/launch_window.c \
 			init_structs.c \
@@ -73,7 +74,7 @@ $(NAME): $(OBJS)
 clean:
 	$(RM) $(OBJ_PATH)
 	@make clean -C $(LIB_F)
-	# @make clean -C $(MLX_F) ## UNCOMMENT BEFORE SUBMISSION!
+	@make clean -C $(MLX_F)
 
 fclean: clean
 	$(RM) $(NAME)

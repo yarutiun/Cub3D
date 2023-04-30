@@ -62,3 +62,8 @@ void    texture_not_loaded_error(t_cube *cube)
 {
     error_exit("Could not load texture file\n", cube);
 }
+
+void    out_of_bounds_error(t_cube *cube)
+{
+    error_exit("Player out of bounds. Get gnomed!\n", cube);
+}

@@ -20,16 +20,16 @@ void	determine_wall_type(t_rc *rc)
 	if (rc->side == 0)
 	{
 		if (rc->ray_dir.x <= 0)
-			rc->wall_type = NORTH_WALL;
-		else
 			rc->wall_type = SOUTH_WALL;
+		else
+			rc->wall_type = NORTH_WALL;
 	}
 	else
 	{
 		if (rc->ray_dir.y >= 0)
-			rc->wall_type = WEST_WALL;
-		else
 			rc->wall_type = EAST_WALL;
+		else
+			rc->wall_type = WEST_WALL;
 	}
 }
 

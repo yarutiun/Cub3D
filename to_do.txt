@@ -23,10 +23,10 @@ Bonuses?
 [x] Wall collisions.
 
 [x]Check for leaks
-	[x]Try errors up until load_textures func
-	[x]Check with successful run and exit
+	[x] Try errors up until load_textures func
+	[x] Check with successful run and exit
 [ ]Norminette
-[ ] Test and check for leaks
+	[ ] Test and check for leaks
 
 [ ] Uncomment Makefile - MLX compilation
 [ ] Add headers

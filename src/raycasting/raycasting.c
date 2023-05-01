@@ -70,9 +70,9 @@ void	calculate_side_distance(t_rc *rc)
 
 void	calculate_deltas(t_rc *rc, int x)
 {
-	rc->cameraX = 2 * x / (double)WIDTH - 1;
-	rc->ray_dir.x = rc->direction.x + rc->camera_plane.x * rc->cameraX;
-	rc->ray_dir.y = rc->direction.y + rc->camera_plane.y * rc->cameraX;
+	rc->camera_x = 2 * x / (double)WIDTH - 1;
+	rc->ray_dir.x = rc->direction.x + rc->camera_plane.x * rc->camera_x;
+	rc->ray_dir.y = rc->direction.y + rc->camera_plane.y * rc->camera_x;
 	if (rc->ray_dir.x == 0)
 		rc->delta_dist.x = INT_MAX;
 	else

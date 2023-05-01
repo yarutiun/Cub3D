@@ -38,7 +38,6 @@ void	init_img(t_cube *cube)
 	img->bits_per_pixel = 0;
 	img->line_length = 0;
 	img->endian = 0;
-	img->wall_ptr = NULL;
 }
 
 void init_rc(t_cube *cube)
@@ -52,7 +51,7 @@ void init_rc(t_cube *cube)
 	rc->direction.y = 0;
 	rc->camera_plane.x = 0;
 	rc->camera_plane.y = 0;
-	rc->cameraX = 0;
+	rc->camera_x = 0;
 	rc->ray_dir.x = 0;
 	rc->ray_dir.y = 0;
 	rc->map.x = 0;

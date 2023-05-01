@@ -38,7 +38,8 @@ SRC		=	error_handling/errors.c \
 			raycasting/init_starting_values.c \
 			raycasting/draw_vertical_line.c \
 			raycasting/raycasting.c \
-			window/hooks.c \
+			window/key_actions.c \
+			window/key_hooks.c \
 			window/launch_window.c \
 			init_structs.c \
 			main.c \

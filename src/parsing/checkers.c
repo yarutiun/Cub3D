@@ -45,20 +45,14 @@ void    check_rgb(t_param *param)
     char    **rgb_f;
     char    **rgb_c;
 
-    i = 0;
     rgb_c = ft_split(param->c, ',');
     rgb_f = ft_split(param->f, ',');
-    while (rgb_c[i] && rgb_f[i])
-    {
-        i++;
-    }
-    if (i != 3)
+    if (array_size(rgb_c) != 3 || array_size(rgb_f) != 3)
     {
         free_double_str_ptr(rgb_c);
         free_double_str_ptr(rgb_f);
         rgb_error(param->cube);
     }
-
     i = 0;
     while (rgb_c[i] && rgb_f[i])
     {

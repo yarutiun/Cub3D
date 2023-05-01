@@ -38,7 +38,7 @@ char    *remove_non_alnum(char *string, int i)
 {
     while (string[i])
     {
-        if (ft_isalnum(string[i]))
+        if (ft_isalnum(string[i]) || string[i] == '-')
         {
             return(ft_strdup(&string[i]));
         }

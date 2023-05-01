@@ -168,22 +168,18 @@ int				key_hooks(int keycode, t_rc *rc);
 
 // Raycasting //
 void			raycasting(t_cube *cube);
+void			draw_vertical_line(t_rc *rc, int x);
 
 // Pixels and textures//
 unsigned int	my_mlx_pixel_get(t_img *img, int x, int y);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			load_textures(t_cube *cube);
 
-// Vector Calculations //
-double			pythagoras(t_xy coord);
-t_xy			add_vector(t_xy v1, t_xy v2);
-t_xy			sub_vector(t_xy v1, t_xy v2);
-t_xy			normalize_vector(t_xy vector);
-
 // Utils //
-char	*get_next_line(int fd);
-int		array_size(char **arr);
-void	print_double_array(char **arr);
+char			*get_next_line(int fd);
+int				array_size(char **arr);
+int				rgb_to_hex(int *rgb);
+void			print_double_array(char **arr);
 
 // Error Handling //
 void			argc_error(t_cube *cube);

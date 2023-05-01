@@ -35,8 +35,9 @@ SRC		=	error_handling/errors.c \
 			parsing/map_checkers.c \
 			parsing/make_map_rectangular.c \
 			parsing/parse_input.c \
+			raycasting/init_starting_values.c \
+			raycasting/draw_vertical_line.c \
 			raycasting/raycasting.c \
-			raycasting/pixels_and_textures.c \
 			window/hooks.c \
 			window/launch_window.c \
 			init_structs.c \

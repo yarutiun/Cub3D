@@ -27,6 +27,7 @@ MLX_A = libmlx.a
 
 # Source and object files
 SRC		=	error_handling/errors.c \
+			parsing/checker_utils.c \
 			error_handling/errors_player_and_textures.c \
 			error_handling/errors_map.c \
 			free_memory/free_utils.c \

@@ -148,7 +148,7 @@ void			check_map_double_n(char *input, t_cube *cube);
 void			check_map_row(char **splitted_input, t_cube *cube);
 void			check_invalid_spaces(char **map, t_cube *cube);
 void			check_forbidden_chars(char **map, t_cube *cube);
-void			check_player(char **map, t_cube *cube);
+void			check_player(char **map, t_cube *cube, char *symbols);
 void			check_player_wihtin_walls(char **map, t_cube *cube);
 void			replace_spaces(char **map);
 void			allocate_map_with_spaces(t_param *param);
@@ -181,9 +181,12 @@ t_xy			sub_vector(t_xy v1, t_xy v2);
 t_xy			normalize_vector(t_xy vector);
 
 // Utils //
-char	*get_next_line(int fd);
-int		array_size(char **arr);
-void	print_double_array(char **arr);
+char			*get_next_line(int fd);
+int				array_size(char **arr);
+int				rgb_to_hex(int *rgb);
+void			print_double_array(char **arr);
+void			free_for_rgb(char **rgb_c, char **rgb_f, t_param *param);
+void			check_if_3_nums(char **rgb_c, char **rgb_f, t_param *param);
 
 // Error Handling //
 void			argc_error(t_cube *cube);
@@ -209,7 +212,6 @@ void			free_double_str_ptr(char **arr);
 void			free_img(t_img *img);
 
 //Yura
-
 
 
 //Santiago

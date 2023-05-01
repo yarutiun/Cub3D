@@ -3,11 +3,8 @@
 
 /* Macros */
 // Window Dimensions //
-// # define WIDTH 640
-// # define HEIGHT 480
 # define WIDTH 1024
 # define HEIGHT 800
-
 // Keys //
 # define ESCAPE_KEY 53
 # define KEY_DOWN 2
@@ -17,28 +14,24 @@
 # define D_KEY 2
 # define LEFT_KEY 123
 # define RIGHT_KEY 124
-
 // MLX //
 # define CLOSE_WINDOW 17
-
 // Raycast //
 # define FOV 90
 # define RAY_COUNT WIDTH
 # define CAMERA_PLANE 0.66
 # define PITCH 100
-
+# define TEXTURE_WIDTH 128
+# define TEXTURE_HEIGHT 128
 // Map //
-# define TILE 100
 # define NORTH_WALL 0
 # define SOUTH_WALL 1
 # define WEST_WALL 2
 # define EAST_WALL 3
-
 // Fd //
 # define MAX_FD 1024
-
 // Misc //
-#define INT_MAX 2147483647
+# define INT_MAX 2147483647
 
 /* Libraries */
 # include <unistd.h>
@@ -143,41 +136,49 @@ typedef struct s_cube
 
 /* Functions */
 // Init Structs //
-void	init_structs(t_cube *cube);
+void			init_structs(t_cube *cube);
 
 // Parsing //
-void	parse_input(int argc, char *path, t_cube *cube);
-int		check_extension(const char *file_name, t_cube *cube);
-void	check_texture_files(t_param *param);
-void	check_rgb(t_param *param);
-void	check_rgb_digits(t_cube *cube);
-void	check_map_double_n(char *input, t_cube *cube);
-void	check_map_row(char **splitted_input, t_cube *cube);
-void	check_invalid_spaces(char **map, t_cube *cube);
-void	check_forbidden_chars(char **map, t_cube *cube);
-void	check_player(char **map, t_cube *cube);
-void	check_player_wihtin_walls(char **map, t_cube *cube);
+void			parse_input(int argc, char *path, t_cube *cube);
+int				check_extension(const char *file_name, t_cube *cube);
+void			check_texture_files(t_param *param);
+void			check_rgb(t_param *param);
+void			check_rgb_digits(t_cube *cube);
+void			check_map_double_n(char *input, t_cube *cube);
+void			check_map_row(char **splitted_input, t_cube *cube);
+void			check_invalid_spaces(char **map, t_cube *cube);
+void			check_forbidden_chars(char **map, t_cube *cube);
+void			check_player(char **map, t_cube *cube);
+void			check_player_wihtin_walls(char **map, t_cube *cube);
+void			replace_spaces(char **map);
+void			allocate_map_with_spaces(t_param *param);
+void			assign_map(char **splitted_input, t_cube *cube);
 
 // Starting Values //
-void	init_starting_values(t_cube *cube);
+void			init_starting_values(t_cube *cube);
 
 // Window //
-void	launch_window(t_cube *cube);
-void	load_textures(t_cube *cube);
-void	render_window(t_cube *cube);
+void			launch_window(t_cube *cube);
+void			load_textures(t_cube *cube);
+void			render_window(t_cube *cube);
 
 // Hooks //
-int		x_close(void);
-int		key_hooks(int keycode, t_rc *rc);
+int				x_close(void);
+int				key_hooks(int keycode, t_rc *rc);
 
 // Raycasting //
-void	raycasting(t_cube *cube);
+void			raycasting(t_cube *cube);
+
+// Pixels and textures//
+unsigned int	my_mlx_pixel_get(t_img *img, int x, int y);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			load_textures(t_cube *cube);
 
 // Vector Calculations //
-double	pythagoras(t_xy coord);
-t_xy	add_vector(t_xy v1, t_xy v2);
-t_xy	sub_vector(t_xy v1, t_xy v2);
-t_xy	normalize_vector(t_xy vector);
+double			pythagoras(t_xy coord);
+t_xy			add_vector(t_xy v1, t_xy v2);
+t_xy			sub_vector(t_xy v1, t_xy v2);
+t_xy			normalize_vector(t_xy vector);
 
 // Utils //
 char	*get_next_line(int fd);
@@ -185,21 +186,26 @@ int		array_size(char **arr);
 void	print_double_array(char **arr);
 
 // Error Handling //
-void	argc_error(t_cube *cube);
-void	extension_error(t_cube *cube);
-void	init_elements_error(t_cube *cube);
-void	file_error(t_cube *cube);
-void	rgb_error(t_cube *cube);
-void	error_double_n(t_cube *cube);
-void	map_row_error(t_cube *cube);
-void	invalid_spaces_error(t_cube *cube);
-void	forbidden_chars_error(t_cube *cube);
-void	player_error(t_cube *cube, char *msg);
-void    texture_not_loaded_error(t_cube *cube);
-void    out_of_bounds_error(t_cube *cube);
+void			argc_error(t_cube *cube);
+void			extension_error(t_cube *cube);
+void			init_elements_error(t_cube *cube);
+void			file_error(t_cube *cube);
+void			rgb_error(t_cube *cube);
+void			error_double_n(t_cube *cube);
+void			map_row_error(t_cube *cube);
+void			invalid_spaces_error(t_cube *cube);
+void			forbidden_chars_error(t_cube *cube);
+void			player_error(t_cube *cube, char *msg);
+void    		texture_not_loaded_error(t_cube *cube);
+void    		out_of_bounds_error(t_cube *cube);
+void			error_exit(char *message, t_cube *cube);
 
 // Free Memory //
-void	free_all(t_cube *cube);
-void	free_double_str_ptr(char **arr);
+void			free_all(t_cube *cube);
+void			free_double_str_ptr(char **arr);
+void			free_str(char *str);
+void			free_int_arr(int *arr);
+void			free_double_str_ptr(char **arr);
+void			free_img(t_img *img);
 
 #endif

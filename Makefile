@@ -27,10 +27,16 @@ MLX_A = libmlx.a
 
 # Source and object files
 SRC		=	error_handling/errors.c \
-			free_memory/free.c \
+			error_handling/errors_player_and_textures.c \
+			error_handling/errors_map.c \
+			free_memory/free_utils.c \
+			free_memory/free_general.c \
 			parsing/checkers.c \
+			parsing/map_checkers.c \
+			parsing/make_map_rectangular.c \
 			parsing/parse_input.c \
 			raycasting/raycasting.c \
+			raycasting/pixels_and_textures.c \
 			window/hooks.c \
 			window/launch_window.c \
 			init_structs.c \
@@ -68,7 +74,7 @@ $(NAME): $(OBJS)
 clean:
 	$(RM) $(OBJ_PATH)
 	@make clean -C $(LIB_F)
-	# @make clean -C $(MLX_F) ## UNCOMMENT BEFORE SUBMISSION!
+	# @make clean -C $(MLX_F) #UNCOMMENT THIS BEFORE SUBMISSION
 
 fclean: clean
 	$(RM) $(NAME)

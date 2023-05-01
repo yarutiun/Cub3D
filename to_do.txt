@@ -24,7 +24,11 @@ Bonuses?
 [ ] A minimap system.
 [x] Wall collisions.
 
-[ ]Norminette
 [ ]Check for leaks
 	[ ]Try errors up until load_textures func
 	[ ]Check with successful run and exit
+[ ]Norminette
+[ ] Test and check for leaks
+
+[ ] Uncomment Makefile - MLX compilation
+[ ] Add headers

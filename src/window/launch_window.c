@@ -1,40 +1,5 @@
 #include "cub3d.h"
 
-void	load_images(t_cube *cube)
-{
-	int i;
-	int j;
-
-	i = 100;
-	j = 100;
-	cube->img.wall_ptr = mlx_xpm_file_to_image(cube->mlx.mlx_ptr, cube->param.wall_path[NORTH_WALL], &i, &j);
-}
-
-void render_map(t_cube *cube)
-{
-	int		i;
-	int		j;
-	int		x_cord;
-	int		y_cord;
-
-	y_cord = 0;
-	i = 0;
-	while (i < (HEIGHT / 100))
-	{
-		x_cord = 0;
-		j = 0;
-		while (j < (WIDTH / 100))
-		{
-			mlx_put_image_to_window(cube->mlx.mlx_ptr, \
-			cube->mlx.window, cube->img.wall_ptr, x_cord, y_cord);
-			++j;
-			x_cord += 100;
-		}
-		y_cord += 100;
-		++i;
-	}	
-}
-
 void	render_window(t_cube *cube)
 {
 	mlx_clear_window(cube->mlx.mlx_ptr, cube->mlx.window);
@@ -55,10 +20,6 @@ void	launch_window(t_cube *cube)
 	img->img = mlx_new_image(mlx->mlx_ptr, WIDTH, HEIGHT);
 	img->address = mlx_get_data_addr(img->img, &img->bits_per_pixel, \
 									&img->line_length, &img->endian);
-	
-	// load_images(cube);
-	// render_map(cube);
-	
 	init_starting_values(cube);
 	load_textures(cube);
 	render_window(cube);

@@ -20,15 +20,14 @@ Subject notes (Parser):
 	separated by one or more space(s).
 	
 Bonuses?
-[ ] Mouse
-[ ] A minimap system.
 [x] Wall collisions.
 
-[ ]Check for leaks
-	[ ]Try errors up until load_textures func
-	[ ]Check with successful run and exit
+[x]Check for leaks
+	[x]Try errors up until load_textures func
+	[x]Check with successful run and exit
 [ ]Norminette
 [ ] Test and check for leaks
 
 [ ] Uncomment Makefile - MLX compilation
 [ ] Add headers
+[ ] Final Norminette

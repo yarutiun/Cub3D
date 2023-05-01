@@ -182,6 +182,7 @@ t_xy	normalize_vector(t_xy vector);
 // Utils //
 char	*get_next_line(int fd);
 int		array_size(char **arr);
+void	print_double_array(char **arr);
 
 // Error Handling //
 void	argc_error(t_cube *cube);

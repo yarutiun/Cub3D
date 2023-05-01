@@ -12,6 +12,18 @@ int     array_size(char **arr)
     return (i);
 }
 
+void	print_double_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+    {
+		printf("%s\n", arr[i]);
+        i++;
+    }
+}
+
 char *get_next_line(int fd)
 {
 	int i;

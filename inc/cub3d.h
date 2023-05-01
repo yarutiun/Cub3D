@@ -208,4 +208,12 @@ void			free_int_arr(int *arr);
 void			free_double_str_ptr(char **arr);
 void			free_img(t_img *img);
 
+//Yura
+
+
+
+//Santiago
+
+
+
 #endif

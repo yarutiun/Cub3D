@@ -3,11 +3,8 @@
 
 /* Macros */
 // Window Dimensions //
-// # define WIDTH 640
-// # define HEIGHT 480
 # define WIDTH 1024
 # define HEIGHT 800
-
 // Keys //
 # define ESCAPE_KEY 53
 # define KEY_DOWN 2
@@ -17,28 +14,24 @@
 # define D_KEY 2
 # define LEFT_KEY 123
 # define RIGHT_KEY 124
-
 // MLX //
 # define CLOSE_WINDOW 17
-
 // Raycast //
 # define FOV 90
 # define RAY_COUNT WIDTH
 # define CAMERA_PLANE 0.66
 # define PITCH 100
-
+# define TEXTURE_WIDTH 128
+# define TEXTURE_HEIGHT 128
 // Map //
-# define TILE 100
 # define NORTH_WALL 0
 # define SOUTH_WALL 1
 # define WEST_WALL 2
 # define EAST_WALL 3
-
 // Fd //
 # define MAX_FD 1024
-
 // Misc //
-#define INT_MAX 2147483647
+# define INT_MAX 2147483647
 
 /* Libraries */
 # include <unistd.h>

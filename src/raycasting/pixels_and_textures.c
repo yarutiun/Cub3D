@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pixels_and_textures.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:48:44 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/05/01 01:52:45 by yarutiun         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 unsigned int	my_mlx_pixel_get(t_img *img, int x, int y)
@@ -52,12 +40,12 @@ void	load_textures(t_cube *cube)
 	init_texture(cube, SOUTH_WALL);
 	init_texture(cube, WEST_WALL);
 	init_texture(cube, EAST_WALL);
-	rc->walls[NORTH_WALL].height = 128;
-	rc->walls[NORTH_WALL].width = 128;
-	rc->walls[SOUTH_WALL].height = 128;
-	rc->walls[SOUTH_WALL].width = 128;
-	rc->walls[WEST_WALL].height = 128;
-	rc->walls[WEST_WALL].width = 128;
-	rc->walls[EAST_WALL].height = 128;
-	rc->walls[EAST_WALL].width = 128;
+	rc->walls[NORTH_WALL].height = TEXTURE_HEIGHT;
+	rc->walls[NORTH_WALL].width = TEXTURE_WIDTH;
+	rc->walls[SOUTH_WALL].height = TEXTURE_HEIGHT;
+	rc->walls[SOUTH_WALL].width = TEXTURE_WIDTH;
+	rc->walls[WEST_WALL].height = TEXTURE_HEIGHT;
+	rc->walls[WEST_WALL].width = TEXTURE_WIDTH;
+	rc->walls[EAST_WALL].height = TEXTURE_HEIGHT;
+	rc->walls[EAST_WALL].width = TEXTURE_WIDTH;
 }

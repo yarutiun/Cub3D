@@ -19,15 +19,6 @@ void	init_param(t_cube *cube)
 	param->new_map = NULL;
 }
 
-void	init_mlx(t_cube *cube)
-{
-	t_mlx	*mlx;
-
-	mlx = &cube->mlx;
-	mlx->mlx_ptr = NULL;
-	mlx->window = NULL;
-}
-
 void	init_img(t_cube *cube)
 {
 	t_img	*img;
@@ -41,7 +32,28 @@ void	init_img(t_cube *cube)
 	img->wall_ptr = NULL;
 }
 
-void init_rc(t_cube *cube)
+void	init_rc_1(t_cube *cube)
+{
+	t_rc	*rc;
+
+	rc = &cube->rc;
+	rc->side = 0;
+	rc->perp_wall_dist = 0;
+	rc->line_height = 0;
+	rc->draw_start = 0;
+	rc->draw_end = 0;
+	rc->pitch = 0;
+	rc->wall_type = 0;
+	rc->texture.x = 0;
+	rc->texture.y = 0;
+	rc->texture_step = 0;
+	rc->texture_position = 0;
+	rc->floor_color = 0;
+	rc->ceiling_color = 0;
+	rc->player_char = '\0';
+}
+
+void	init_rc_2(t_cube *cube)
 {
 	t_rc	*rc;
 
@@ -63,20 +75,7 @@ void init_rc(t_cube *cube)
 	rc->delta_dist.y = 0;
 	rc->step.x = 0;
 	rc->step.y = 0;
-	rc->side = 0;
-	rc->perp_wall_dist = 0;
-	rc->line_height = 0;
-	rc->draw_start = 0;
-	rc->draw_end = 0;
-	rc->pitch = 0;
-	rc->wall_type = 0;
-	rc->texture.x = 0;
-	rc->texture.y = 0;
-	rc->texture_step = 0;
-	rc->texture_position = 0;
-	rc->floor_color = 0;
-	rc->ceiling_color = 0;
-	rc->player_char = '\0';
+	init_rc_1(cube);
 }
 
 void	init_structs(t_cube *cube)
@@ -88,5 +87,5 @@ void	init_structs(t_cube *cube)
 	cube->img.cube = cube;
 	init_img(cube);
 	cube->rc.cube = cube;
-	init_rc(cube);
+	init_rc_2(cube);
 }

@@ -120,8 +120,5 @@ void	check_player(char **map, t_cube *cube, char *symbols)
 		}
 		i++;
 	}
-	if (flag == 0)
-		player_error(cube, "No players on the map\n");
-	else if (flag > 1)
-		player_error(cube, "Too many players on the map\n");
+	player_error_if(cube, flag);
 }

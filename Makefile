@@ -28,6 +28,7 @@ MLX_A = libmlx.a
 # Source and object files
 SRC		=	error_handling/errors.c \
 			parsing/checker_utils.c \
+			parsing/alloc_map_spaces.c \
 			error_handling/errors_player_and_textures.c \
 			error_handling/errors_map.c \
 			free_memory/free_utils.c \
@@ -42,7 +43,8 @@ SRC		=	error_handling/errors.c \
 			window/launch_window.c \
 			init_structs.c \
 			main.c \
-			utils.c
+			utils.c \
+			utils2.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

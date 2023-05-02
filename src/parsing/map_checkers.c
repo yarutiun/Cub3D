@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	check_map_double_n(char *input, t_cube *cube)
+int	find_end_of_header(char *input)
 {
 	int	count;
 	int	flag;
@@ -23,6 +23,14 @@ void	check_map_double_n(char *input, t_cube *cube)
 		}
 		count++;
 	}
+	return (count);
+}
+
+void	check_map_double_n(char *input, t_cube *cube)
+{
+	int	count;
+
+	count = find_end_of_header(input);
 	while (input[count])
 	{
 		if (input[count] == ' ' || input[count] == '1' || input[count] == '0')

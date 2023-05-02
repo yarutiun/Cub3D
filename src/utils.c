@@ -60,3 +60,12 @@ int	rgb_to_hex(int *rgb)
 	color = 0 << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2];
 	return (color);
 }
+
+void	init_mlx(t_cube *cube)
+{
+	t_mlx	*mlx;
+
+	mlx = &cube->mlx;
+	mlx->mlx_ptr = NULL;
+	mlx->window = NULL;
+}

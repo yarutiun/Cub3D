@@ -152,6 +152,7 @@ void			check_open_top(char **map, t_cube *cube);
 void			check_forbidden_chars(char **map, t_cube *cube);
 void			check_player(char **map, t_cube *cube, char *symbols);
 void			check_player_wihtin_walls(char **map, t_cube *cube);
+void			check_player_inside_wall(char **map, t_cube *cube);
 void			check_map_double_n(char *input, t_cube *cube);
 void			replace_spaces(char **map);
 void			allocate_map_with_spaces(t_param *param);

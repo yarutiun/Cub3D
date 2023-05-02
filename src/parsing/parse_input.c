@@ -89,7 +89,9 @@ void	parse_input(int argc, char *path, t_cube *cube)
 	check_map_row(cube->param.splitted_input, cube);
 	assign_map(cube->param.splitted_input, cube);
 	allocate_map_with_spaces(&cube->param);
+	check_player_inside_wall(cube->param.new_map, cube);
 	check_player_wihtin_walls(cube->param.new_map, cube);
+	check_open_top(cube->param.new_map, cube);
 	check_invalid_spaces(cube->param.new_map, cube);
 	check_player(cube->param.new_map, cube, "NSEW");
 	check_forbidden_chars(cube->param.new_map, cube);

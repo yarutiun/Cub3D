@@ -55,9 +55,17 @@ void	check_map_row(char **splitted_input, t_cube *cube)
 	while (splitted_input[i])
 	{
 		last_i = ft_strlen(splitted_input[i]) - 1;
-		if (splitted_input[i][last_i] == '0')
+		if (splitted_input[i][last_i] == '0' \
+		|| splitted_input[i][last_i] == 'N' \
+		|| splitted_input[i][last_i] == 'S' \
+		|| splitted_input[i][last_i] == 'W' \
+		|| splitted_input[i][last_i] == 'E')
 			map_row_error(cube);
-		else if (splitted_input[i][0] == '0')
+		else if (splitted_input[i][0] == '0' \
+		|| splitted_input[i][0] == 'N' \
+		|| splitted_input[i][0] == 'S' \
+		|| splitted_input[i][0] == 'W' \
+		|| splitted_input[i][0] == 'E')
 			map_row_error(cube);
 		i++;
 	}
@@ -68,21 +76,6 @@ void	check_invalid_spaces(char **map, t_cube *cube)
 	int	i;
 	int	j;
 
-	check_open_top(map, cube);
-	j = 0;
-	while (map[0][j])
-	{
-		if (map[0][j] == '0')
-			map_row_error(cube);
-		j++;
-	}
-	j = 0;
-	while (map[array_size(map) - 1][j])
-	{
-		if (map[array_size(map) - 1][j] == '0')
-			map_row_error(cube);
-		j++;
-	}
 	i = 0;
 	while (i < array_size(map))
 	{

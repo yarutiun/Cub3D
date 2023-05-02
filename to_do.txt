@@ -27,8 +27,6 @@ Bonuses?
 	[x] Check with successful run and exit
 [ ]Norminette
 	[x] Merge norm branches
-	[ ] Test and check for leaks
+	[x] Test and check for leaks
 
-[ ] Add headers
-[ ] Uncomment Makefile - MLX compilation
-[ ] Final Norminette
+[x] Uncomment Makefile - MLX compilation

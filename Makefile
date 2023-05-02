@@ -74,7 +74,7 @@ $(NAME): $(OBJS)
 clean:
 	$(RM) $(OBJ_PATH)
 	@make clean -C $(LIB_F)
-	# @make clean -C $(MLX_F) #UNCOMMENT THIS BEFORE SUBMISSION
+	# @make clean -C $(MLX_F)
 
 fclean: clean
 	$(RM) $(NAME)

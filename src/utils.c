@@ -12,18 +12,6 @@ int	array_size(char **arr)
 	return (i);
 }
 
-void	print_double_array(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-}
-
 char	*get_next_line(int fd)
 {
 	int		i;
@@ -33,21 +21,20 @@ char	*get_next_line(int fd)
 
 	i = 0;
 	buff = malloc(sizeof(char) * 100);
-	while ((readed = read(fd, &c, 1)) > 0)
+	readed = 1;
+	while (readed > 0)
 	{
+		readed = read(fd, &c, 1);
 		buff[i++] = c;
 		if (c == '\n')
 			break ;
 	}
 	if ((!buff[i - 1] && !readed) || readed == -1)
-	{
-		free(buff);
-		return (NULL);
-	}
+		return (free(buff), NULL);
 	if (buff[i - 1] == '\n')
 	{
 		buff[i - 1] = '\0';
-		return (buff);	
+		return (buff);
 	}
 	buff[i] = '\0';
 	return (buff);
@@ -68,4 +55,12 @@ void	init_mlx(t_cube *cube)
 	mlx = &cube->mlx;
 	mlx->mlx_ptr = NULL;
 	mlx->window = NULL;
+}
+
+void	player_error_if(t_cube *cube, int flag)
+{
+	if (flag == 0)
+		player_error(cube, "No players on the map\n");
+	else if (flag > 1)
+		player_error(cube, "Too many players on the map\n");
 }

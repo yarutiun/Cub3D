@@ -3,13 +3,8 @@ NAME = cub3D
 CC = cc
 CFLAGS = -Wextra -Wall -Werror -g
 DEBUG	= -fsanitize=address
-
-## -Og -g3 -fsanitize=address
-
 INC = -I $(INC_PATH)
 MLX = -framework OpenGL -framework AppKit
-## MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
-## FLAGS = -Wall -Wextra -Werror -Iincludes -g -Lmlx -lmlx -framework OpenGL -framework AppKit -o
 
 # Clean
 RM = rm -rf
@@ -37,6 +32,7 @@ SRC		=	error_handling/errors.c \
 			parsing/map_checkers.c \
 			parsing/make_map_rectangular.c \
 			parsing/parse_input.c \
+			parsing/print_double_array.c \
 			raycasting/init_starting_values.c \
 			raycasting/draw_vertical_line.c \
 			raycasting/raycasting.c \
@@ -45,8 +41,7 @@ SRC		=	error_handling/errors.c \
 			window/launch_window.c \
 			init_structs.c \
 			main.c \
-			utils.c \
-			utils2.c
+			utils.c
 
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

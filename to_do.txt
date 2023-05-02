@@ -26,8 +26,9 @@ Bonuses?
 	[x] Try errors up until load_textures func
 	[x] Check with successful run and exit
 [ ]Norminette
+	[x] Merge norm branches
 	[ ] Test and check for leaks
 
-[ ] Uncomment Makefile - MLX compilation
 [ ] Add headers
+[ ] Uncomment Makefile - MLX compilation
 [ ] Final Norminette

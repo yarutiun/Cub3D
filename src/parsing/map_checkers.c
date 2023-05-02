@@ -68,13 +68,28 @@ void	check_invalid_spaces(char **map, t_cube *cube)
 	int	i;
 	int	j;
 
+	check_open_top(map, cube);
+	j = 0;
+	while (map[0][j])
+	{
+		if (map[0][j] == '0')
+			map_row_error(cube);
+		j++;
+	}
+	j = 0;
+	while (map[array_size(map) - 1][j])
+	{
+		if (map[array_size(map) - 1][j] == '0')
+			map_row_error(cube);
+		j++;
+	}
 	i = 0;
 	while (i < array_size(map))
 	{
 		j = 0;
 		while (j < (int)ft_strlen(map[i]))
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] && map[i][j] == '0')
 			{
 				if (map[i][j + 1] && map[i][j + 1] == ' ')
 					invalid_spaces_error(cube);

@@ -148,6 +148,7 @@ void			check_rgb(t_param *param);
 void			check_map_double_n(char *input, t_cube *cube);
 void			check_map_row(char **splitted_input, t_cube *cube);
 void			check_invalid_spaces(char **map, t_cube *cube);
+void			check_open_top(char **map, t_cube *cube);
 void			check_forbidden_chars(char **map, t_cube *cube);
 void			check_player(char **map, t_cube *cube, char *symbols);
 void			check_player_wihtin_walls(char **map, t_cube *cube);

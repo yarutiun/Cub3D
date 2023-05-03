@@ -15,22 +15,20 @@ void	front_back_movement(t_rc *rc, char **map, int key)
 		factor = MOVE_SPEED * 2;
 		delta.x = (int)(rc->position.x + rc->direction.x * factor);
 		delta.y = (int)(rc->position.y + rc->direction.y * factor);
-		if (map[delta.x][delta.y] != '1')
-		{
+		if (map[delta.x][(int)rc->position.y] != '1')
 			rc->position.x += rc->direction.x * MOVE_SPEED;
+		if (map[(int)rc->position.x][delta.y] != '1')
 			rc->position.y += rc->direction.y * MOVE_SPEED;
-		}
 	}
 	else if (key == S_KEY)
 	{
 		factor = MOVE_SPEED;
 		delta.x = (int)(rc->position.x - rc->direction.x * factor);
 		delta.y = (int)(rc->position.y - rc->direction.y * factor);
-		if (map[delta.x][delta.y] != '1')
-		{
+		if (map[delta.x][(int)rc->position.y] != '1')
 			rc->position.x -= rc->direction.x * MOVE_SPEED;
+		if (map[(int)rc->position.x][delta.y] != '1')
 			rc->position.y -= rc->direction.y * MOVE_SPEED;
-		}
 	}
 }
 

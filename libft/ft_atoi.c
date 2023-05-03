@@ -6,7 +6,7 @@
 /*   By: stena-he <stena-he@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 18:06:26 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/04/19 23:41:30 by stena-he         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:02:10 by stena-he         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	ft_atoi(const char *str)
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f' || \
 		str[i] == '\r' || str[i] == '\n' || \
 		str[i] == '\v' )
-	{
 		i++;
-	}
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i++] == '-')

@@ -1,7 +1,7 @@
 # cub3D
  
 <p align="center">
-<img src="https://github.com/santiagotena/assets/blob/master/logos/42%20logo.jpeg?raw=true" alt="42 Wolfsburg Logo" width="150" height="150">
+<img src="https://github.com/yarutiun/Cub3D/blob/main/screenshots/42%20logo.jpeg?raw=true" alt="42 Wolfsburg Logo" width="150" height="150">
 </p>
  
 Cub3D is a 42 Wolfsburg raycasting project where a pseudo-3D maze is to be rendered and where the user can traverse in.
